@@ -2,14 +2,11 @@ package com.example.vinilos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import com.example.vinilos.ui.AlbumFragment
-import com.example.vinilos.ui.MusiciansFragment
+import com.example.vinilos.views.AlbumFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_musicos -> {
-                    setFragment(MusiciansFragment())
+                    //setFragment(MusiciansFragment())
                     true
                 }
 

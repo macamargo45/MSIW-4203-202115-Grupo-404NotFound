@@ -1,7 +1,6 @@
-package com.example.vinilos.ui
+package com.example.vinilos.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.databinding.AlbumFragmentBinding
 import com.example.vinilos.models.Album
-import com.example.vinilos.ui.adapters.AlbumsAdapter
+import com.example.vinilos.views.adapters.AlbumsAdapter
 import com.example.vinilos.viewmodels.AlbumViewModel
 
 //import com.example.vinilos.ui.AlbumFragmentDirections

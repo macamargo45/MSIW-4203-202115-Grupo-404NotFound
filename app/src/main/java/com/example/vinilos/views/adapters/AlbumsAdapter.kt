@@ -1,10 +1,9 @@
-package com.example.vinilos.ui.adapters
+package com.example.vinilos.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumItemBinding
