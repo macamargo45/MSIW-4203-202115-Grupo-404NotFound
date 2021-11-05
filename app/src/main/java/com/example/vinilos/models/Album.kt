@@ -1,9 +1,9 @@
 package com.example.vinilos.models
 
-
-import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Album(
     val albumId:Int,
     val name: String?,
@@ -11,8 +11,8 @@ data class Album(
     val releaseDate: String?,
     val description: String?,
     val genre: String?,
-    val recordLabel: String?
-
+    val recordLabel: String?,
+    val performers: MutableList<Performer?>
 ): Parcelable {
 
     companion object {
@@ -46,4 +46,5 @@ data class Album(
 
     override fun describeContents(): Int = 0
 
+    val performerNames get() = this.performers.map { it?.name }.joinToString()
 }
