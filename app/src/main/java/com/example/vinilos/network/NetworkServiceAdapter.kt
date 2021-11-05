@@ -8,6 +8,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilos.models.Album
+import com.example.vinilos.models.Performer
 import org.json.JSONArray
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -33,12 +34,34 @@ class NetworkServiceAdapter constructor(context: Context) {
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
+
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
+
+                    val performers = mutableListOf<Performer?>()
+                    val jsonPerformers = item.getJSONArray("performers")
+
+                    for (performerIndex in 0 until jsonPerformers.length()) {
+                        val jsonPerformer = jsonPerformers.getJSONObject(performerIndex)
+
+                        performers.add(performerIndex, Performer(
+                            id = jsonPerformer.getInt("id"),
+                            name = jsonPerformer.getString("name"),
+                            image = jsonPerformer.getString("image"),
+                            description = jsonPerformer.getString("description")
+                        ))
+                    }
+
                     list.add(i, Album(
                         albumId = item.getInt("id"),
-                        name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
-
+                        name = item.getString("name"),
+                        cover = item.getString("cover"),
+                        recordLabel = item.getString("recordLabel"),
+                        releaseDate = item.getString("releaseDate"),
+                        genre = item.getString("genre"),
+                        description = item.getString("description"),
+                        performers = performers
+                    ))
                 }
                 onComplete(list)
             },

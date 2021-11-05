@@ -11,6 +11,7 @@ import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumItemBinding
 import com.example.vinilos.models.Album
 import com.example.vinilos.views.AlbumFragmentDirections
+import com.squareup.picasso.Picasso
 
 
 class AlbumsAdapter() : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
@@ -33,12 +34,20 @@ class AlbumsAdapter() : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             AlbumViewHolder.LAYOUT,
             parent,
             false)
+
         return AlbumViewHolder(withDataBinding)
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+        val album = albums[position]
+
+        Picasso
+            .get()
+            .load(album.cover)
+            .into(holder.viewDataBinding.imageView)
+        
         holder.viewDataBinding.also {
-            it.album = albums[position]
+            it.album = album
         }
         holder.viewDataBinding.root.setOnClickListener {
             try {

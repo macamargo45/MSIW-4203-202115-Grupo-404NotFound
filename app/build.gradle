@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -64,7 +65,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-common-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-runtime-ktx:2.3.5'
-
+    // Thumbnails from url
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 apply plugin: 'com.android.application'

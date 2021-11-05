@@ -1,10 +1,12 @@
 package com.example.vinilos.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,11 +47,16 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
+        binding.progressBar.isVisible = true
+        binding.albumsRv.isVisible = false
+
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(AlbumViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
-                //Log.d("act", "ACA CREO QUE DEBERIA CARGAR LOS ALBUMES")
                 viewModelAdapter!!.albums = this
+
+                binding.albumsRv.isVisible = true
+                binding.progressBar.isVisible = false
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
