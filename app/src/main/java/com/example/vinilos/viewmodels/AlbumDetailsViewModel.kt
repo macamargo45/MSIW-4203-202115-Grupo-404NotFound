@@ -3,13 +3,12 @@ package com.example.vinilos.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinilos.models.Album
-import com.example.vinilos.network.NetworkServiceAdapter
 
-class AlbumViewModel (application: Application) :  AndroidViewModel(application) {
-    private val _albums = MutableLiveData<List<Album>>()
+class AlbumDetailsViewModel (application: Application) :  AndroidViewModel(application) {
+    private val _album = MutableLiveData<Album>()
 
-    val albums: LiveData<List<Album>>
-        get() = _albums
+    val album: LiveData<Album>
+        get() = _album
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -26,15 +25,17 @@ class AlbumViewModel (application: Application) :  AndroidViewModel(application)
     }
 
     private fun refreshDataFromNetwork() {
-        NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
-            val list = listOf<Album>()
-            _albums.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
+        val album = Album(1,"URL","28 of march 1985",
+            "A good one", "Rock", "One of those","One of many", mutableListOf())
+        //NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
 
-        },{
-            _eventNetworkError.value = true
-        })
+        //    _albums.postValue(list)
+        //    _eventNetworkError.value = false
+        //    _isNetworkErrorShown.value = false
+        //},{
+        //    _eventNetworkError.value = true
+        //})
+        _album.postValue(album)
     }
 
     fun onNetworkErrorShown() {
@@ -43,9 +44,9 @@ class AlbumViewModel (application: Application) :  AndroidViewModel(application)
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(AlbumDetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app) as T
+                return AlbumDetailsViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
