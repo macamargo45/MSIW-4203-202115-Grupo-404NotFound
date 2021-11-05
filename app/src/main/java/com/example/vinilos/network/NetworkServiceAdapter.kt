@@ -1,7 +1,6 @@
 package com.example.vinilos.network
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -36,7 +35,9 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val list = mutableListOf<Album>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-                    list.add(i, Album(albumId = item.getInt("id"),name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
+                    list.add(i, Album(
+                        albumId = item.getInt("id"),
+                        name = item.getString("name"), cover = item.getString("cover"), recordLabel = item.getString("recordLabel"), releaseDate = item.getString("releaseDate"), genre = item.getString("genre"), description = item.getString("description")))
 
                 }
                 onComplete(list)
