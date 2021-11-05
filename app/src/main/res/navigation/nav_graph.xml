@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/albumFragment2">
+    <fragment
+        android:id="@+id/albumFragment2"
+        android:name="com.example.vinilos.views.AlbumFragment"
+        android:label="@string/album_list_title"
+        tools:layout="@layout/album_fragment">
+        <action
+            android:id="@+id/action_albumFragment2_to_albumDetailsFragment2"
+            app:destination="@id/albumDetailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumDetailsFragment2"
+        android:name="com.example.vinilos.views.AlbumDetailsFragment"
+        android:label="AlbumDetailsFragment">
+        <argument
+            android:name="myArg"
+            app:argType="com.example.vinilos.models.Album" />
+    </fragment>
+</navigation>
