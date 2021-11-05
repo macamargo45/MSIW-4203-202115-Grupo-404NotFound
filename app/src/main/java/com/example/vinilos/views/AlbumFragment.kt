@@ -15,8 +15,6 @@ import com.example.vinilos.models.Album
 import com.example.vinilos.views.adapters.AlbumsAdapter
 import com.example.vinilos.viewmodels.AlbumViewModel
 
-//import com.example.vinilos.ui.AlbumFragmentDirections
-
 class AlbumFragment : Fragment() {
     private var _binding: AlbumFragmentBinding? = null
     private val binding get() = _binding!!
@@ -28,6 +26,8 @@ class AlbumFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
