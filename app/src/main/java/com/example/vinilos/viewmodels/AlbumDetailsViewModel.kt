@@ -27,6 +27,7 @@ class AlbumDetailsViewModel (application: Application) :  AndroidViewModel(appli
     private fun refreshDataFromNetwork() {
         val album = Album(1,"URL","28 of march 1985",
             "A good one", "Rock", "One of those","One of many", mutableListOf())
+
         //NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
 
         //    _albums.postValue(list)
