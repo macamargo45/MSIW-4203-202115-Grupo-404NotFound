@@ -1,6 +1,5 @@
 package com.example.vinilos.views
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,20 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumDetailsFragmentBinding
-import com.example.vinilos.models.Album
 import com.example.vinilos.viewmodels.AlbumDetailsViewModel
 import com.squareup.picasso.Picasso
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 
 class AlbumDetailsFragment : Fragment() {
     private var _binding: AlbumDetailsFragmentBinding? = null
@@ -58,7 +51,6 @@ class AlbumDetailsFragment : Fragment() {
         })
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
@@ -74,8 +66,9 @@ class AlbumDetailsFragment : Fragment() {
         val txtGenre: TextView = view.findViewById(R.id.GenreAlbumDetails)
         txtGenre.text = args.myArg.genre.toString()
 
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val date = LocalDate.parse(args.myArg.releaseDate.toString().substring(0,10),  DateTimeFormatter.ISO_DATE)
+        val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val formatter = SimpleDateFormat("dd-MM-yyyy")
+        val date: = formatter.format(parser.parse(args.myArg.releaseDate.toString().substring(0,19)))
 
         val txtReleaseDate: TextView = view.findViewById(R.id.ReleaseDateAlbumDetails)
         txtReleaseDate.text = date.format(formatter)
