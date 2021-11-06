@@ -15,6 +15,8 @@ Las historias incluidas en esta versión son las siguientes:
 * HU001 - Listado de albumes
 * HU002 - Ver el detalle de un album (esto no incluye visualizar la lista de canciones del album)
 
+En [este wiki](https://github.com/macamargo45/MSIW-4203-202115-Grupo-404NotFound/wiki/Backlog-del-Producto) puede ver el detalle de las historias.
+
 ## Pruebas
 Las pruebas de la aplicación se encuentran en el folder XXX. El detalle de los dispositivos en los que se probó está en [la estrategia de pruebas](https://uniandes-my.sharepoint.com/:w:/g/personal/j_monterov_uniandes_edu_co/ETwsSjrjt3BMhb1xd7t2UQEBWcIWGVI3q6ygDyCzSrwHmA?e=dt1FPm).
 La historia HU001 se cubre con las pruebas:
