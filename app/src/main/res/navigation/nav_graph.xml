@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/albumDetailsFragment2"
         android:name="com.example.vinilos.views.AlbumDetailsFragment"
-        android:label="AlbumDetailsFragment">
+        android:label="@string/album_details_title">
         <argument
             android:name="myArg"
             app:argType="com.example.vinilos.models.Album" />
