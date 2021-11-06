@@ -11,7 +11,11 @@
         <entry key="..\:/Repositorios/MSIW-4203-202115-Grupo-404NotFound/app/src/main/res/layout/album_item.xml" value="0.33229166666666665" />
         <entry key="..\:/Repositorios/MSIW-4203-202115-Grupo-404NotFound/app/src/main/res/layout/content_main.xml" value="0.1765625" />
         <entry key="..\:/Repositorios/MSIW-4203-202115-Grupo-404NotFound/app/src/main/res/menu/navigation.xml" value="0.1328125" />
+        <entry key="app/src/main/res/drawable/ic_album.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_album_ok.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_cap.xml" value="0.215625" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265625" />
+        <entry key="app/src/main/res/drawable/ic_premios.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29483695652173914" />
         <entry key="app/src/main/res/layout/album_fragment.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/album_item.xml" value="0.5" />
