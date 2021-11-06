@@ -68,7 +68,7 @@ class AlbumDetailsFragment : Fragment() {
 
         val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         val formatter = SimpleDateFormat("dd-MM-yyyy")
-        val date: = formatter.format(parser.parse(args.myArg.releaseDate.toString().substring(0,19)))
+        val date = formatter.format(parser.parse(args.myArg.releaseDate.toString().substring(0,19)))
 
         val txtReleaseDate: TextView = view.findViewById(R.id.ReleaseDateAlbumDetails)
         txtReleaseDate.text = date.format(formatter)
