@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_albums"
-        android:icon="@drawable/ic_album_ok"
-        android:title="Albums"/>
+        android:icon="@drawable/ic_album"
+        android:title="Albumes"/>
     <item
         android:id="@+id/navigation_musicos"
-        android:icon="@drawable/ic_musicos"
+        android:icon="@drawable/ic_zap"
         android:title="Músicos"/>
     <item
         android:id="@+id/navigation_coleccionistas"
