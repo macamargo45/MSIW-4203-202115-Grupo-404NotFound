@@ -2,6 +2,7 @@ package com.example.vinilos.views
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumDetailsFragmentBinding
@@ -32,59 +34,74 @@ class AlbumDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
-        _binding = AlbumDetailsFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+            _binding = AlbumDetailsFragmentBinding.inflate(inflater, container, false)
+            val view = binding.root
+            return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        viewModel = ViewModelProvider(this, AlbumDetailsViewModel.Factory(activity.application)).get(AlbumDetailsViewModel::class.java)
-        viewModel.album.observe(viewLifecycleOwner, {
-            it.apply {
-                //Log.d("act", "ACA CREO QUE DEBERIA CARGAR LOS ALBUMES")
-                //viewModelAdapter!!.albums = args
+        try {
+            super.onActivityCreated(savedInstanceState)
+            val activity = requireNotNull(this.activity) {
+                "You can only access the viewModel after onActivityCreated()"
             }
-        })
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
-            if (isNetworkError) onNetworkError()
-        })
+            viewModel =
+                ViewModelProvider(this, AlbumDetailsViewModel.Factory(activity.application)).get(
+                    AlbumDetailsViewModel::class.java
+                )
+            viewModel.album.observe(viewLifecycleOwner, {
+                it.apply {
+                    //Log.d("act", "ACA CREO QUE DEBERIA CARGAR LOS ALBUMES")
+                    //viewModelAdapter!!.albums = args
+                }
+            })
+            viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
+                if (isNetworkError) onNetworkError()
+            })
+        } catch (e: Exception) {
+            Log.println(Log.ERROR, "Error", e.message.toString())
+            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            view?.findNavController()?.navigate(action)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        try {
+            val txtDescription: TextView = view.findViewById(R.id.DescripcionAlbumDetails)
+            txtDescription.text = args.myArg.description.toString()
 
-        val txtDescription: TextView = view.findViewById(R.id.DescripcionAlbumDetails)
-        txtDescription.text = args.myArg.description.toString()
+            val txtName: TextView = view.findViewById(R.id.NameAlbumDetails)
+            txtName.text = args.myArg.name.toString()
 
-        val txtName: TextView = view.findViewById(R.id.NameAlbumDetails)
-        txtName.text = args.myArg.name.toString()
+            val txtPerformers: TextView = view.findViewById(R.id.PerformerNamesAlbumDetails)
+            txtPerformers.text = args.myArg.performerNames
 
-        val txtPerformers: TextView = view.findViewById(R.id.PerformerNamesAlbumDetails)
-        txtPerformers.text = args.myArg.performerNames
+            val txtGenre: TextView = view.findViewById(R.id.GenreAlbumDetails)
+            txtGenre.text = args.myArg.genre.toString()
 
-        val txtGenre: TextView = view.findViewById(R.id.GenreAlbumDetails)
-        txtGenre.text = args.myArg.genre.toString()
+            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            val formatter = SimpleDateFormat("dd-MM-yyyy")
+            val date =
+                formatter.format(parser.parse(args.myArg.releaseDate.toString().substring(0, 19)))
 
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val date = LocalDate.parse(args.myArg.releaseDate.toString().substring(0,10),  DateTimeFormatter.ISO_DATE)
+            val txtReleaseDate: TextView = view.findViewById(R.id.ReleaseDateAlbumDetails)
+            txtReleaseDate.text = date.format(formatter)
 
-        val txtReleaseDate: TextView = view.findViewById(R.id.ReleaseDateAlbumDetails)
-        txtReleaseDate.text = date.format(formatter)
+            val txtRecordLabel: TextView = view.findViewById(R.id.RecordLabelAlbumDetails)
+            txtRecordLabel.text = args.myArg.recordLabel.toString()
 
-        val txtRecordLabel: TextView = view.findViewById(R.id.RecordLabelAlbumDetails)
-        txtRecordLabel.text = args.myArg.recordLabel.toString()
-
-        val imgCover: ImageView = view.findViewById(R.id.imageViewAlbumDetails)
-        Picasso
-            .get()
-            .load(args.myArg.cover)
-            .into(imgCover)
+            val imgCover: ImageView = view.findViewById(R.id.imageViewAlbumDetails)
+            Picasso
+                .get()
+                .load(args.myArg.cover)
+                .into(imgCover)
+        } catch (e: Exception) {
+            Log.println(Log.ERROR, "Error", e.message.toString())
+            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            view.findNavController().navigate(action)
+        }
     }
 
     override fun onDestroyView() {
@@ -93,12 +110,13 @@ class AlbumDetailsFragment : Fragment() {
     }
 
     private fun onNetworkError() {
-        if(!viewModel.isNetworkErrorShown.value!!) {
+        if (!viewModel.isNetworkErrorShown.value!!) {
+            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            view?.findNavController()?.navigate(action)
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
     }
-
 
 
 }
