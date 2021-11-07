@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Vinilos</string>
     <string name="album_list_title">Albumes</string>
+    <string name="album_details_title">Detalle Album</string>
+    <string name="record_label_title">Compañia discográfica</string>
+    <string name="genre_title">Género</string>
+    <string name="release_date_title">Fecha Lanzamiento</string>
+    <string name="cover_title">Portada del album</string>
+    <string name="error_message_title">Ocurrió un error</string>
+    <string name="musicos_list_title">Músicos</string>
+    <string name="collecionistas_list_title">Coleccionistas</string>
+    <string name="premios_list_title">Premios</string>
+    <string name="error_message">Ha ocurrido un error. Vuelva a intentar usar la aplicación más tarde.</string>
+
+
+
+
+
 </resources>

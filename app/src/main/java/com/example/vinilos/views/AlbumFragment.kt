@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.databinding.AlbumFragmentBinding
@@ -27,51 +28,72 @@ class AlbumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-
-        _binding = AlbumFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = AlbumsAdapter()
-        return view
+            _binding = AlbumFragmentBinding.inflate(inflater, container, false)
+            val view = binding.root
+            viewModelAdapter = AlbumsAdapter()
+            return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumsRv
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = viewModelAdapter
+        try {
+            recyclerView = binding.albumsRv
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = viewModelAdapter
+        } catch (e: Exception) {
+            Log.println(Log.ERROR, "Error", e.message.toString())
+            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            view.findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        binding.progressBar.isVisible = true
-        binding.albumsRv.isVisible = false
+        try {
 
-        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(AlbumViewModel::class.java)
-        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
-            it.apply {
-                viewModelAdapter!!.albums = this
 
-                binding.albumsRv.isVisible = true
-                binding.progressBar.isVisible = false
+            super.onActivityCreated(savedInstanceState)
+            val activity = requireNotNull(this.activity) {
+                "You can only access the viewModel after onActivityCreated()"
             }
-        })
-        viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
-            if (isNetworkError) onNetworkError()
-        })
+            binding.progressBar.isVisible = true
+            binding.albumsRv.isVisible = false
+
+            viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(
+                AlbumViewModel::class.java
+            )
+            viewModel.albums.observe(viewLifecycleOwner, {
+                it.apply {
+                    viewModelAdapter!!.albums = this
+
+                    binding.albumsRv.isVisible = true
+                    binding.progressBar.isVisible = false
+                }
+            })
+            viewModel.eventNetworkError.observe(
+                viewLifecycleOwner,
+                { isNetworkError ->
+                    if (isNetworkError) onNetworkError()
+                })
+        } catch (e: Exception) {
+            Log.println(Log.ERROR, "Error", e.message.toString())
+            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            view?.findNavController()?.navigate(action)
+        }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     private fun onNetworkError() {
-        if(!viewModel.isNetworkErrorShown.value!!) {
+        if (!viewModel.isNetworkErrorShown.value!!) {
+            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            view?.findNavController()?.navigate(action)
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+
         }
     }
 
