@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vinilos">
-          <activity
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
