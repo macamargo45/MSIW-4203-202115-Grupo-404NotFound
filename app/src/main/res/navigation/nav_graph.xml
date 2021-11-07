@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_albumFragment2_to_albumDetailsFragment2"
             app:destination="@id/albumDetailsFragment2" />
+        <action
+            android:id="@+id/action_albumFragment2_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
     </fragment>
     <fragment
         android:id="@+id/albumDetailsFragment2"
@@ -20,5 +23,17 @@
         <argument
             android:name="myArg"
             app:argType="com.example.vinilos.models.Album" />
+        <action
+            android:id="@+id/action_albumDetailsFragment2_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorMessageFragment"
+        android:name="com.example.vinilos.views.ErrorMessageFragment"
+        android:label="@string/error_message_title"
+        tools:layout="@layout/error_message_fragment" >
+        <action
+            android:id="@+id/action_errorMessageFragment_to_albumFragment2"
+            app:destination="@id/albumFragment2" />
     </fragment>
 </navigation>
