@@ -4,7 +4,9 @@ package com.example.vinilos
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -170,23 +172,7 @@ class AlbumDetailTest {
         )
         textView11.check(matches(withText("01-08-1984")))
 
-        val appCompatImageButton = onView(
-            allOf(
-                withContentDescription("Navigate up"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.action_bar),
-                        childAtPosition(
-                            withId(R.id.action_bar_container),
-                            0
-                        )
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatImageButton.perform(click())
+        pressBack()
 
         val textView12 = onView(
             allOf(
