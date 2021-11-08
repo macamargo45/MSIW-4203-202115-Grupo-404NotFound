@@ -41,7 +41,7 @@ class AlbumFragmentTest {
     }
 
     @Test
-    fun test_backNavigation_toMovieListFragment() {
+    fun test_backNavigation_toAlbumListFragment() {
         onView(withId(R.id.albumsRv)).perform(
             actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
                 LIST_ALBUM_IN_TEST,
