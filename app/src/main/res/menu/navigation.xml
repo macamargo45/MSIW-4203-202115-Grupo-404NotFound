@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/navigation_albums"
-        android:icon="@drawable/ic_album_ok"
-        android:title="Albums"/>
+        android:icon="@drawable/ic_album"
+        android:title="@string/album_list_title"/>
     <item
         android:id="@+id/navigation_musicos"
-        android:icon="@drawable/ic_musicos"
-        android:title="Músicos"/>
+        android:icon="@drawable/ic_zap"
+        android:title="@string/musicos_list_title"/>
     <item
         android:id="@+id/navigation_coleccionistas"
         android:icon="@drawable/ic_colecc"
-        android:title="Coleccionistas"/>
+        android:title="@string/collecionistas_list_title"/>
     <item
         android:id="@+id/navigation_premios"
         android:icon="@drawable/ic_premios"
-        android:title="Premios"/>
+        android:title="@string/premios_list_title"/>
 </menu>
