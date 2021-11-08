@@ -14,8 +14,6 @@ import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.example.vinilos.util.EspressoIdlingResource
-import com.example.vinilos.views.adapters.AlbumsAdapter
-import com.example.vinilos.views.data.FakeAlbumData
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -37,7 +35,6 @@ class NavigationTest {
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     val LIST_ALBUM_IN_TEST = 10;
-    val ALBUM_IN_TEST = FakeAlbumData.albums[LIST_ALBUM_IN_TEST]
 
     @Before
     fun registerIdlingResource() {
