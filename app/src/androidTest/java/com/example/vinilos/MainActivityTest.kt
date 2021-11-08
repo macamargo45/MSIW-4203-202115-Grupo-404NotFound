@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
+import com.example.vinilos.util.EspressoIdlingResource
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -24,6 +26,8 @@ import org.junit.runner.RunWith
 
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.`is`
+import org.junit.After
+import org.junit.Before
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -32,6 +36,16 @@ class MainActivityTest {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @Before
+    fun registerIdlingResource() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @After
+    fun unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
 
     @Test
     fun mainActivityTest() {
