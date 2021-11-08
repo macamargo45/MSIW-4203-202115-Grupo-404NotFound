@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilos.models.Album
 import com.example.vinilos.models.Performer
+import com.example.vinilos.util.EspressoIdlingResource
 import org.json.JSONArray
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -30,6 +31,7 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
     fun getAlbums(onComplete:(resp:List<Album>)->Unit, onError: (error: VolleyError)->Unit){
+        EspressoIdlingResource.increment()
         requestQueue.add(getRequest("albums",
             Response.Listener<String> { response ->
                 val resp = JSONArray(response)
@@ -64,6 +66,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     ))
                 }
                 onComplete(list)
+                EspressoIdlingResource.decrement()
             },
             Response.ErrorListener {
                 onError(it)
