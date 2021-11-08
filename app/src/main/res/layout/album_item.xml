@@ -46,14 +46,15 @@
                     android:text="@{album.name}"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:tag="@{album.albumId}" />
+                    android:contentDescription="@{Integer.toString(album.albumId)}"/>
 
                 <TextView
                     android:id="@+id/albumPerformerNames"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{album.performerNames}"
-                    android:tag="@{album.albumId}" />
+                    android:tag="@{album.albumId}"
+                    android:contentDescription="@{Integer.toString(album.albumId)}" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
