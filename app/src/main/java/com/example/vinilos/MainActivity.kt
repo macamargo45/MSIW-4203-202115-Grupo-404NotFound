@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.vinilos.views.AlbumDetailsFragment
 import com.example.vinilos.views.AlbumFragment
 import com.example.vinilos.views.AlbumFragmentDirections
+import com.example.vinilos.views.CollectorsListFragmentDirections
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -51,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_coleccionistas -> {
-                    //setFragment(frag3())
+                    val action = CollectorsListFragmentDirections.actionGlobalCollectorsListFragment()
+                    navController.navigate(action)
                     true
                 }
                 R.id.navigation_premios ->{
