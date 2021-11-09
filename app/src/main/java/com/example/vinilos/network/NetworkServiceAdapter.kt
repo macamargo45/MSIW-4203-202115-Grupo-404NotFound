@@ -118,8 +118,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                     list.add(i, Collector(
                         id = item.getInt("id"),
                         name = item.getString("name"),
-                        telephone = item.getString("cover"),
-                        email = item.getString("recordLabel"),
+                        telephone = item.getString("telephone"),
+                        email = item.getString("email"),
                         favoritePerformers = favoritePerformers,
                         collectorAlbums = collectorsAlbums
                     )
