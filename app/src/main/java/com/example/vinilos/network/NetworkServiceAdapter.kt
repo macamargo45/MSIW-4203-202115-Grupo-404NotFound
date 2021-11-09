@@ -8,6 +8,8 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilos.models.Album
+import com.example.vinilos.models.Collector
+import com.example.vinilos.models.CollectorAlbum
 import com.example.vinilos.models.Performer
 import com.example.vinilos.util.EspressoIdlingResource
 import org.json.JSONArray
@@ -33,7 +35,7 @@ class NetworkServiceAdapter constructor(context: Context) {
     fun getAlbums(onComplete:(resp:List<Album>)->Unit, onError: (error: VolleyError)->Unit){
         EspressoIdlingResource.increment()
         requestQueue.add(getRequest("albums",
-            Response.Listener<String> { response ->
+            { response ->
                 val resp = JSONArray(response)
                 val list = mutableListOf<Album>()
 
@@ -68,11 +70,66 @@ class NetworkServiceAdapter constructor(context: Context) {
                 onComplete(list)
                 EspressoIdlingResource.decrement()
             },
-            Response.ErrorListener {
+            {
                 onError(it)
             }))
     }
     private fun getRequest(path:String, responseListener: Response.Listener<String>, errorListener: Response.ErrorListener): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL+path, responseListener,errorListener)
+    }
+
+    fun getCollectors(onComplete:(resp:List<Collector>)->Unit, onError: (error: VolleyError)->Unit){
+        EspressoIdlingResource.increment()
+        requestQueue.add(getRequest("collectors",
+            { response ->
+                val resp = JSONArray(response)
+                val list = mutableListOf<Collector>()
+
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+
+                    val favoritePerformers = mutableListOf<Performer?>()
+                    val jsonPerformers = item.getJSONArray("favoritePerformers")
+
+                    val collectorsAlbums = mutableListOf<CollectorAlbum?>()
+                    val jsonCollectorsAlbums = item.getJSONArray("collectorAlbums")
+
+                    for (performerIndex in 0 until jsonPerformers.length()) {
+                        val jsonPerformer = jsonPerformers.getJSONObject(performerIndex)
+
+                        favoritePerformers.add(performerIndex, Performer(
+                            id = jsonPerformer.getInt("id"),
+                            name = jsonPerformer.getString("name"),
+                            image = jsonPerformer.getString("image"),
+                            description = jsonPerformer.getString("description")
+                        ))
+                    }
+
+                    for (albumIndex in 0 until jsonCollectorsAlbums.length()) {
+                        val jsonCollectorAlbum = jsonCollectorsAlbums.getJSONObject(albumIndex)
+
+                        collectorsAlbums.add(albumIndex, CollectorAlbum(
+                            id = jsonCollectorAlbum.getInt("id"),
+                            status = jsonCollectorAlbum.getString("status"),
+                            price = jsonCollectorAlbum.getInt("price")
+                        ))
+                    }
+
+                    list.add(i, Collector(
+                        id = item.getInt("id"),
+                        name = item.getString("name"),
+                        telephone = item.getString("cover"),
+                        email = item.getString("recordLabel"),
+                        favoritePerformers = favoritePerformers,
+                        collectorAlbums = collectorsAlbums
+                    )
+                    )
+                }
+                onComplete(list)
+                EspressoIdlingResource.decrement()
+            },
+            {
+                onError(it)
+            }))
     }
 }

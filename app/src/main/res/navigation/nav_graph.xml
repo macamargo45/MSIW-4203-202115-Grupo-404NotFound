@@ -36,4 +36,13 @@
             android:id="@+id/action_errorMessageFragment_to_albumFragment2"
             app:destination="@id/albumFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/collectorsListFragment"
+        android:name="com.example.vinilos.views.CollectorsListFragment"
+        android:label="collectors_list_fragment"
+        tools:layout="@layout/collectors_list_fragment" >
+        <action
+            android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+    </fragment>
 </navigation>
