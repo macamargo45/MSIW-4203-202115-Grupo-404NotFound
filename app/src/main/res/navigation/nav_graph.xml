@@ -19,6 +19,7 @@
             android:id="@+id/action_albumFragment2_to_collectorsListFragment"
             app:destination="@id/collectorsListFragment" />
     </fragment>
+    <action android:id="@+id/action_global_albumFragment" app:destination="@id/albumFragment2"/>
     <fragment
         android:id="@+id/albumDetailsFragment2"
         android:name="com.example.vinilos.views.AlbumDetailsFragment"
@@ -48,4 +49,15 @@
             android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
     </fragment><action android:id="@+id/action_global_collectorsListFragment" app:destination="@id/collectorsListFragment"/>
+
+    <fragment
+        android:id="@+id/musiciansListFragment"
+        android:name="com.example.vinilos.views.MusiciansListFragment"
+        android:label="@string/musicians_list_title"
+        tools:layout="@layout/collectors_list_fragment" >
+        <action
+            android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_musiciansListFragment" app:destination="@id/musiciansListFragment"/>
 </navigation>
