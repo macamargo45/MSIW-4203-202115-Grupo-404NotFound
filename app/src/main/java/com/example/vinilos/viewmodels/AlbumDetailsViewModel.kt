@@ -5,10 +5,6 @@ import androidx.lifecycle.*
 import com.example.vinilos.models.Album
 
 class AlbumDetailsViewModel (application: Application) :  AndroidViewModel(application) {
-    private val _album = MutableLiveData<Album>()
-
-    val album: LiveData<Album>
-        get() = _album
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -25,18 +21,7 @@ class AlbumDetailsViewModel (application: Application) :  AndroidViewModel(appli
     }
 
     private fun refreshDataFromNetwork() {
-        val album = Album(1,"URL","28 of march 1985",
-            "A good one", "Rock", "One of those","One of many", mutableListOf())
 
-        //NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
-
-        //    _albums.postValue(list)
-        //    _eventNetworkError.value = false
-        //    _isNetworkErrorShown.value = false
-        //},{
-        //    _eventNetworkError.value = true
-        //})
-        _album.postValue(album)
     }
 
     fun onNetworkErrorShown() {
