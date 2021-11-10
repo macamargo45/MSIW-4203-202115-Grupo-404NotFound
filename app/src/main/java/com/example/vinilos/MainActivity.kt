@@ -15,6 +15,7 @@ import com.example.vinilos.views.AlbumDetailsFragment
 import com.example.vinilos.views.AlbumFragment
 import com.example.vinilos.views.AlbumFragmentDirections
 import com.example.vinilos.views.CollectorsListFragmentDirections
+import com.example.vinilos.views.MusiciansListFragmentDirections
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -42,12 +43,14 @@ class MainActivity : AppCompatActivity() {
             when (menu.itemId) {
 
                 R.id.navigation_albums -> {
-                    navController.navigateUp()
+                    val action = AlbumFragmentDirections.actionGlobalAlbumFragment()
+                    navController.navigate(action)
                     true
                 }
 
                 R.id.navigation_musicos -> {
-                    //setFragment(MusiciansFragment())
+                    val action = MusiciansListFragmentDirections.actionGlobalMusiciansListFragment()
+                    navController.navigate(action)
                     true
                 }
 

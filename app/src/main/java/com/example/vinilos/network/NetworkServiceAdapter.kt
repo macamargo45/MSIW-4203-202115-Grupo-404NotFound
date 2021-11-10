@@ -7,10 +7,7 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.vinilos.models.Album
-import com.example.vinilos.models.Collector
-import com.example.vinilos.models.CollectorAlbum
-import com.example.vinilos.models.Performer
+import com.example.vinilos.models.*
 import com.example.vinilos.util.EspressoIdlingResource
 import org.json.JSONArray
 
@@ -131,5 +128,51 @@ class NetworkServiceAdapter constructor(context: Context) {
             {
                 onError(it)
             }))
+    }
+
+    //FUCNION PARA TRAER LOS MUSICOS DEL ENDPOINT
+
+    fun getMusicians(onComplete:(resp:List<Musician>)->Unit, onError: (error: VolleyError)->Unit){
+        EspressoIdlingResource.increment()
+        requestQueue.add(getRequest("musicians",{ response ->
+
+            val resp = JSONArray(response)
+            val list = mutableListOf<Musician>()
+            for (i in 0 until resp.length()) {
+                val item = resp.getJSONObject(i)
+                val albums = item.getJSONArray("albums")
+                val albumsList = mutableListOf<Album?>()
+                val performers = mutableListOf<Performer?>()
+
+                for (albumIndex in 0 until albums.length()) {
+                    val jsonAlbum = albums.getJSONObject(albumIndex)
+
+                    albumsList.add(i, Album(
+                        albumId = jsonAlbum.getInt("id"),
+                        name = jsonAlbum.getString("name"),
+                        cover = jsonAlbum.getString("cover"),
+                        recordLabel = jsonAlbum.getString("recordLabel"),
+                        releaseDate = jsonAlbum.getString("releaseDate"),
+                        genre = jsonAlbum.getString("genre"),
+                        description = jsonAlbum.getString("description"),
+                        performers = performers
+                    ))
+                }
+
+                list.add(i, Musician(
+                    id = item.getInt("id"),
+                    name = item.getString("name"),
+                    image= item.getString("image"),
+                    description= item.getString("description"),
+                    birthDate= item.getString("birthDate"),
+                    albums = albumsList
+                )
+                )
+                onComplete(list)
+                EspressoIdlingResource.decrement()
+            }
+        },{
+            onError(it)
+        }))
     }
 }
