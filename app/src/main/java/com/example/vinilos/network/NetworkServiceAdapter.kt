@@ -10,7 +10,7 @@ import com.android.volley.toolbox.Volley
 import com.example.vinilos.models.*
 import com.example.vinilos.util.EspressoIdlingResource
 import org.json.JSONArray
-
+ 
 class NetworkServiceAdapter constructor(context: Context) {
 
     companion object{
