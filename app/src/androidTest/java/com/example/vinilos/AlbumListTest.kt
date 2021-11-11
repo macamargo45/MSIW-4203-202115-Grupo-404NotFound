@@ -31,7 +31,7 @@ import org.junit.Before
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
+class AlbumListTest {
 
     @Rule
     @JvmField
