@@ -25,7 +25,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
+ 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class NavigationTest {
@@ -35,6 +35,16 @@ class NavigationTest {
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     val LIST_ALBUM_IN_TEST = 10;
+
+    @Before
+    fun registerIdlingResource() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @After
+    fun unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
 
     @Before
     fun registerIdlingResource() {

@@ -206,6 +206,7 @@ class MainActivityTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Rubén Blades Bellido de Luna"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withContentDescription("100"),
                 isDisplayed()
             )
         )
@@ -224,6 +225,7 @@ class MainActivityTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Rubén Blades Bellido de Luna"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withContentDescription("101"),
                 isDisplayed()
             )
         )
@@ -242,6 +244,7 @@ class MainActivityTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Queen"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withContentDescription("102"),
                 isDisplayed()
             )
         )
@@ -260,6 +263,7 @@ class MainActivityTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Queen"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withContentDescription("103"),
                 isDisplayed()
             )
         )

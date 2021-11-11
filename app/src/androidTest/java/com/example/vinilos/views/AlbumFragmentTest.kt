@@ -39,11 +39,13 @@ class AlbumFragmentTest {
 
     @Test
     fun test_isListFragmentVisible_onAppLaunch() {
+        Thread.sleep(1500)
         onView(withId(R.id.albumsRv)).check(matches(isDisplayed()))
     }
 
     @Test
     fun test_selectListItem_isDetailFragmentVisible() {
+        Thread.sleep(1500)
         onData(withId(R.id.albumsRv)).perform(
             actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
                 LIST_ALBUM_IN_TEST,
@@ -55,6 +57,7 @@ class AlbumFragmentTest {
 
     @Test
     fun test_backNavigation_toAlbumListFragment() {
+        Thread.sleep(1500)
         onData(withId(R.id.albumsRv)).perform(
             actionOnItemAtPosition<AlbumsAdapter.AlbumViewHolder>(
                 LIST_ALBUM_IN_TEST,
@@ -64,5 +67,6 @@ class AlbumFragmentTest {
         onData(withId(R.id.albumName)).check(matches(withText(ALBUM_IN_TEST.name)))
         pressBack()
         onData(withId(R.id.albumsRv)).check(matches(isDisplayed()))
+        Thread.sleep(1500)
     }
 }
