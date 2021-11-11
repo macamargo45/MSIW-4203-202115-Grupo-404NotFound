@@ -46,6 +46,16 @@ class NavigationTest {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
     }
 
+    @Before
+    fun registerIdlingResource() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @After
+    fun unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
+
     @Test
     fun navigationTest() {
 
