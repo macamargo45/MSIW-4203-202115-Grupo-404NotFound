@@ -55,5 +55,6 @@
         <action
             android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
-    </fragment><action android:id="@+id/action_global_musiciansListFragment" app:destination="@id/musiciansListFragment"/>
+    </fragment>
+    <action android:id="@+id/action_global_musiciansListFragment" app:destination="@id/musiciansListFragment"/>
 </navigation>
