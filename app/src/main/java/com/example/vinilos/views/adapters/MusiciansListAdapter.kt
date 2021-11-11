@@ -11,7 +11,7 @@ import com.example.vinilos.databinding.MusicianItemBinding
 import com.example.vinilos.models.Musician
 import com.squareup.picasso.Picasso
 
-class MusiciansListAdapter() : RecyclerView.Adapter<MusiciansListAdapter.MusicianListViewHolder>() {
+class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianListViewHolder>() {
 
     class MusicianListViewHolder(val viewDataBinding: MusicianItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
