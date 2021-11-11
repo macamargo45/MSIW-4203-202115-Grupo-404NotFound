@@ -47,12 +47,6 @@ class AlbumDetailsFragment : Fragment() {
                 ViewModelProvider(this, AlbumDetailsViewModel.Factory(activity.application)).get(
                     AlbumDetailsViewModel::class.java
                 )
-            viewModel.album.observe(viewLifecycleOwner, {
-                it.apply {
-                    //Log.d("act", "ACA CREO QUE DEBERIA CARGAR LOS ALBUMES")
-                    //viewModelAdapter!!.albums = args
-                }
-            })
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })

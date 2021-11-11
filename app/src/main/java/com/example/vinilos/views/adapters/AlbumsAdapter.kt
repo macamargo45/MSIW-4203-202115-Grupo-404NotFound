@@ -14,7 +14,7 @@ import com.example.vinilos.views.AlbumFragmentDirections
 import com.squareup.picasso.Picasso
 
 
-class AlbumsAdapter() : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
