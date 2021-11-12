@@ -4,13 +4,13 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Musician (
-    val id:Int,
+data class Musician(
+    val id: Int,
     val name: String?,
     val image: String?,
     val description: String?,
     val birthDate: String?,
-    val albums: MutableList<Album?>
+    val albums: List<Album>
 ): Parcelable {
     val albumsNames get() = this.albums.map { it?.name }.joinToString()
 }
