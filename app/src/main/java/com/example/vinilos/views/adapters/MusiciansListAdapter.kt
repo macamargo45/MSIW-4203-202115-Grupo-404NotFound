@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.databinding.MusicianItemBinding
 import com.example.vinilos.models.Musician
+import com.example.vinilos.views.MusiciansListFragmentDirections
 import com.squareup.picasso.Picasso
 
 class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianListViewHolder>() {
@@ -20,17 +22,20 @@ class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianL
             val LAYOUT = R.layout.musician_item
         }
     }
-    var musicians :List<Musician> = emptyList()
+
+    var musicians: List<Musician> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianListViewHolder {
         val withDataBinding: MusicianItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             MusicianListViewHolder.LAYOUT,
             parent,
-            false)
+            false
+        )
 
         return MusicianListViewHolder(withDataBinding)
     }
@@ -48,12 +53,11 @@ class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianL
         }
         holder.viewDataBinding.root.setOnClickListener {
             try {
-                //val action = AlbumFragmentDirections.actionAlbumFragment2ToAlbumDetailsFragment2(albums[position])
-                //holder.viewDataBinding.root.findNavController().navigate(action)
-
-            }
-            catch(e: Exception) {
-                Log.println(Log.ERROR,"Error",e.message.toString())
+                val action =
+                    MusiciansListFragmentDirections.actionMusicianListFragmentToMusicianDetailsFragment(musicians[position])
+                holder.viewDataBinding.root.findNavController().navigate(action)
+            } catch (e: Exception) {
+                Log.println(Log.ERROR, "Error", e.message.toString())
             }
         }
     }
