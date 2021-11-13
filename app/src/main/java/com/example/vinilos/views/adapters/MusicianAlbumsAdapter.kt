@@ -8,54 +8,62 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
-import com.example.vinilos.databinding.MusicianItemBinding
-import com.example.vinilos.models.Musician
-import com.example.vinilos.views.MusiciansListFragmentDirections
+import com.example.vinilos.databinding.AlbumItemBinding
+import com.example.vinilos.models.Album
+import com.example.vinilos.views.MusicianDetailsFragmentDirections
 import com.squareup.picasso.Picasso
 
-class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianListViewHolder>() {
 
-    class MusicianListViewHolder(val viewDataBinding: MusicianItemBinding) :
+class MusicianAlbumsAdapter : RecyclerView.Adapter<MusicianAlbumsAdapter.MusicianAlbumsHolder>() {
+
+    class MusicianAlbumsHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.musician_item
+            val LAYOUT = R.layout.album_item
         }
     }
 
-    var musicians: List<Musician> = emptyList()
+    var musicianAlbums: List<Album> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianListViewHolder {
-        val withDataBinding: MusicianItemBinding = DataBindingUtil.inflate(
+    var musicianName: String = ""
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianAlbumsHolder {
+        val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            MusicianListViewHolder.LAYOUT,
+            MusicianAlbumsHolder.LAYOUT,
             parent,
             false
         )
 
-        return MusicianListViewHolder(withDataBinding)
+        return MusicianAlbumsHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: MusicianListViewHolder, position: Int) {
-        val musician = musicians[position]
+    override fun onBindViewHolder(holder: MusicianAlbumsHolder, position: Int) {
+        val album = musicianAlbums[position]
 
         Picasso
             .get()
-            .load(musician.image)
+            .load(album.cover)
             .into(holder.viewDataBinding.imageView)
 
         holder.viewDataBinding.also {
-            it.musician = musician
+            it.album = album
         }
         holder.viewDataBinding.root.setOnClickListener {
             try {
                 val action =
-                    MusiciansListFragmentDirections.actionMusicianListFragmentToMusicianDetailsFragment(musicians[position])
+                    MusicianDetailsFragmentDirections.actionMusicianDetailFragmentToAlbumDetailsFragment2(album)
                 holder.viewDataBinding.root.findNavController().navigate(action)
+
             } catch (e: Exception) {
                 Log.println(Log.ERROR, "Error", e.message.toString())
             }
@@ -63,6 +71,6 @@ class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianL
     }
 
     override fun getItemCount(): Int {
-        return musicians.size
+        return musicianAlbums.size
     }
 }
