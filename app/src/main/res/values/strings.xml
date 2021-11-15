@@ -12,6 +12,7 @@
     <string name="musician_details_title">Detalle Músico</string>
     <string name="musician_birth_date">Fecha de Nacimiento</string>
     <string name="musician_album_title">Albumes Músico</string>
+    <string name="collector_default_thumbnail">Imagen de coleccionista por defecto</string>
     <string name="collecionistas_list_title">Coleccionistas</string>
     <string name="musicians_list_title">Musicos</string>
     <string name="premios_list_title">Premios</string>
