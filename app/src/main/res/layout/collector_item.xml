@@ -40,7 +40,7 @@
                 android:orientation="vertical"
                 android:padding="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/collectorDefaultThumbnail"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
