@@ -11,7 +11,7 @@ import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorItemBinding
 import com.example.vinilos.models.Collector
 
-class CollectorsListAdapter() : RecyclerView.Adapter<CollectorsListAdapter.CollectorListViewHolder>() {
+class CollectorsListAdapter : RecyclerView.Adapter<CollectorsListAdapter.CollectorListViewHolder>() {
 
     class CollectorListViewHolder(val viewDataBinding: CollectorItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {

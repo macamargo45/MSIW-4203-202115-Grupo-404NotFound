@@ -3,7 +3,7 @@ package com.example.vinilos.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 
-class AlbumDetailsViewModel(application: Application) : AndroidViewModel(application) {
+class MusicianDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
 
@@ -19,16 +19,15 @@ class AlbumDetailsViewModel(application: Application) : AndroidViewModel(applica
 
     }
 
-
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumDetailsViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(MusicianDetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumDetailsViewModel(app) as T
+                return MusicianDetailsViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

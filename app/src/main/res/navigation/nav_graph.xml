@@ -15,10 +15,11 @@
         <action
             android:id="@+id/action_albumFragment2_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
-        <action
-            android:id="@+id/action_albumFragment2_to_collectorsListFragment"
-            app:destination="@id/collectorsListFragment" />
+        />
     </fragment>
+    <action
+        android:id="@+id/action_global_albumFragment"
+        app:destination="@id/albumFragment2" />
     <fragment
         android:id="@+id/albumDetailsFragment2"
         android:name="com.example.vinilos.views.AlbumDetailsFragment"
@@ -34,7 +35,7 @@
         android:id="@+id/errorMessageFragment"
         android:name="com.example.vinilos.views.ErrorMessageFragment"
         android:label="@string/error_message_title"
-        tools:layout="@layout/error_message_fragment" >
+        tools:layout="@layout/error_message_fragment">
         <action
             android:id="@+id/action_errorMessageFragment_to_albumFragment2"
             app:destination="@id/albumFragment2" />
@@ -43,9 +44,42 @@
         android:id="@+id/collectorsListFragment"
         android:name="com.example.vinilos.views.CollectorsListFragment"
         android:label="@string/collecionistas_list_title"
-        tools:layout="@layout/collectors_list_fragment" >
+        tools:layout="@layout/collectors_list_fragment">
         <action
             android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
-    </fragment><action android:id="@+id/action_global_collectorsListFragment" app:destination="@id/collectorsListFragment"/>
+    </fragment>
+    <action
+        android:id="@+id/action_global_collectorsListFragment"
+        app:destination="@id/collectorsListFragment" />
+
+    <fragment
+        android:id="@+id/musiciansListFragment"
+        android:name="com.example.vinilos.views.MusiciansListFragment"
+        android:label="@string/musicians_list_title"
+        tools:layout="@layout/collectors_list_fragment">
+        <action
+            android:id="@+id/action_musicianListFragment_to_musicianDetailsFragment"
+            app:destination="@id/musicianDetailsFragment" />
+        <action
+            android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_musiciansListFragment"
+        app:destination="@id/musiciansListFragment" />
+    <fragment
+        android:id="@+id/musicianDetailsFragment"
+        android:name="com.example.vinilos.views.MusicianDetailsFragment"
+        android:label="@string/musician_details_title">
+        <argument
+            android:name="musician"
+            app:argType="com.example.vinilos.models.Musician" />
+        <action
+            android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment2"
+            app:destination="@id/albumDetailsFragment2" />
+        <action
+            android:id="@+id/action_musicianDetailsFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+    </fragment>
 </navigation>

@@ -88,7 +88,8 @@ class AlbumListTest {
 
         val textView3 = onView(
             allOf(
-                withId(R.id.albumPerformerNames), withText("Rubén Blades Bellido de Luna"),
+                withId(R.id.albumPerformerNames),
+                withText("Rubén Blades Bellido de Luna"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 withContentDescription("100"),
                 isDisplayed()

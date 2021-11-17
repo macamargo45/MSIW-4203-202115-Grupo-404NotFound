@@ -8,6 +8,4 @@ data class CollectorAlbum (
     val id:Int,
     val price: Int,
     val status: String?
-): Parcelable {
-
-}
+): Parcelable
