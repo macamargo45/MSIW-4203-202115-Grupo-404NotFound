@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.vinilos.models.Musician
 import com.example.vinilos.repositories.MusiciansRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MusiciansListViewModel(application: Application) : AndroidViewModel(application) {
     private val musiciansRepository = MusiciansRepository(application)
@@ -28,15 +31,19 @@ class MusiciansListViewModel(application: Application) : AndroidViewModel(applic
     }
 
     private fun refreshDataFromNetwork() {
-        musiciansRepository.refreshData({
-            val list = listOf<Musician>()
-            _musicians.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
+        try {
+            viewModelScope.launch (Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = musiciansRepository.refreshData()
+                    _musicians.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }catch (e:Exception){
 
-        }, {
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {
