@@ -4,12 +4,14 @@ import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilos.models.*
 import com.example.vinilos.util.EspressoIdlingResource
 import org.json.JSONArray
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class NetworkServiceAdapter constructor(context: Context) {
 
@@ -29,7 +31,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    fun getAlbums(onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont->
         EspressoIdlingResource.increment()
         requestQueue.add(
             getRequest("albums",
@@ -69,14 +71,17 @@ class NetworkServiceAdapter constructor(context: Context) {
                             )
                         )
                     }
-                    onComplete(list)
                     EspressoIdlingResource.decrement()
+                    cont.resume(list)
                 },
-                {
-                    onError(it)
+                Response.ErrorListener {
+                    cont.resumeWithException(it) //se relanza la excepción
                 })
         )
     }
+
+
+
 
     private fun getRequest(
         path: String,
@@ -86,7 +91,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         return StringRequest(Request.Method.GET, BASE_URL + path, responseListener, errorListener)
     }
 
-    fun getCollectors(onComplete: (resp: List<Collector>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont ->
         EspressoIdlingResource.increment()
         requestQueue.add(
             getRequest("collectors",
@@ -139,18 +144,17 @@ class NetworkServiceAdapter constructor(context: Context) {
                             )
                         )
                     }
-                    onComplete(list)
+                    cont.resume(list)
                     EspressoIdlingResource.decrement()
                 },
-                {
-                    onError(it)
-                })
-        )
+                Response.ErrorListener {
+                    cont.resumeWithException(it) //se relanza la excepción
+                }))
     }
 
-    //FUCNION PARA TRAER LOS MUSICOS DEL ENDPOINT
 
-    fun getMusicians(onComplete: (resp: List<Musician>) -> Unit, onError: (error: VolleyError) -> Unit) {
+    //FUCNION PARA TRAER LOS MUSICOS DEL ENDPOINT
+    suspend fun getMusicians() = suspendCoroutine<List<Musician>> { cont ->
         EspressoIdlingResource.increment()
         requestQueue.add(getRequest("musicians", { response ->
 
@@ -189,11 +193,12 @@ class NetworkServiceAdapter constructor(context: Context) {
                         albums = albumsList.toList()
                     )
                 )
-                onComplete(list)
+                cont.resume(list)
                 EspressoIdlingResource.decrement()
             }
-        }, {
-            onError(it)
+        }, Response.ErrorListener {
+            cont.resumeWithException(it) //se relanza la excepción
         }))
     }
+
 }
