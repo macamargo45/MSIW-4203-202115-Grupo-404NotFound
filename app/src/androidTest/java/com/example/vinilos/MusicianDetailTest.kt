@@ -84,19 +84,19 @@ class MusicianDetailTest {
         // Debe contener fecha de nacimiento del musico
         val textView2 = onView(
             allOf(
-                withId(R.id.BirthDateMusicianDetails), withText("16-07-1948"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.widget.TableLayout::class.java))),
+                withId(R.id.BirthDate), withText("Fecha de Nacimiento 16-07-1948"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("16-07-1948")))
+        textView2.check(matches(withText("Fecha de Nacimiento 16-07-1948")))
 
         // Debe contener descripción del musico
         val textView3 = onView(
             allOf(
                 withId(R.id.MusicianDescriptionDetails),
                 withText("Es un cantante, compositor, músico, actor, abogado, político y activista panameño. Ha desarrollado gran parte de su carrera artística en la ciudad de Nueva York."),
-                withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
+                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
         )

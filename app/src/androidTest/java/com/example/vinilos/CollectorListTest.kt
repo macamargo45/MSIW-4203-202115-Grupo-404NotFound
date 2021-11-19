@@ -31,7 +31,7 @@ class CollectorListTest {
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun collectorList() {
+    fun collectorListTest() {
         val bottomNavigationItemView = onView(
             allOf(
                 withId(R.id.navigation_coleccionistas), withContentDescription("Coleccionistas"),

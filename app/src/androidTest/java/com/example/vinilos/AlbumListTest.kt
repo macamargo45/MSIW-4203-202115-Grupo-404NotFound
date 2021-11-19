@@ -38,7 +38,7 @@ class AlbumListTest {
     }
 
     @Test
-    fun mainActivityTest() {
+    fun albumListTest() {
 
         val textView = onView(
             allOf(
