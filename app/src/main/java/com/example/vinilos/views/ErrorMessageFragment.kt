@@ -10,11 +10,6 @@ import com.example.vinilos.R
 import com.example.vinilos.viewmodels.ErrorMessageViewModel
 
 class ErrorMessageFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ErrorMessageFragment()
-    }
-
     private lateinit var viewModel: ErrorMessageViewModel
 
     override fun onCreateView(
@@ -26,8 +21,7 @@ class ErrorMessageFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ErrorMessageViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this)[ErrorMessageViewModel::class.java]
     }
 
 }

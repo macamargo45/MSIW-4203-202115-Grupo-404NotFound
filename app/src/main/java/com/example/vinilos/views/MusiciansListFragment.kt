@@ -57,9 +57,7 @@ class MusiciansListFragment : Fragment() {
             binding.progressBarMusicians.isVisible = true
             binding.musicianRv.isVisible = false
 
-            viewModel = ViewModelProvider(this, MusiciansListViewModel.Factory(activity.application)).get(
-                MusiciansListViewModel::class.java
-            )
+            viewModel = ViewModelProvider(this, MusiciansListViewModel.Factory(activity.application))[MusiciansListViewModel::class.java]
             viewModel.musicians.observe(viewLifecycleOwner, {
                 it.apply {
                     viewModelAdapter!!.musicians = this

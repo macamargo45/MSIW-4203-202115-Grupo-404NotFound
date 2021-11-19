@@ -30,12 +30,6 @@ class MusicianAlbumsAdapter : RecyclerView.Adapter<MusicianAlbumsAdapter.Musicia
             notifyDataSetChanged()
         }
 
-    var musicianName: String = ""
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianAlbumsHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),

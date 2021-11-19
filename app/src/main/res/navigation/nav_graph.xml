@@ -15,7 +15,6 @@
         <action
             android:id="@+id/action_albumFragment2_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
-        />
     </fragment>
     <action
         android:id="@+id/action_global_albumFragment"

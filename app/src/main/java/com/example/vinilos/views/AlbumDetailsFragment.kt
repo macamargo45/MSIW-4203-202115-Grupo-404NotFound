@@ -18,7 +18,8 @@ import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumDetailsFragmentBinding
 import com.example.vinilos.viewmodels.AlbumDetailsViewModel
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class AlbumDetailsFragment : Fragment() {
     private var _binding: AlbumDetailsFragmentBinding? = null
@@ -33,8 +34,7 @@ class AlbumDetailsFragment : Fragment() {
     ): View {
 
             _binding = AlbumDetailsFragmentBinding.inflate(inflater, container, false)
-            val view = binding.root
-            return view
+            return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,9 +44,7 @@ class AlbumDetailsFragment : Fragment() {
                 "You can only access the viewModel after onActivityCreated()"
             }
             viewModel =
-                ViewModelProvider(this, AlbumDetailsViewModel.Factory(activity.application)).get(
-                    AlbumDetailsViewModel::class.java
-                )
+                ViewModelProvider(this, AlbumDetailsViewModel.Factory(activity.application))[AlbumDetailsViewModel::class.java]
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
@@ -73,13 +71,10 @@ class AlbumDetailsFragment : Fragment() {
             val txtGenre: TextView = view.findViewById(R.id.GenreAlbumDetails)
             txtGenre.text = args.myArg.genre.toString()
 
-            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-            val formatter = SimpleDateFormat("dd-MM-yyyy")
-            val date =
-                formatter.format(parser.parse(args.myArg.releaseDate.toString().substring(0, 19)))
+            val releaseDate = LocalDate.parse(args.myArg.releaseDate, DateTimeFormatter.ISO_DATE_TIME)
 
             val txtReleaseDate: TextView = view.findViewById(R.id.ReleaseDateAlbumDetails)
-            txtReleaseDate.text = date.format(formatter)
+            txtReleaseDate.text = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(releaseDate)
 
             val txtRecordLabel: TextView = view.findViewById(R.id.RecordLabelAlbumDetails)
             txtRecordLabel.text = args.myArg.recordLabel.toString()

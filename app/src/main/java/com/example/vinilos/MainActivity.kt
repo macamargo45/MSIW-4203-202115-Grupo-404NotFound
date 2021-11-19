@@ -3,7 +3,6 @@ package com.example.vinilos
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -17,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var toolbar: ActionBar
+    private lateinit var toolbar: ActionBar
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -65,10 +64,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
-
-    fun setFragment(fr: Fragment) {
-        val frag = supportFragmentManager.beginTransaction()
-        frag.replace(R.id.nav_host_fragment, fr)
-        frag.commit()
-    }
 }
