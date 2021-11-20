@@ -30,7 +30,6 @@ class MusicianDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: MusicianDetailsViewModel
     private val args: MusicianDetailsFragmentArgs by navArgs()
-    //private lateinit var recyclerView: RecyclerView
     private var viewModelAdapter: MusicianAlbumsAdapter? = null
 
     override fun onCreateView(

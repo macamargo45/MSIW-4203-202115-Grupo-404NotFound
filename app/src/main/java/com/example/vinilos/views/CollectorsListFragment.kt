@@ -19,7 +19,6 @@ import com.example.vinilos.views.adapters.CollectorsListAdapter
 class CollectorsListFragment : Fragment() {
     private var _binding: CollectorsListFragmentBinding? = null
     private val binding get() = _binding!!
-    //private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: CollectorsListViewModel
     private var viewModelAdapter: CollectorsListAdapter? = null
 
