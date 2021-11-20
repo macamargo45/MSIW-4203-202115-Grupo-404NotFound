@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="14dp"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="@null">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -23,7 +24,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@null">
 
             <ImageView
                 android:id="@+id/imageViewMusicianDetails"
@@ -48,7 +50,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="14sp">
+            android:padding="14sp"
+            android:background="@null">
             <TextView
                 android:id="@+id/NameMusicianDetails"
                 android:layout_width="wrap_content"
@@ -77,7 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="14sp">
+            android:padding="14sp"
+            android:background="@null">
             <TextView
                 android:id="@+id/MusicianDescriptionDetails"
                 android:layout_width="wrap_content"
@@ -90,7 +94,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@null">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,6 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/album_item" />
+            tools:listitem="@layout/album_item"
+            android:background="@null"/>
     </LinearLayout>
 </LinearLayout>
