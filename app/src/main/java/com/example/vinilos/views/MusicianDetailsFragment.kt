@@ -87,6 +87,7 @@ class MusicianDetailsFragment : Fragment() {
             Picasso
                 .get()
                 .load(args.musician.image)
+                .resize(100, 100)
                 .into(imgCover)
 
             binding.albumsMusicianRv.layoutManager = LinearLayoutManager(context)
