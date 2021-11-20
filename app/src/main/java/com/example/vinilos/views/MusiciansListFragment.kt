@@ -19,7 +19,7 @@ import com.example.vinilos.views.adapters.MusiciansListAdapter
 class MusiciansListFragment : Fragment() {
     private var _binding: MusiciansListFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var recyclerView: RecyclerView
+    //private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: MusiciansListViewModel
     private var viewModelAdapter: MusiciansListAdapter? = null
 
@@ -28,17 +28,18 @@ class MusiciansListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = MusiciansListFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = MusiciansListAdapter()
-        return view
+        if(_binding == null)
+            _binding = MusiciansListFragmentBinding.inflate(inflater, container, false)
+
+        if(viewModelAdapter == null)
+            viewModelAdapter = MusiciansListAdapter()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
-            recyclerView = binding.musicianRv
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = viewModelAdapter
+            binding.musicianRv.layoutManager = LinearLayoutManager(context)
+            binding.musicianRv.adapter = viewModelAdapter
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
             val action = CollectorsListFragmentDirections.actionCollectorsListFragmentToErrorMessageFragment()
