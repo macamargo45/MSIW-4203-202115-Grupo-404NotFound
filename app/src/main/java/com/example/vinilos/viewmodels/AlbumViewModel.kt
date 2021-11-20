@@ -34,7 +34,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = albumRepository.refreshData()
+                    val data = albumRepository.refreshData()
                     _albums.postValue(data)
                 }
                 _eventNetworkError.postValue(false)

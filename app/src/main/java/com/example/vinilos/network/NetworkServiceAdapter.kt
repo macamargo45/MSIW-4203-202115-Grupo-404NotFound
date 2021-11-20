@@ -74,7 +74,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     EspressoIdlingResource.decrement()
                     cont.resume(list)
                 },
-                Response.ErrorListener {
+                {
                     cont.resumeWithException(it) //se relanza la excepción
                 })
         )
@@ -147,7 +147,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     cont.resume(list)
                     EspressoIdlingResource.decrement()
                 },
-                Response.ErrorListener {
+                {
                     cont.resumeWithException(it) //se relanza la excepción
                 }))
     }
@@ -196,7 +196,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 cont.resume(list)
                 EspressoIdlingResource.decrement()
             }
-        }, Response.ErrorListener {
+        }, {
             cont.resumeWithException(it) //se relanza la excepción
         }))
     }

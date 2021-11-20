@@ -20,10 +20,7 @@ class CollectorsListAdapter : RecyclerView.Adapter<CollectorsListAdapter.Collect
         }
     }
     var collectors :List<Collector> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorListViewHolder {
         val withDataBinding: CollectorItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),

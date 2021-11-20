@@ -24,10 +24,6 @@ class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianL
     }
 
     var musicians: List<Musician> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianListViewHolder {
         val withDataBinding: MusicianItemBinding = DataBindingUtil.inflate(

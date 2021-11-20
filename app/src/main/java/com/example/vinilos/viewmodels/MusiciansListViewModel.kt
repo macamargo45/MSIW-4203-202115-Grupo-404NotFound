@@ -34,7 +34,7 @@ class MusiciansListViewModel(application: Application) : AndroidViewModel(applic
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = musiciansRepository.refreshData()
+                    val data = musiciansRepository.refreshData()
                     _musicians.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
