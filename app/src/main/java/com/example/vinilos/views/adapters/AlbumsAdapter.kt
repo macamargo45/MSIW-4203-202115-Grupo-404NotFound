@@ -11,6 +11,7 @@ import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumItemBinding
 import com.example.vinilos.models.Album
 import com.example.vinilos.views.AlbumFragmentDirections
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
 
@@ -41,7 +42,10 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         Picasso
             .get()
             .load(album.cover)
+            .resize(100, 100)
             .into(holder.viewDataBinding.imageView)
+
+
         
         holder.viewDataBinding.also {
             it.album = album

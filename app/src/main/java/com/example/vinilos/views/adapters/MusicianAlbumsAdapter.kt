@@ -43,6 +43,7 @@ class MusicianAlbumsAdapter : RecyclerView.Adapter<MusicianAlbumsAdapter.Musicia
         Picasso
             .get()
             .load(album.cover)
+            .resize(100, 100)
             .into(holder.viewDataBinding.imageView)
 
         holder.viewDataBinding.also {

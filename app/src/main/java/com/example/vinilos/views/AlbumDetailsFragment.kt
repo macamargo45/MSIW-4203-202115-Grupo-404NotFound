@@ -83,6 +83,7 @@ class AlbumDetailsFragment : Fragment() {
             Picasso
                 .get()
                 .load(args.myArg.cover)
+                .resize(100, 100)
                 .into(imgCover)
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())

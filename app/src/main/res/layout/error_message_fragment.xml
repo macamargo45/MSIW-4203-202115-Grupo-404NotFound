@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".views.ErrorMessageFragment"
     android:layout_gravity="center"
-    android:paddingTop="50sp">
+    android:paddingTop="50sp"
+    android:background="@null">
 
     <TextView
         android:layout_width="300sp"

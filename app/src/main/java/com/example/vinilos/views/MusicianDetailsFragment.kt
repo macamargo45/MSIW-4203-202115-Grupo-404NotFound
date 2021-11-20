@@ -30,17 +30,18 @@ class MusicianDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: MusicianDetailsViewModel
     private val args: MusicianDetailsFragmentArgs by navArgs()
-    private lateinit var recyclerView: RecyclerView
     private var viewModelAdapter: MusicianAlbumsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MusicianDetailsFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = MusicianAlbumsAdapter()
-        return view
+        if(_binding == null)
+            _binding = MusicianDetailsFragmentBinding.inflate(inflater, container, false)
+
+        if(viewModelAdapter == null)
+            viewModelAdapter = MusicianAlbumsAdapter()
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -85,11 +86,11 @@ class MusicianDetailsFragment : Fragment() {
             Picasso
                 .get()
                 .load(args.musician.image)
+                .resize(100, 100)
                 .into(imgCover)
 
-            recyclerView = binding.albumsMusicianRv
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = viewModelAdapter
+            binding.albumsMusicianRv.layoutManager = LinearLayoutManager(context)
+            binding.albumsMusicianRv.adapter = viewModelAdapter
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
             val action = MusicianDetailsFragmentDirections.actionMusicianDetailsFragmentToErrorMessageFragment()
@@ -100,6 +101,7 @@ class MusicianDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        viewModelAdapter = null
     }
 
     private fun onNetworkError() {

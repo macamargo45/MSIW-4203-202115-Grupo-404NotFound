@@ -42,6 +42,7 @@ class MusiciansListAdapter : RecyclerView.Adapter<MusiciansListAdapter.MusicianL
         Picasso
             .get()
             .load(musician.image)
+            .resize(100, 100)
             .into(holder.viewDataBinding.imageView)
 
         holder.viewDataBinding.also {
