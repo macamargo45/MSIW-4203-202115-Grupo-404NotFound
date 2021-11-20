@@ -34,7 +34,6 @@ class AlbumFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
-            //recyclerView = binding.albumsRv
             binding.albumsRv.layoutManager = LinearLayoutManager(context)
             binding.albumsRv.adapter = viewModelAdapter
         } catch (e: Exception) {
