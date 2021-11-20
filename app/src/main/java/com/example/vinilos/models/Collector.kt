@@ -11,6 +11,4 @@ data class Collector (
     val email: String?,
     val favoritePerformers: MutableList<Performer?>,
     val collectorAlbums: MutableList<CollectorAlbum?>
-): Parcelable {
-    val performerNames get() = this.favoritePerformers.map { it?.name }.joinToString()
-}
+): Parcelable

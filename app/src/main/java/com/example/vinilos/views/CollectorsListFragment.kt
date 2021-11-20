@@ -57,9 +57,7 @@ class CollectorsListFragment : Fragment() {
             binding.progressBarCollectors.isVisible = true
             binding.collectorsRv.isVisible = false
 
-            viewModel = ViewModelProvider(this, CollectorsListViewModel.Factory(activity.application)).get(
-                CollectorsListViewModel::class.java
-            )
+            viewModel = ViewModelProvider(this, CollectorsListViewModel.Factory(activity.application))[CollectorsListViewModel::class.java]
             viewModel.collectors.observe(viewLifecycleOwner, {
                 it.apply {
                     viewModelAdapter!!.collectors = this

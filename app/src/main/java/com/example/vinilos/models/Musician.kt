@@ -11,6 +11,4 @@ data class Musician(
     val description: String?,
     val birthDate: String?,
     val albums: List<Album>
-): Parcelable {
-    val albumsNames get() = this.albums.map { it?.name }.joinToString()
-}
+): Parcelable

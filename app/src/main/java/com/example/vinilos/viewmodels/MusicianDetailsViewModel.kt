@@ -5,26 +5,22 @@ import androidx.lifecycle.*
 
 class MusicianDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+    private var _eventNetworkError = MutableLiveData(false)
 
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+    private var _isNetworkErrorShown = MutableLiveData(false)
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
-
-    init {
-
-    }
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(MusicianDetailsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return MusicianDetailsViewModel(app) as T

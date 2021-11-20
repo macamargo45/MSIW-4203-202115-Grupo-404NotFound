@@ -4,7 +4,6 @@ package com.example.vinilos
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.IdlingRegistry
@@ -47,7 +46,7 @@ class AlbumDetailTest {
     }
 
     @Test
-    fun mainActivityTest2() {
+    fun albumDetailsTest() {
         val recyclerView = onView(
             allOf(
                 withId(R.id.albumsRv),

@@ -22,7 +22,8 @@ import com.example.vinilos.databinding.MusicianDetailsFragmentBinding
 import com.example.vinilos.viewmodels.MusicianDetailsViewModel
 import com.example.vinilos.views.adapters.MusicianAlbumsAdapter
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class MusicianDetailsFragment : Fragment() {
     private var _binding: MusicianDetailsFragmentBinding? = null
@@ -54,9 +55,7 @@ class MusicianDetailsFragment : Fragment() {
             binding.albumsMusicianRv.isVisible = true
 
             viewModel =
-                ViewModelProvider(this, MusicianDetailsViewModel.Factory(activity.application)).get(
-                    MusicianDetailsViewModel::class.java
-                )
+                ViewModelProvider(this, MusicianDetailsViewModel.Factory(activity.application))[MusicianDetailsViewModel::class.java]
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
@@ -77,14 +76,10 @@ class MusicianDetailsFragment : Fragment() {
             val txtName: TextView = view.findViewById(R.id.NameMusicianDetails)
             txtName.text = args.musician.name.toString()
 
+            val birthDate = LocalDate.parse(args.musician.birthDate, DateTimeFormatter.ISO_DATE_TIME)
 
-            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-            val formatter = SimpleDateFormat("dd-MM-yyyy")
-            val date =
-                formatter.format(parser.parse(args.musician.birthDate.toString().substring(0, 19)))
-
-            val txtBirtDate: TextView = view.findViewById(R.id.BirthDateMusicianDetails)
-            txtBirtDate.text = date.format(formatter)
+            val txtBirthDate: TextView = view.findViewById(R.id.BirthDate)
+            txtBirthDate.text = getString(R.string.musician_birth_date, DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate))
 
             val imgCover: ImageView = view.findViewById(R.id.imageViewMusicianDetails)
             Picasso
