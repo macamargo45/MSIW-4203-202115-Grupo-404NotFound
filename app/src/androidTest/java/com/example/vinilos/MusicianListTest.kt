@@ -69,7 +69,7 @@ class MusicianListTest {
         val imageView = onView(
             allOf(
                 withId(R.id.imageView), withContentDescription("Imagen del musico"),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
+                withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java)),
                 isDisplayed()
             )
         )
