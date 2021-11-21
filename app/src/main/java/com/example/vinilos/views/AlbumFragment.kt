@@ -11,10 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.databinding.AlbumFragmentBinding
-import com.example.vinilos.views.adapters.AlbumsAdapter
 import com.example.vinilos.viewmodels.AlbumViewModel
+import com.example.vinilos.views.adapters.AlbumsAdapter
 
 class AlbumFragment : Fragment() {
     private var _binding: AlbumFragmentBinding? = null

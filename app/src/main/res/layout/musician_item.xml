@@ -16,12 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/colorPrimary">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@null">
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="72sp"
@@ -36,7 +30,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="14sp"
+                android:paddingLeft="86sp"
+                android:paddingTop="14sp"
+                android:paddingBottom="14sp"
+                android:paddingRight="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,6 +49,5 @@
                     android:textSize="18sp" />
 
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

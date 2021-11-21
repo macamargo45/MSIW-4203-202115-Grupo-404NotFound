@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/colorPrimary">
+        app:strokeColor="@color/colorPrimary"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,19 +77,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/colorPrimary">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="14sp"
-            android:background="@null">
             <TextView
                 android:id="@+id/MusicianDescriptionDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
-        </LinearLayout>
+                android:textSize="18sp"
+                android:padding="14sp"/>
+
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
