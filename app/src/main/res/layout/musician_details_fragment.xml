@@ -77,7 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/colorPrimary">
-
             <TextView
                 android:id="@+id/MusicianDescriptionDetails"
                 android:layout_width="wrap_content"
