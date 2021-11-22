@@ -25,16 +25,6 @@ class MusicianAlbumsAdapter : RecyclerView.Adapter<MusicianAlbumsAdapter.Musicia
     }
 
     var musicianAlbums: List<Album> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    var musicianName: String = ""
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicianAlbumsHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
@@ -53,6 +43,7 @@ class MusicianAlbumsAdapter : RecyclerView.Adapter<MusicianAlbumsAdapter.Musicia
         Picasso
             .get()
             .load(album.cover)
+            .resize(100, 100)
             .into(holder.viewDataBinding.imageView)
 
         holder.viewDataBinding.also {

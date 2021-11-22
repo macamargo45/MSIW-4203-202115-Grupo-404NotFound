@@ -16,30 +16,31 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.databinding.MusicianDetailsFragmentBinding
 import com.example.vinilos.viewmodels.MusicianDetailsViewModel
 import com.example.vinilos.views.adapters.MusicianAlbumsAdapter
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class MusicianDetailsFragment : Fragment() {
     private var _binding: MusicianDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: MusicianDetailsViewModel
     private val args: MusicianDetailsFragmentArgs by navArgs()
-    private lateinit var recyclerView: RecyclerView
     private var viewModelAdapter: MusicianAlbumsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MusicianDetailsFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        viewModelAdapter = MusicianAlbumsAdapter()
-        return view
+        if(_binding == null)
+            _binding = MusicianDetailsFragmentBinding.inflate(inflater, container, false)
+
+        if(viewModelAdapter == null)
+            viewModelAdapter = MusicianAlbumsAdapter()
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,9 +55,7 @@ class MusicianDetailsFragment : Fragment() {
             binding.albumsMusicianRv.isVisible = true
 
             viewModel =
-                ViewModelProvider(this, MusicianDetailsViewModel.Factory(activity.application)).get(
-                    MusicianDetailsViewModel::class.java
-                )
+                ViewModelProvider(this, MusicianDetailsViewModel.Factory(activity.application))[MusicianDetailsViewModel::class.java]
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
@@ -77,24 +76,20 @@ class MusicianDetailsFragment : Fragment() {
             val txtName: TextView = view.findViewById(R.id.NameMusicianDetails)
             txtName.text = args.musician.name.toString()
 
+            val birthDate = LocalDate.parse(args.musician.birthDate, DateTimeFormatter.ISO_DATE_TIME)
 
-            val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-            val formatter = SimpleDateFormat("dd-MM-yyyy")
-            val date =
-                formatter.format(parser.parse(args.musician.birthDate.toString().substring(0, 19)))
-
-            val txtBirtDate: TextView = view.findViewById(R.id.BirthDateMusicianDetails)
-            txtBirtDate.text = date.format(formatter)
+            val txtBirthDate: TextView = view.findViewById(R.id.BirthDate)
+            txtBirthDate.text = getString(R.string.musician_birth_date, DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate))
 
             val imgCover: ImageView = view.findViewById(R.id.imageViewMusicianDetails)
             Picasso
                 .get()
                 .load(args.musician.image)
+                .resize(100, 100)
                 .into(imgCover)
 
-            recyclerView = binding.albumsMusicianRv
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = viewModelAdapter
+            binding.albumsMusicianRv.layoutManager = LinearLayoutManager(context)
+            binding.albumsMusicianRv.adapter = viewModelAdapter
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
             val action = MusicianDetailsFragmentDirections.actionMusicianDetailsFragmentToErrorMessageFragment()
@@ -105,6 +100,7 @@ class MusicianDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        viewModelAdapter = null
     }
 
     private fun onNetworkError() {

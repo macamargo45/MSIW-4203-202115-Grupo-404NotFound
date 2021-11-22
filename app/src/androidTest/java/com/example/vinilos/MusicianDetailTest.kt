@@ -1,27 +1,18 @@
 package com.example.vinilos
 
 
-import androidx.test.espresso.DataInteraction
-import androidx.test.espresso.ViewInteraction
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 
-import androidx.test.InstrumentationRegistry.getInstrumentation
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
-
-import com.example.vinilos.R
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
@@ -32,7 +23,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.anything
 import org.hamcrest.Matchers.`is`
 
 @LargeTest
@@ -94,19 +84,19 @@ class MusicianDetailTest {
         // Debe contener fecha de nacimiento del musico
         val textView2 = onView(
             allOf(
-                withId(R.id.BirthDateMusicianDetails), withText("16-07-1948"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.widget.TableLayout::class.java))),
+                withId(R.id.BirthDate), withText("Fecha de Nacimiento 16-07-1948"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("16-07-1948")))
+        textView2.check(matches(withText("Fecha de Nacimiento 16-07-1948")))
 
         // Debe contener descripción del musico
         val textView3 = onView(
             allOf(
                 withId(R.id.MusicianDescriptionDetails),
                 withText("Es un cantante, compositor, músico, actor, abogado, político y activista panameño. Ha desarrollado gran parte de su carrera artística en la ciudad de Nueva York."),
-                withParent(withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))),
+                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
         )

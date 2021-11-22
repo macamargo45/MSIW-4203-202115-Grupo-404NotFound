@@ -8,20 +8,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.databinding.AlbumFragmentBinding
-import com.example.vinilos.models.Album
-import com.example.vinilos.views.adapters.AlbumsAdapter
 import com.example.vinilos.viewmodels.AlbumViewModel
+import com.example.vinilos.views.adapters.AlbumsAdapter
 
 class AlbumFragment : Fragment() {
     private var _binding: AlbumFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumViewModel
     private var viewModelAdapter: AlbumsAdapter? = null
 
@@ -31,16 +27,14 @@ class AlbumFragment : Fragment() {
     ): View {
 
             _binding = AlbumFragmentBinding.inflate(inflater, container, false)
-            val view = binding.root
             viewModelAdapter = AlbumsAdapter()
-            return view
+            return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
-            recyclerView = binding.albumsRv
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = viewModelAdapter
+            binding.albumsRv.layoutManager = LinearLayoutManager(context)
+            binding.albumsRv.adapter = viewModelAdapter
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
             val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
@@ -59,9 +53,7 @@ class AlbumFragment : Fragment() {
             binding.progressBar.isVisible = true
             binding.albumsRv.isVisible = false
 
-            viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(
-                AlbumViewModel::class.java
-            )
+            viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))[AlbumViewModel::class.java]
             viewModel.albums.observe(viewLifecycleOwner, {
                 it.apply {
                     viewModelAdapter!!.albums = this
@@ -85,6 +77,7 @@ class AlbumFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        viewModelAdapter = null
     }
 
     private fun onNetworkError() {

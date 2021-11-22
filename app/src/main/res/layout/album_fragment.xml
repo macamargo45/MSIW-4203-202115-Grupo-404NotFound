@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.AlbumFragment"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@null">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -25,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/album_item" />
+        tools:listitem="@layout/album_item"
+        android:background="@null" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

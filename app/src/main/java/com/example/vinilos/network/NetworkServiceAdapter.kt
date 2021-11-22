@@ -17,7 +17,7 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     companion object {
         const val BASE_URL = "https://vinilo-grupo-15.herokuapp.com/"
-        var instance: NetworkServiceAdapter? = null
+        private var instance: NetworkServiceAdapter? = null
         fun getInstance(context: Context) =
             instance ?: synchronized(this) {
                 instance ?: NetworkServiceAdapter(context).also {
@@ -74,7 +74,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     EspressoIdlingResource.decrement()
                     cont.resume(list)
                 },
-                Response.ErrorListener {
+                {
                     cont.resumeWithException(it) //se relanza la excepción
                 })
         )
@@ -147,7 +147,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     cont.resume(list)
                     EspressoIdlingResource.decrement()
                 },
-                Response.ErrorListener {
+                {
                     cont.resumeWithException(it) //se relanza la excepción
                 }))
     }
@@ -196,7 +196,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 cont.resume(list)
                 EspressoIdlingResource.decrement()
             }
-        }, Response.ErrorListener {
+        }, {
             cont.resumeWithException(it) //se relanza la excepción
         }))
     }

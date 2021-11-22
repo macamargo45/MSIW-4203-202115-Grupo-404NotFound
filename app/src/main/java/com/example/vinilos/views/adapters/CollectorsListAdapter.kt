@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorItemBinding
@@ -21,10 +20,7 @@ class CollectorsListAdapter : RecyclerView.Adapter<CollectorsListAdapter.Collect
         }
     }
     var collectors :List<Collector> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorListViewHolder {
         val withDataBinding: CollectorItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),

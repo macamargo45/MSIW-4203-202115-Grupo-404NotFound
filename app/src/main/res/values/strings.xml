@@ -10,16 +10,11 @@
     <string name="error_message_title">Ocurrió un error</string>
     <string name="musicos_list_title">Músicos</string>
     <string name="musician_details_title">Detalle Músico</string>
-    <string name="musician_birth_date">Fecha de Nacimiento</string>
-    <string name="musician_album_title">Albumes Músico</string>
+    <string name="musician_birth_date">Fecha de Nacimiento %1$s</string>
+    <string name="musician_album_title">Albumes</string>
     <string name="collector_default_thumbnail">Imagen de coleccionista por defecto</string>
     <string name="collecionistas_list_title">Coleccionistas</string>
     <string name="musicians_list_title">Musicos</string>
     <string name="premios_list_title">Premios</string>
     <string name="error_message">Ha ocurrido un error. Vuelva a intentar usar la aplicación más tarde.</string>
-
-
-
-
-
 </resources>

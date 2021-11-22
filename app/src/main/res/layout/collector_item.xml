@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@null">
 
     <data>
 
@@ -19,11 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/colorPrimary">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/collectorDefaultThumbnail"
                 android:layout_width="72sp"
@@ -38,10 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="14sp"
+                android:paddingLeft="86sp"
+                android:paddingTop="14sp"
+                android:paddingBottom="14sp"
+                android:paddingRight="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/collectorDefaultThumbnail"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@null">
 
                 <TextView
                     android:id="@+id/collectorName"
@@ -59,6 +59,5 @@
                     android:contentDescription="@{Integer.toString(collector.id)}"
                     android:text="@{collector.email}" />
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

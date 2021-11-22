@@ -68,8 +68,15 @@ class MusicianListTest {
         // Debe contener la imagen del musico Rubén Blades Bellido de Luna
         val imageView = onView(
             allOf(
-                withId(R.id.imageView), withContentDescription("Imagen del musico"),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
+                withId(R.id.imageView),
+                withContentDescription("Imagen del musico"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.musicianRv),
+                        0
+                    ),
+                    0
+                ),
                 isDisplayed()
             )
         )
