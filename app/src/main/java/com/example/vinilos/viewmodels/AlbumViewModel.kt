@@ -32,13 +32,19 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun refreshDataFromNetwork() {
         try {
-            viewModelScope.launch (Dispatchers.Default){
-                withContext(Dispatchers.IO){
-                    val data = albumRepository.refreshData()
-                    _albums.postValue(data)
+            viewModelScope.launch (Dispatchers.Default) {
+
+                try {
+                    withContext(Dispatchers.IO) {
+                        val data = albumRepository.refreshData()
+                        _albums.postValue(data)
+                    }
+                    _eventNetworkError.postValue(false)
+                    _isNetworkErrorShown.postValue(false)
+                } catch (e: Exception) {
+                    _eventNetworkError.postValue(true)
+                    _isNetworkErrorShown.postValue(true)
                 }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
             }
         }
         catch (e:Exception){

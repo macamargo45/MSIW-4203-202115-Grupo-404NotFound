@@ -12,7 +12,7 @@ class AlbumRepository(val application: Application) {
         val potentialResp = CacheManager.getInstance(application.applicationContext).getAlbums("allAlbums")
         val compareDate = CacheManager.getInstance(application.applicationContext).getDate()
         val dateInSecs: Long = compareDate.timeInMillis
-        val dateExpiration = Date(dateInSecs + 10 * 60 * 1000)
+        val dateExpiration = Date(dateInSecs + 10 * 600 * 1000)
         val now: Calendar = Calendar.getInstance()
 
 
