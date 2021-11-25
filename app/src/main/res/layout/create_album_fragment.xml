@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.CreateAlbumFragment"
+    android:background="@null">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="86sp"
+        android:paddingTop="14sp"
+        android:paddingBottom="14sp"
+        android:paddingRight="14sp"
+        android:background="@null">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/album_name_title" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/album_cover_title" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/album_release_date_title" />
+
+   <DatePicker
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:datePickerMode="spinner"
+       android:calendarViewShown="false"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/album_performer_title" />
+
+        <Spinner
+            android:id="@+id/performers_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></Spinner>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/album_record_label_title" />
+        <Spinner
+            android:id="@+id/record_label_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></Spinner>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/album_description_title" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/add_album_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/agregar">
+
+        </Button>
+    </LinearLayout>
+
+</FrameLayout>
