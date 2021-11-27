@@ -38,6 +38,11 @@ class CacheManager(context: Context) {
         return if (albums.containsKey(key)) albums[key]!! else listOf()
     }
 
+    fun removeAllAlbums(key:String) {
+        if (albums.containsKey(key))
+            albums.remove(key)
+    }
+
     //CAHCE PARA LOS MUSICOS
     private var musicians: HashMap<String, List<Musician>> = HashMap()
     fun addMusicians(key:String, musician: List<Musician>,dateNow:Calendar){
