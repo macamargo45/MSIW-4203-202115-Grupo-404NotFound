@@ -3,6 +3,7 @@ package com.example.vinilos.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import android.util.Patterns
+import com.example.vinilos.R
 
 
 @Parcelize
@@ -28,13 +29,13 @@ data class Album(
         return !(name?.isEmpty() ?: true)
     }
     fun isGenreValueProvided(): Boolean {
-        return !(genre?.isEmpty() ?: true)
+        return !(genre?.isEmpty() ?: true) && genre != "Seleccionar"
     }
     fun isDescriptionValueProvided(): Boolean {
         return !(description?.isEmpty() ?: true)
     }
     fun isRecordLabelValueProvided(): Boolean {
-        return !(recordLabel?.isEmpty() ?: true)
+        return !(recordLabel?.isEmpty() ?: true)  && recordLabel != "Seleccionar"
     }
 
     fun isCoverURLValid(): Boolean {
@@ -44,14 +45,6 @@ data class Album(
     fun isDescriptionLengthGreaterThan5(): Boolean {
         return if (description != null) {
             description!!.length > 5
-        } else {
-            false
-        }
-    }
-
-    fun isPerformersPresent(): Boolean {
-        return if (performers != null) {
-            performers.size > 0
         } else {
             false
         }
