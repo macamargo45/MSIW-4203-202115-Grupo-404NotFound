@@ -42,7 +42,7 @@ class AlbumFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.app_bar, menu)
+        inflater.inflate(R.menu.add_album_bar, menu)
 
         val expandListener = MenuItem.OnMenuItemClickListener {
 
