@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -32,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="7sp"
-            android:inputType="text" />
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <TextView
             android:layout_width="match_parent"
@@ -46,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="7sp"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <TextView
             android:layout_width="match_parent"
@@ -99,7 +99,8 @@
             android:layout_height="match_parent"
             android:width="21sp"
             android:padding="7sp"
-            android:inputType="textLongMessage"/>
+            android:inputType="textLongMessage"
+            android:importantForAutofill="no" />
 
         <Button
             android:id="@+id/add_album_button"

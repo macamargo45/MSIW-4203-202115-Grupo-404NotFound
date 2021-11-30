@@ -1,9 +1,8 @@
 package com.example.vinilos.models
 
 import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import android.util.Patterns
-import com.example.vinilos.R
+import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
@@ -22,9 +21,6 @@ data class Album(
 
     val performerNames get() = this.performers?.map { it?.name }?.joinToString()
 
-    fun isCoverValueProvided(): Boolean {
-        return !(cover?.isEmpty() ?: true)
-    }
     fun isNameValueProvided(): Boolean {
         return !(name?.isEmpty() ?: true)
     }

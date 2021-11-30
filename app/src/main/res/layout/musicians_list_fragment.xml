@@ -16,7 +16,7 @@ android:padding="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:id="@+id/progressBarMusicians"/>
+    android:id="@+id/progressBarMusicians" />
 
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/musicianRv"

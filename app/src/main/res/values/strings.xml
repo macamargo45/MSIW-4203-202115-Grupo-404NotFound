@@ -25,6 +25,11 @@
     <string name="album_description_title">Descripción</string>
     <string name="agregar">Agregar</string>
     <string name="album_genre_title">Género</string>
+    <string name="MensajeErrorNombreAlbum">Ingrese el nombre del album</string>
+    <string name="ErrorMessageAlbumCover">Ingrese un URL válido para el cover del album</string>
+    <string name="ErrorMessageAlbumGenre">Seleccione el género del album</string>
+    <string name="ErrorMessageAlbumLabel">Seleccione el sello discográfico del album</string>
+    <string name="ErrorMessageAlbumDescription">Ingrese una descripción de al menos 5 caracteres</string>
     <string-array name="record_labels">
         <item>Seleccionar</item>
         <item>Sony Music</item>

@@ -1,7 +1,6 @@
 package com.example.vinilos
 
 import android.os.Bundle
-import android.view.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -69,23 +68,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.app_bar, menu)
 
-        val expandListener = MenuItem.OnMenuItemClickListener {
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToCreateAlbumFragment()
-            navController.navigate(action)
 
-            true
-        }
 
-        // Get the MenuItem for the action item
-        val actionMenuItem = menu?.findItem(R.id.add_album)
-
-        // Assign the listener to that action item
-        actionMenuItem?.setOnMenuItemClickListener(expandListener)
-
-        return super.onCreateOptionsMenu(menu)
-    }
 
 }

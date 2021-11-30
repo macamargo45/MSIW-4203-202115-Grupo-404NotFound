@@ -1,23 +1,26 @@
 package com.example.vinilos.views
 
+import android.graphics.Color
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.vinilos.R
 import com.example.vinilos.databinding.CreateAlbumFragmentBinding
 import com.example.vinilos.models.Album
 import com.example.vinilos.viewmodels.CreateAlbumViewModel
-import java.util.Date
+import java.time.LocalDate
+import java.util.*
+
 
 class CreateAlbumFragment : Fragment() {
     private var _binding: CreateAlbumFragmentBinding? = null
@@ -26,15 +29,13 @@ class CreateAlbumFragment : Fragment() {
     private var newAlbum: Album? = null
     //private var viewModelAdapter: CreateAlbumAdapter? = null
 
-    companion object {
-        fun newInstance() = CreateAlbumFragment()
-    }
+    companion object;
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         if (_binding == null)
             _binding = CreateAlbumFragmentBinding.inflate(inflater, container, false)
 
@@ -44,6 +45,7 @@ class CreateAlbumFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        binding.releaseDatepicker.maxDate = Date().time
         // Create an ArrayAdapter using the string array and a default spinner layout
         this.context?.let {
             ArrayAdapter.createFromResource(
@@ -78,43 +80,53 @@ class CreateAlbumFragment : Fragment() {
             newAlbum!!.description = binding.descriptionTextbox.text.toString()
             newAlbum!!.genre = binding.genreSpinner.selectedItem.toString()
             newAlbum!!.recordLabel = binding.recordLabelSpinner.selectedItem.toString()
-            newAlbum!!.releaseDate  = "01/01/2020"
+            newAlbum!!.releaseDate  = getDateReleaseDate()
             viewModel.album.postValue(newAlbum)
         }
     }
 
+    private fun getDateReleaseDate(): String {
+        val date = LocalDate.of(binding.releaseDatepicker.year,binding.releaseDatepicker.month+1, binding.releaseDatepicker.dayOfMonth)
+        Log.d("date: ", date.toString())
+        return date.toString()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(CreateAlbumViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CreateAlbumViewModel::class.java]
 
         viewModel.album.observe(viewLifecycleOwner, {
-            var validData: Boolean = true
+            var validData = true
             if (
                 !it.isNameValueProvided()) {
-                binding.nameTextbox.error = "Ingrese el nombre del album"
+                binding.nameTextbox.error = getString(R.string.MensajeErrorNombreAlbum)
                 binding.nameTextbox.requestFocus()
                 validData = false
             }
             if (!it.isCoverURLValid()) {
-                binding.coverTextobox.error = "Ingrese un URL válido para el cover del album"
+                binding.coverTextobox.error = getString(R.string.ErrorMessageAlbumCover)
                 binding.coverTextobox.requestFocus()
                 validData = false
             }
             if (!it.isGenreValueProvided()) {
-                binding.nameTextbox.error = "Seleccione el género del album"
-                binding.nameTextbox.requestFocus()
+
+                val errorText: TextView = binding.genreSpinner.selectedView as TextView
+                errorText.error = getString(R.string.ErrorMessageAlbumGenre)
+                errorText.setTextColor(Color.RED) //just to highlight that this is an error
+
                 validData = false
             }
             if (!it.isRecordLabelValueProvided()) {
-                binding.nameTextbox.error = "Seleccione el sello discográfico del album"
-                binding.nameTextbox.requestFocus()
+
+                val errorText: TextView = binding.recordLabelSpinner.selectedView as TextView
+                errorText.error = getString(R.string.ErrorMessageAlbumLabel)
+                errorText.setTextColor(Color.RED)
                 validData = false
             }
-            if (!it.isDescriptionLengthGreaterThan5()) {
+            if (!it.isDescriptionValueProvided() && !it.isDescriptionLengthGreaterThan5()) {
                 binding.descriptionTextbox.error =
-                    "Ingrese una descripción de al menos 5 caracteres"
+                    getString(R.string.ErrorMessageAlbumDescription)
                 binding.descriptionTextbox.requestFocus()
                 validData = false
             }
@@ -130,7 +142,16 @@ class CreateAlbumFragment : Fragment() {
                 if (isNetworkError) onNetworkError()
             })
 
+        viewModel.albumId.observe(
+            viewLifecycleOwner,
+            {
+                val action = CreateAlbumFragmentDirections.actionCreateAlbumFragmentToAlbumFragment2()
+                view?.findNavController()?.navigate(action)
+            })
+
     }
+
+
 
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {

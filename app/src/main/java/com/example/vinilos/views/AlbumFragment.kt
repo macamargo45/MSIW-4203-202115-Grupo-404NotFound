@@ -2,15 +2,14 @@ package com.example.vinilos.views
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumFragmentBinding
 import com.example.vinilos.viewmodels.AlbumViewModel
 import com.example.vinilos.views.adapters.AlbumsAdapter
@@ -42,6 +41,26 @@ class AlbumFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.app_bar, menu)
+
+        val expandListener = MenuItem.OnMenuItemClickListener {
+
+            if(it.itemId == R.id.add_album) {
+                val action = AlbumFragmentDirections.actionAlbumFragment2ToCreateAlbumFragment()
+                view?.findNavController()?.navigate(action)
+            }
+
+            true
+        }
+
+        // Get the MenuItem for the action item
+        val actionMenuItem = menu.findItem(R.id.add_album)
+
+        // Assign the listener to that action item
+        actionMenuItem?.setOnMenuItemClickListener(expandListener)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         try {
 
@@ -67,12 +86,15 @@ class AlbumFragment : Fragment() {
                 { isNetworkError ->
                     if (isNetworkError) onNetworkError()
                 })
+
+            setHasOptionsMenu(true)
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
             val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
