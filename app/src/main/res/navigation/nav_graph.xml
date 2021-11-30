@@ -2,28 +2,35 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/albumFragment2"
-    android:id="@+id/navegationBar">
+    android:id="@+id/navegationBar"
+    app:startDestination="@id/albumFragment">
+    <!-- Acciones del bottom bar -->
+    <action
+        android:id="@+id/action_global_albumFragment"
+        app:destination="@id/albumFragment" />
+    <action
+        android:id="@+id/action_global_collectorsListFragment"
+        app:destination="@id/collectorsListFragment" />
+    <action
+        android:id="@+id/action_global_musiciansListFragment"
+        app:destination="@id/musiciansListFragment" />
     <fragment
-        android:id="@+id/albumFragment2"
+        android:id="@+id/albumFragment"
         android:name="com.example.vinilos.views.AlbumFragment"
         android:label="@string/album_list_title"
         tools:layout="@layout/album_fragment">
         <action
-            android:id="@+id/action_albumFragment2_to_albumDetailsFragment2"
-            app:destination="@id/albumDetailsFragment2" />
+            android:id="@+id/action_albumFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
         <action
-            android:id="@+id/action_albumFragment2_to_errorMessageFragment"
+            android:id="@+id/action_albumFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
         <action
             android:id="@+id/action_albumFragment2_to_createAlbumFragment"
             app:destination="@id/createAlbumFragment" />
     </fragment>
-    <action
-        android:id="@+id/action_global_albumFragment"
-        app:destination="@id/albumFragment2" />
     <fragment
-        android:id="@+id/albumDetailsFragment2"
+        android:id="@+id/albumDetailsFragment"
         android:name="com.example.vinilos.views.AlbumDetailsFragment"
         android:label="@string/album_details_title">
         <argument
@@ -34,42 +41,17 @@
             app:destination="@id/errorMessageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/errorMessageFragment"
-        android:name="com.example.vinilos.views.ErrorMessageFragment"
-        android:label="@string/error_message_title"
-        tools:layout="@layout/error_message_fragment">
-        <action
-            android:id="@+id/action_errorMessageFragment_to_albumFragment2"
-            app:destination="@id/albumFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/collectorsListFragment"
-        android:name="com.example.vinilos.views.CollectorsListFragment"
-        android:label="@string/collecionistas_list_title"
-        tools:layout="@layout/collectors_list_fragment">
-        <action
-            android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
-            app:destination="@id/errorMessageFragment" />
-    </fragment>
-    <action
-        android:id="@+id/action_global_collectorsListFragment"
-        app:destination="@id/collectorsListFragment" />
-
-    <fragment
         android:id="@+id/musiciansListFragment"
         android:name="com.example.vinilos.views.MusiciansListFragment"
         android:label="@string/musicians_list_title"
-        tools:layout="@layout/collectors_list_fragment">
+        tools:layout="@layout/musicians_list_fragment">
         <action
             android:id="@+id/action_musicianListFragment_to_musicianDetailsFragment"
             app:destination="@id/musicianDetailsFragment" />
         <action
-            android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
+            android:id="@+id/action_musiciansListFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
     </fragment>
-    <action
-        android:id="@+id/action_global_musiciansListFragment"
-        app:destination="@id/musiciansListFragment" />
     <fragment
         android:id="@+id/musicianDetailsFragment"
         android:name="com.example.vinilos.views.MusicianDetailsFragment"
@@ -78,8 +60,8 @@
             android:name="musician"
             app:argType="com.example.vinilos.models.Musician" />
         <action
-            android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment2"
-            app:destination="@id/albumDetailsFragment2" />
+            android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
         <action
             android:id="@+id/action_musicianDetailsFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
@@ -96,4 +78,34 @@
             android:id="@+id/action_createAlbumFragment_to_albumFragment2"
             app:destination="@id/albumFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/collectorsListFragment"
+        android:name="com.example.vinilos.views.CollectorsListFragment"
+        android:label="@string/collectors_list_title"
+        tools:layout="@layout/collectors_list_fragment">
+        <action
+            android:id="@+id/action_collectorsListFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+        <action
+            android:id="@+id/action_collectorsListFragment_to_collectorDetailsFragment"
+            app:destination="@id/collectorDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/collectorDetailsFragment"
+        android:name="com.example.vinilos.views.CollectorDetailsFragment"
+        android:label="@string/collector_details_title"
+        tools:layout="@layout/collector_details_fragment">
+        <argument
+            android:name="collector"
+            app:argType="com.example.vinilos.models.Collector" />
+        <action
+            android:id="@+id/action_collectorDetailsFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+    </fragment>
+    <!-- Acciones de error -->
+    <fragment
+        android:id="@+id/errorMessageFragment"
+        android:name="com.example.vinilos.views.ErrorMessageFragment"
+        android:label="@string/error_message_title"
+        tools:layout="@layout/error_message_fragment"/>
 </navigation>

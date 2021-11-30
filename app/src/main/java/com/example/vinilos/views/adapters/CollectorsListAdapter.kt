@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorItemBinding
 import com.example.vinilos.models.Collector
+import com.example.vinilos.views.CollectorsListFragmentDirections
 
 class CollectorsListAdapter : RecyclerView.Adapter<CollectorsListAdapter.CollectorListViewHolder>() {
 
@@ -34,15 +36,13 @@ class CollectorsListAdapter : RecyclerView.Adapter<CollectorsListAdapter.Collect
     override fun onBindViewHolder(holder: CollectorListViewHolder, position: Int) {
         val collector = collectors[position]
 
-
         holder.viewDataBinding.also {
             it.collector = collector
         }
         holder.viewDataBinding.root.setOnClickListener {
             try {
-                //val action = AlbumFragmentDirections.actionAlbumFragment2ToAlbumDetailsFragment2(albums[position])
-                //holder.viewDataBinding.root.findNavController().navigate(action)
-
+                val action = CollectorsListFragmentDirections.actionCollectorsListFragmentToCollectorDetailsFragment(collector)
+                holder.viewDataBinding.root.findNavController().navigate(action)
             }
             catch(e: Exception) {
                 Log.println(Log.ERROR,"Error",e.message.toString())
