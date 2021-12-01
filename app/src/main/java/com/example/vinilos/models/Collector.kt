@@ -12,11 +12,9 @@ data class Collector (
     val telephone: String?,
     val email: String?,
 ): Parcelable {
-    @IgnoredOnParcel
-    val performers = mutableListOf<Performer?>()
-    @IgnoredOnParcel
-    val albums = mutableListOf<CollectorAlbum?>()
-    val comments = mutableListOf<Comment>()
+    val performers get() = mutableListOf<Performer?>()
+    val albums get() = mutableListOf<CollectorAlbum?>()
+    val comments get() = mutableListOf<Comment?>()
 
     fun setPerformersFromJSON(jsonPerformers: JSONArray) {
         if (jsonPerformers.length() > 0) {
