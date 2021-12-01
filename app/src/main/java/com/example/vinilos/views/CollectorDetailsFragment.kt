@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -19,7 +18,6 @@ import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorDetailsFragmentBinding
 import com.example.vinilos.viewmodels.CollectorDetailsViewModel
 import com.example.vinilos.views.adapters.CollectorCommentsAdapter
-import com.example.vinilos.views.adapters.CollectorsListAdapter
 
 class CollectorDetailsFragment: Fragment() {
     private var _binding: CollectorDetailsFragmentBinding? = null

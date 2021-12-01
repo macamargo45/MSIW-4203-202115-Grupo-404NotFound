@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10sp"
-            android:text="Colecciones"
+            android:text="@string/collections"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10sp"
-            android:text="Músicos Favoritos"
+            android:text="@string/favorite_musicians"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10sp"
-            android:text="Calificaciones"
+            android:text="@string/latest_comments"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 

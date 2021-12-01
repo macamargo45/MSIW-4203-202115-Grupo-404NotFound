@@ -30,6 +30,9 @@
     <string name="ErrorMessageAlbumGenre">Seleccione el género del album</string>
     <string name="ErrorMessageAlbumLabel">Seleccione el sello discográfico del album</string>
     <string name="ErrorMessageAlbumDescription">Ingrese una descripción de al menos 5 caracteres</string>
+    <string name="collections">Colecciones</string>
+    <string name="favorite_musicians">Músicos Favoritos</string>
+    <string name="latest_comments">Comentarios Recientes</string>
     <string-array name="record_labels">
         <item>Seleccionar</item>
         <item>Sony Music</item>
