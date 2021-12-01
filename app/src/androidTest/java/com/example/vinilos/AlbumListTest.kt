@@ -7,17 +7,21 @@ import androidx.test.runner.AndroidJUnit4
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.*
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.vinilos.util.EspressoIdlingResource
+import java.util.regex.Matcher
 
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
+import androidx.test.espresso.matcher.ViewMatchers.withTagValue
+import org.hamcrest.Matchers.*
+
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -76,12 +80,13 @@ class AlbumListTest {
         )
         textView2.check(matches(withText("Buscando América")))
 
+
         val textView3 = onView(
             allOf(
                 withId(R.id.albumPerformerNames),
                 withText("Rubén Blades Bellido de Luna"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
-                withContentDescription("100"),
+                withTagValue(allOf(instanceOf(Int::class.java), equalTo(100 as Int?))),
                 isDisplayed()
             )
         )
@@ -100,7 +105,7 @@ class AlbumListTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Rubén Blades Bellido de Luna"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
-                withContentDescription("101"),
+                withTagValue(allOf(instanceOf(Int::class.java), equalTo(101 as Int?))),
                 isDisplayed()
             )
         )
@@ -119,7 +124,7 @@ class AlbumListTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Queen"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
-                withContentDescription("102"),
+                withTagValue(allOf(instanceOf(Int::class.java), equalTo(102 as Int?))),
                 isDisplayed()
             )
         )
@@ -138,7 +143,7 @@ class AlbumListTest {
             allOf(
                 withId(R.id.albumPerformerNames), withText("Queen"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
-                withContentDescription("103"),
+                withTagValue(allOf(instanceOf(Int::class.java), equalTo(103 as Int?))),
                 isDisplayed()
             )
         )
