@@ -8,23 +8,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
-import com.example.vinilos.databinding.CollectorItemBinding
+import com.example.vinilos.databinding.CollectorListItemBinding
 import com.example.vinilos.models.Collector
 import com.example.vinilos.views.CollectorsListFragmentDirections
 
 class CollectorsListAdapter : RecyclerView.Adapter<CollectorsListAdapter.CollectorListViewHolder>() {
 
-    class CollectorListViewHolder(val viewDataBinding: CollectorItemBinding) :
+    class CollectorListViewHolder(val viewDataBinding: CollectorListItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.collector_item
+            val LAYOUT = R.layout.collector_list_item
         }
     }
     var collectors :List<Collector> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorListViewHolder {
-        val withDataBinding: CollectorItemBinding = DataBindingUtil.inflate(
+        val withDataBinding: CollectorListItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             CollectorListViewHolder.LAYOUT,
             parent,

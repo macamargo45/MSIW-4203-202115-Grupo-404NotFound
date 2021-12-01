@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -82,11 +81,10 @@
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/albumsMusicianRv"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            tools:listitem="@layout/album_item"-->
-        <!--            android:background="@null"/>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/collectorCommentsRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"/>
     </LinearLayout>
 </LinearLayout>
