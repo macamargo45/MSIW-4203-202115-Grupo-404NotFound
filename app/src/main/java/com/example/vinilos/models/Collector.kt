@@ -11,7 +11,9 @@ data class Collector (
     val telephone: String?,
     val email: String?,
 ): Parcelable {
+    @IgnoredOnParcel
     val performers = mutableListOf<Performer?>()
+    @IgnoredOnParcel
     val albums = mutableListOf<CollectorAlbum?>()
     val comments = mutableListOf<Comment>()
 
