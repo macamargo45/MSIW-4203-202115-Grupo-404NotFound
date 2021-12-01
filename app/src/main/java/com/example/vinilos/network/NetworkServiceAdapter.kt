@@ -1,7 +1,6 @@
 package com.example.vinilos.network
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -109,11 +108,6 @@ class NetworkServiceAdapter constructor(context: Context) {
                     cont.resume(albumId)
                 },
                 {
-                    Log.d("Error in post call", it.stackTrace.toString())
-
-                        // As of f605da3 the following should work
-                    Log.d("Error in post call",it.networkResponse.toString())
-
                     cont.resumeWithException(it) //se relanza la excepción
                 })
         )
@@ -151,8 +145,6 @@ class NetworkServiceAdapter constructor(context: Context) {
         }
 
         return request
-
-
     }
 
     suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont ->
