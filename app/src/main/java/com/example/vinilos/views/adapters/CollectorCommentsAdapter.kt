@@ -1,62 +1,43 @@
 package com.example.vinilos.views.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
-import com.example.vinilos.databinding.CollectorDetailsReviewItemBinding
-import com.example.vinilos.models.Collector
+import com.example.vinilos.databinding.CollectorDetailsCommentItemBinding
+import com.example.vinilos.models.Comment
 
-class CollectorCommentsAdapter: RecyclerView.Adapter<CollectorCommentsAdapter.CollectorReviewViewHolder>() {
-    class CollectorReviewViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private val flowerTextView: TextView = itemView.findViewById(R.id.flower_text)
-        private val flowerImageView: ImageView = itemView.findViewById(R.id.flower_image)
-        private var review: Flower? = null
-
-        fun bind(flower: Flower) {
-            currentFlower = flower
-
-            flowerTextView.text = flower.name
-            if (flower.image != null) {
-                flowerImageView.setImageResource(flower.image)
-            } else {
-                flowerImageView.setImageResource(R.drawable.rose)
-            }
+class CollectorCommentsAdapter: RecyclerView.Adapter<CollectorCommentsAdapter.CollectorCommentViewHolder>() {
+    class CollectorCommentViewHolder(val viewDataBinding: CollectorDetailsCommentItemBinding) :
+        RecyclerView.ViewHolder(viewDataBinding.root) {
+        companion object {
+            @LayoutRes
+            val LAYOUT = R.layout.collector_details_comment_item
         }
     }
+    var comments :List<Comment> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorReviewViewHolder {
-        val withDataBinding: CollectorDetailsReviewItemBinding = DataBindingUtil.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorCommentViewHolder {
+        val withDataBinding: CollectorDetailsCommentItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            CollectorReviewViewHolder.LAYOUT,
+            CollectorCommentViewHolder.LAYOUT,
             parent,
             false)
 
-        return CollectorReviewViewHolder(withDataBinding)
+        return CollectorCommentViewHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: CollectorListViewHolder, position: Int) {
-        val collector = collectors[position]
+    override fun onBindViewHolder(holder: CollectorCommentViewHolder, position: Int) {
+        val comment = comments[position]
 
         holder.viewDataBinding.also {
-            it.collector = collector
-        }
-        holder.viewDataBinding.root.setOnClickListener {
-            try {
-                val action = CollectorsListFragmentDirections.actionCollectorsListFragmentToCollectorDetailsFragment(collector)
-                holder.viewDataBinding.root.findNavController().navigate(action)
-            }
-            catch(e: Exception) {
-                Log.println(Log.ERROR,"Error",e.message.toString())
-            }
+            it.comment = comment
         }
     }
 
     override fun getItemCount(): Int {
-        return collectors.size
+        return comments.size
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -77,12 +78,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10sp"
-            android:text="Calificaciones Recientes"
+            android:text="Calificaciones"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/collectorCommentsRv"
+                tools:listitem="@layout/collector_details_comment_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"/>

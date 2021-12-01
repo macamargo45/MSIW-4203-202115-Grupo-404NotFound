@@ -9,26 +9,35 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorDetailsFragmentBinding
 import com.example.vinilos.viewmodels.CollectorDetailsViewModel
+import com.example.vinilos.views.adapters.CollectorCommentsAdapter
+import com.example.vinilos.views.adapters.CollectorsListAdapter
 
 class CollectorDetailsFragment: Fragment() {
     private var _binding: CollectorDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: CollectorDetailsViewModel
     private val args: CollectorDetailsFragmentArgs by navArgs()
-
+    private var commentsAdapter: CollectorCommentsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CollectorDetailsFragmentBinding.inflate(inflater, container, false)
+        if(_binding == null)
+            _binding = CollectorDetailsFragmentBinding.inflate(inflater, container, false)
+
+        if(commentsAdapter == null)
+            commentsAdapter = CollectorCommentsAdapter()
+
         return binding.root
     }
 
@@ -38,6 +47,9 @@ class CollectorDetailsFragment: Fragment() {
             val activity = requireNotNull(this.activity) {
                 "You can only access the viewModel after onActivityCreated()"
             }
+
+            commentsAdapter!!.comments = args.collector.comments.toList()
+
             viewModel =
                 ViewModelProvider(this, CollectorDetailsViewModel.Factory(activity.application))[CollectorDetailsViewModel::class.java]
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
@@ -53,6 +65,9 @@ class CollectorDetailsFragment: Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
+            binding.collectorCommentsRv.layoutManager = LinearLayoutManager(context)
+            binding.collectorCommentsRv.adapter = commentsAdapter
+
             val txtName: TextView = view.findViewById(R.id.CollectorDetailsName)
             txtName.text = args.collector.name
 

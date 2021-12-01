@@ -75,8 +75,8 @@
             android:id="@+id/action_createAlbumFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
         <action
-            android:id="@+id/action_createAlbumFragment_to_albumFragment2"
-            app:destination="@id/albumFragment2" />
+            android:id="@+id/action_createAlbumFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
     </fragment>
     <fragment
         android:id="@+id/collectorsListFragment"

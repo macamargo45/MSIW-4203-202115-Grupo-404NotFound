@@ -1,6 +1,7 @@
 package com.example.vinilos.models
 
 import android.os.Parcelable
+import android.util.Log
 import kotlinx.parcelize.Parcelize
 import org.json.JSONArray
 
@@ -11,16 +12,16 @@ data class Collector (
     val telephone: String?,
     val email: String?,
 ): Parcelable {
-    val performers get() = mutableListOf<Performer?>()
-    val albums get() = mutableListOf<CollectorAlbum?>()
-    val comments get() = mutableListOf<Comment?>()
+    val performers = mutableListOf<Performer?>()
+    val albums = mutableListOf<CollectorAlbum?>()
+    val comments = mutableListOf<Comment>()
 
     fun setPerformersFromJSON(jsonPerformers: JSONArray) {
         if (jsonPerformers.length() > 0) {
             for (index in 0 until jsonPerformers.length()) {
                 val jsonPerformer = jsonPerformers.getJSONObject(index)
 
-                this.performers.add(
+                performers.add(
                     index, Performer(
                         id = jsonPerformer.getInt("id"),
                         name = jsonPerformer.getString("name"),
@@ -37,7 +38,7 @@ data class Collector (
             for (index in 0 until jsonAlbums.length()) {
                 val jsonCollectorAlbum = jsonAlbums.getJSONObject(index)
 
-                this.albums.add(
+                albums.add(
                     index, CollectorAlbum(
                         id = jsonCollectorAlbum.getInt("id"),
                         status = jsonCollectorAlbum.getString("status"),
@@ -52,8 +53,7 @@ data class Collector (
         if (jsonComments.length() > 0) {
             for (index in 0 until jsonComments.length()) {
                 val comment = jsonComments.getJSONObject(index)
-
-                this.comments.add(
+                comments.add(
                     index, Comment(
                         id = comment.getInt("id"),
                         rating = comment.getInt("rating"),
