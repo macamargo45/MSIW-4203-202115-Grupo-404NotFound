@@ -28,4 +28,10 @@ class AlbumRepository(val application: Application) {
             potentialResp
         }
     }
+    suspend fun createAlbum(newAlbum: Album): Int{
+        val albumId = NetworkServiceAdapter.getInstance(application).createAlbum(newAlbum)
+        // Remove cache so that next query updates the albums list from the network
+        CacheManager.getInstance(application.applicationContext).removeAllAlbums("allAlbums")
+        return albumId
+    }
 }

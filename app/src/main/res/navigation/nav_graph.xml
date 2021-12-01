@@ -2,8 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/albumFragment2">
+    app:startDestination="@id/albumFragment2"
+    android:id="@+id/navegationBar">
     <fragment
         android:id="@+id/albumFragment2"
         android:name="com.example.vinilos.views.AlbumFragment"
@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_albumFragment2_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
+        <action
+            android:id="@+id/action_albumFragment2_to_createAlbumFragment"
+            app:destination="@id/createAlbumFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_albumFragment"
@@ -80,5 +83,17 @@
         <action
             android:id="@+id/action_musicianDetailsFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAlbumFragment"
+        android:name="com.example.vinilos.views.CreateAlbumFragment"
+        android:label="@string/add_album_title"
+        tools:layout="@layout/create_album_fragment" >
+        <action
+            android:id="@+id/action_createAlbumFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+        <action
+            android:id="@+id/action_createAlbumFragment_to_albumFragment2"
+            app:destination="@id/albumFragment2" />
     </fragment>
 </navigation>

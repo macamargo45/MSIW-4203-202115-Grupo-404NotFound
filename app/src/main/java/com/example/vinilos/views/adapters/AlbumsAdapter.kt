@@ -11,7 +11,6 @@ import com.example.vinilos.R
 import com.example.vinilos.databinding.AlbumItemBinding
 import com.example.vinilos.models.Album
 import com.example.vinilos.views.AlbumFragmentDirections
-import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
 

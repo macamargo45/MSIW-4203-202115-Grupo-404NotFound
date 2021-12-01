@@ -17,4 +17,32 @@
     <string name="musicians_list_title">Musicos</string>
     <string name="premios_list_title">Premios</string>
     <string name="error_message">Ha ocurrido un error. Vuelva a intentar usar la aplicación más tarde.</string>
+    <string name="add_album_title">Agregar Album</string>
+    <string name="album_name_title">Nombre</string>
+    <string name="album_cover_title">Carátula</string>
+    <string name="album_release_date_title">Fecha Lanzamiento</string>
+    <string name="album_record_label_title">Sello Discográfico</string>
+    <string name="album_description_title">Descripción</string>
+    <string name="agregar">Agregar</string>
+    <string name="album_genre_title">Género</string>
+    <string name="MensajeErrorNombreAlbum">Ingrese el nombre del album</string>
+    <string name="ErrorMessageAlbumCover">Ingrese un URL válido para el cover del album</string>
+    <string name="ErrorMessageAlbumGenre">Seleccione el género del album</string>
+    <string name="ErrorMessageAlbumLabel">Seleccione el sello discográfico del album</string>
+    <string name="ErrorMessageAlbumDescription">Ingrese una descripción de al menos 5 caracteres</string>
+    <string-array name="record_labels">
+        <item>Seleccionar</item>
+        <item>Sony Music</item>
+        <item>EMI</item>
+        <item>Discos Fuentes</item>
+        <item>Elektra</item>
+        <item>Fania Records</item>
+    </string-array>
+    <string-array name="genre_list">
+        <item>Seleccionar</item>
+        <item>Classical</item>
+        <item>Salsa</item>
+        <item>Rock</item>
+        <item>Folk</item>
+    </string-array>
 </resources>
