@@ -12,14 +12,10 @@ import kotlinx.coroutines.withContext
 
 class CollectorDetailsViewModel(application: Application) : AndroidViewModel(application) {
     private val albumRepository = AlbumRepository(application)
-    private val _albums = MutableLiveData<List<Album>>()
-    val albums: LiveData<List<Album>>
-        get() = _albums
-
     private val musiciansRepository = MusiciansRepository(application)
-    private val _musicians = MutableLiveData<List<Musician>>()
-    val musicians: LiveData<List<Musician>>
-        get() = _musicians
+
+    private val _musiciansAndAlbums = MutableLiveData<Pair<List<Musician>, List<Album>>>()
+    val musiciansAndAlbums: LiveData<Pair<List<Musician>, List<Album>>> = _musiciansAndAlbums
 
     private var _eventNetworkError = MutableLiveData(false)
 
@@ -41,10 +37,9 @@ class CollectorDetailsViewModel(application: Application) : AndroidViewModel(app
                 try {
                     withContext(Dispatchers.IO) {
                         val musicians = musiciansRepository.refreshData()
-                        _musicians.postValue(musicians)
-
                         val albums = albumRepository.refreshData()
-                        _albums.postValue(albums)
+
+                        _musiciansAndAlbums.postValue(Pair(musicians, albums))
                     }
                     _eventNetworkError.postValue(false)
                     _isNetworkErrorShown.postValue(false)

@@ -11,15 +11,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorDetailsFragmentBinding
-import com.example.vinilos.models.Musician
 import com.example.vinilos.viewmodels.CollectorDetailsViewModel
 import com.example.vinilos.views.adapters.CollectorAlbumsAdapter
 import com.example.vinilos.views.adapters.CollectorCommentsAdapter
@@ -68,17 +65,12 @@ class CollectorDetailsFragment: Fragment() {
             viewModel =
                 ViewModelProvider(this, CollectorDetailsViewModel.Factory(activity.application))[CollectorDetailsViewModel::class.java]
 
-            val mediator = MediatorLiveData<List<Musician>>()
-            viewModel.musicians.observe(viewLifecycleOwner, {
-                val musicianIds = args.collector.performers.map { musician -> musician?.id }
+            viewModel.musiciansAndAlbums.observe(viewLifecycleOwner, {
+                val musicianIds = args.collector.performers.map { musician -> musician.id }
+                collectorMusiciansAdapter!!.musicians = it.first.filter { musician -> musician.id in musicianIds }
 
-                collectorMusiciansAdapter!!.musicians = it.filter { musician -> musician.id in musicianIds }
-            })
-
-            viewModel.albums.observe(viewLifecycleOwner, {
-                val albumIds = args.collector.albums.map { album -> album?.id }
-
-                collectorAlbumsAdapter!!.albums = it.filter { album -> album.albumId in albumIds }
+                val albumIds = args.collector.albums.map { album -> album.id }
+                collectorAlbumsAdapter!!.albums = it.second.filter { album -> album.albumId in albumIds }
 
                 binding.progressBarCollectors.isVisible = false
                 binding.collectorDetailsFragment.isVisible = true
