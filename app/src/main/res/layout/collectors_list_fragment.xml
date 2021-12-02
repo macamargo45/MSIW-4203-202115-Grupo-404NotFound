@@ -26,7 +26,7 @@ android:padding="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:listitem="@layout/collector_item"
+    tools:listitem="@layout/collector_list_item"
     android:background="@null" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

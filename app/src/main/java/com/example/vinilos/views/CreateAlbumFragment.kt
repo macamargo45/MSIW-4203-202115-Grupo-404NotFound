@@ -145,7 +145,7 @@ class CreateAlbumFragment : Fragment() {
         viewModel.albumId.observe(
             viewLifecycleOwner,
             {
-                val action = CreateAlbumFragmentDirections.actionCreateAlbumFragmentToAlbumFragment2()
+                val action = CreateAlbumFragmentDirections.actionCreateAlbumFragmentToAlbumFragment()
                 view?.findNavController()?.navigate(action)
             })
 
