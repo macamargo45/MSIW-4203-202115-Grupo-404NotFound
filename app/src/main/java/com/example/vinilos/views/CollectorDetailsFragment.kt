@@ -9,22 +9,30 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vinilos.R
 import com.example.vinilos.databinding.CollectorDetailsFragmentBinding
+import com.example.vinilos.models.Musician
 import com.example.vinilos.viewmodels.CollectorDetailsViewModel
+import com.example.vinilos.views.adapters.CollectorAlbumsAdapter
 import com.example.vinilos.views.adapters.CollectorCommentsAdapter
+import com.example.vinilos.views.adapters.CollectorMusiciansAdapter
 
 class CollectorDetailsFragment: Fragment() {
     private var _binding: CollectorDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: CollectorDetailsViewModel
     private val args: CollectorDetailsFragmentArgs by navArgs()
-    private var commentsAdapter: CollectorCommentsAdapter? = null
+    private var collectorCommentsAdapter: CollectorCommentsAdapter? = null
+    private var collectorMusiciansAdapter: CollectorMusiciansAdapter? = null
+    private var collectorAlbumsAdapter: CollectorAlbumsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +41,14 @@ class CollectorDetailsFragment: Fragment() {
         if(_binding == null)
             _binding = CollectorDetailsFragmentBinding.inflate(inflater, container, false)
 
-        if(commentsAdapter == null)
-            commentsAdapter = CollectorCommentsAdapter()
+        if(collectorCommentsAdapter == null)
+            collectorCommentsAdapter = CollectorCommentsAdapter()
+
+        if(collectorMusiciansAdapter == null)
+            collectorMusiciansAdapter = CollectorMusiciansAdapter()
+
+        if(collectorAlbumsAdapter == null)
+            collectorAlbumsAdapter = CollectorAlbumsAdapter()
 
         return binding.root
     }
@@ -46,10 +60,30 @@ class CollectorDetailsFragment: Fragment() {
                 "You can only access the viewModel after onActivityCreated()"
             }
 
-            commentsAdapter!!.comments = args.collector.comments.toList()
+            binding.progressBarCollectors.isVisible = true
+            binding.collectorDetailsFragment.isVisible = false
+
+            collectorCommentsAdapter!!.comments = args.collector.comments.toList()
 
             viewModel =
                 ViewModelProvider(this, CollectorDetailsViewModel.Factory(activity.application))[CollectorDetailsViewModel::class.java]
+
+            val mediator = MediatorLiveData<List<Musician>>()
+            viewModel.musicians.observe(viewLifecycleOwner, {
+                val musicianIds = args.collector.performers.map { musician -> musician?.id }
+
+                collectorMusiciansAdapter!!.musicians = it.filter { musician -> musician.id in musicianIds }
+            })
+
+            viewModel.albums.observe(viewLifecycleOwner, {
+                val albumIds = args.collector.albums.map { album -> album?.id }
+
+                collectorAlbumsAdapter!!.albums = it.filter { album -> album.albumId in albumIds }
+
+                binding.progressBarCollectors.isVisible = false
+                binding.collectorDetailsFragment.isVisible = true
+            })
+
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
@@ -64,7 +98,13 @@ class CollectorDetailsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
             binding.collectorCommentsRv.layoutManager = LinearLayoutManager(context)
-            binding.collectorCommentsRv.adapter = commentsAdapter
+            binding.collectorCommentsRv.adapter = collectorCommentsAdapter
+
+            binding.collectorPerformersRv.layoutManager = LinearLayoutManager(context)
+            binding.collectorPerformersRv.adapter = collectorMusiciansAdapter
+
+            binding.collectorAlbumsRv.layoutManager = LinearLayoutManager(context)
+            binding.collectorAlbumsRv.adapter = collectorAlbumsAdapter
 
             val txtName: TextView = view.findViewById(R.id.CollectorDetailsName)
             txtName.text = args.collector.name

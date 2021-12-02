@@ -47,8 +47,6 @@ class CollectorsListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         try {
-
-
             super.onActivityCreated(savedInstanceState)
             val activity = requireNotNull(this.activity) {
                 "You can only access the viewModel after onActivityCreated()"
