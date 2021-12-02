@@ -41,7 +41,7 @@ class AlbumFragment : Fragment() {
             binding.albumsRv.adapter = viewModelAdapter
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToErrorMessageFragment()
             view.findNavController().navigate(action)
         }
     }
@@ -95,7 +95,7 @@ class AlbumFragment : Fragment() {
             setHasOptionsMenu(true)
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
         }
     }
@@ -109,7 +109,7 @@ class AlbumFragment : Fragment() {
 
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()

@@ -111,6 +111,4 @@ class MusicianDetailsFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
-
-
 }
