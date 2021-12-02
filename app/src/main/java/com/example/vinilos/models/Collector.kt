@@ -1,7 +1,6 @@
 package com.example.vinilos.models
 
 import android.os.Parcelable
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import org.json.JSONArray
 
@@ -12,10 +11,8 @@ data class Collector (
     val telephone: String?,
     val email: String?,
 ): Parcelable {
-    @IgnoredOnParcel
-    val performers = mutableListOf<Performer?>()
-    @IgnoredOnParcel
-    val albums = mutableListOf<CollectorAlbum?>()
+    val performers = mutableListOf<Performer>()
+    val albums = mutableListOf<CollectorAlbum>()
     val comments = mutableListOf<Comment>()
 
     fun setPerformersFromJSON(jsonPerformers: JSONArray) {
