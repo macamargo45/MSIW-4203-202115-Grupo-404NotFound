@@ -30,6 +30,12 @@
     <string name="ErrorMessageAlbumGenre">Seleccione el género del album</string>
     <string name="ErrorMessageAlbumLabel">Seleccione el sello discográfico del album</string>
     <string name="ErrorMessageAlbumDescription">Ingrese una descripción de al menos 5 caracteres</string>
+    <string name="nombre_coleccionista">nombre del coleccionista: %1$s</string>
+    <string name="email_coleccionista">email del coleccionista: %1$s</string>
+    <string name="album_nombre">nombre del album: %1$s</string>
+    <string name="artista_nombre">nombre del artista: %1$s</string>
+    <string name="artista_img">imagen del artista: %1$s</string>
+    <string name="album_img">imagen del album: %1$s</string>
     <string-array name="record_labels">
         <item>Seleccionar</item>
         <item>Sony Music</item>

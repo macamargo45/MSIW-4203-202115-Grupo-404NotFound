@@ -47,17 +47,19 @@
                     android:id="@+id/collectorName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@{Integer.toString(collector.id)}"
+                    android:contentDescription="@{@string/nombre_coleccionista(collector.name)}"
                     android:text="@{collector.name}"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:tag="@{collector.id}"/>
 
                 <TextView
                     android:id="@+id/collectorEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@{Integer.toString(collector.id)}"
-                    android:text="@{collector.email}" />
+                    android:contentDescription="@{@string/email_coleccionista(collector.email)}"
+                    android:text="@{collector.email}"
+                    android:tag="@{collector.id}"/>
             </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
