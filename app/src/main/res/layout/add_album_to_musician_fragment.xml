@@ -32,12 +32,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
+                android:contentDescription="Nombre del Musico"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/birthDateAssociateAlbum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="Fecha de Nacimiento"
                 android:text="@string/musician_birth_date"
                 tools:ignore="MissingConstraints" />
         </LinearLayout>
@@ -64,12 +66,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="7sp"
+                android:contentDescription="Lista de Albumes"
                 android:text="@string/album_list_title" />
 
             <Spinner
                 android:id="@+id/album_list_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="Seleccion de albumes"
                 android:padding="7sp"/>
 
             <Button
@@ -77,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="7sp"
+                android:contentDescription="Boton de Asociar"
                 android:text="@string/associate">
 
             </Button>
