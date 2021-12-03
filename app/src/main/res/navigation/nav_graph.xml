@@ -59,7 +59,6 @@
         <argument
             android:name="musician"
             app:argType="com.example.vinilos.models.Musician" />
-        app:argType="com.example.vinilos.models.Musician" />
         <action
             android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment"
             app:destination="@id/albumDetailsFragment" />
