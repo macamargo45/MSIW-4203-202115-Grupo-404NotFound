@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Vinilos</string>
-    <string name="album_list_title">lista de albumes</string>
+    <string name="album_list_title">lista de álbumes</string>
     <string name="album_list_menu">Albumes</string>
     <string name="album_details_title">Detalle Album</string>
     <string name="record_label_title">Compañia discográfica</string>
@@ -11,7 +11,7 @@
     <string name="error_message_title">Ocurrió un error</string>
     <string name="musician_details_title">Detalle Músico</string>
     <string name="musician_birth_date">Fecha de Nacimiento %1$s</string>
-    <string name="musician_album_title">Lista de albumes</string>
+    <string name="musician_album_title">Lista de álbumes</string>
     <string name="collector_default_thumbnail">Imagen de coleccionista por defecto</string>
     <string name="collectors_list_title">Lista de coleccionistas</string>
     <string name="collectors_list_menu">Coleccionistas</string>
