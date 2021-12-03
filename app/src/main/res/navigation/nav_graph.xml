@@ -29,9 +29,6 @@
             android:id="@+id/action_albumFragment2_to_createAlbumFragment"
             app:destination="@id/createAlbumFragment" />
     </fragment>
-    <action
-        android:id="@+id/action_global_albumFragment"
-        app:destination="@id/albumFragment2" />
     <fragment
         android:id="@+id/albumDetailsFragment"
         android:name="com.example.vinilos.views.AlbumDetailsFragment"
@@ -62,9 +59,10 @@
         <argument
             android:name="musician"
             app:argType="com.example.vinilos.models.Musician" />
+        app:argType="com.example.vinilos.models.Musician" />
         <action
-            android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment2"
-            app:destination="@id/albumDetailsFragment2" />
+            android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment"
+            app:destination="@id/albumDetailsFragment" />
         <action
             android:id="@+id/action_musicianDetailFragment_to_addAlbumToMusicianFragment"
             app:destination="@id/addAlbumToMusicianFragment" />
@@ -87,7 +85,7 @@
         android:id="@+id/createAlbumFragment"
         android:name="com.example.vinilos.views.CreateAlbumFragment"
         android:label="@string/add_album_title"
-        tools:layout="@layout/create_album_fragment" >
+        tools:layout="@layout/create_album_fragment">
         <action
             android:id="@+id/action_createAlbumFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
@@ -124,5 +122,5 @@
         android:id="@+id/errorMessageFragment"
         android:name="com.example.vinilos.views.ErrorMessageFragment"
         android:label="@string/error_message_title"
-        tools:layout="@layout/error_message_fragment"/>
+        tools:layout="@layout/error_message_fragment" />
 </navigation>
