@@ -24,7 +24,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="@{@string/album_img(album.name)}"
-                android:tag="@{album.albumId}"/>
+                android:tag="@{album.albumId}"
+                android:background="@color/purple_700"
+                android:padding="3dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
