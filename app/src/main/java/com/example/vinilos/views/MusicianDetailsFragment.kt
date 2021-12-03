@@ -109,7 +109,7 @@ class MusicianDetailsFragment : Fragment() {
         val expandListener = MenuItem.OnMenuItemClickListener {
             if (it.itemId == R.id.accion_asociar_album) {
                 val action =
-                    MusicianDetailsFragmentDirections.actionMusicianDetailFragmentToAssociateAlbumToMusicianFragment(
+                    MusicianDetailsFragmentDirections.actionMusicianDetailFragmentToAddAlbumToMusicianFragment(
                         args.musician
                     )
                 view?.findNavController()?.navigate(action)

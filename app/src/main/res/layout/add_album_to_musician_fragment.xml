@@ -73,7 +73,7 @@
                 android:padding="7sp"/>
 
             <Button
-                android:id="@+id/associate_album_to_musician_button"
+                android:id="@+id/add_album_to_musician_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="7sp"

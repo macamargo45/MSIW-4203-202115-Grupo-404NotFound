@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,18 +14,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vinilos.R
-import com.example.vinilos.databinding.AssociateAlbumToMusicianFragmentBinding
+import com.example.vinilos.databinding.AddAlbumToMusicianFragmentBinding
 import com.example.vinilos.models.Album
-import com.example.vinilos.viewmodels.AssociateAlbumToMusicianViewModel
+import com.example.vinilos.viewmodels.AddAlbumToMusicianViewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 
-class AssociateAlbumToMusicianFragment : Fragment() {
-    private var _binding: AssociateAlbumToMusicianFragmentBinding? = null
+class AddAlbumToMusicianFragment : Fragment() {
+    private var _binding: AddAlbumToMusicianFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AssociateAlbumToMusicianViewModel
-    private val args: AssociateAlbumToMusicianFragmentArgs by navArgs()
+    private lateinit var viewModel: AddAlbumToMusicianViewModel
+    private val args: AddAlbumToMusicianFragmentArgs by navArgs()
     private var albums: List<Album> = emptyList()
     private var spinner: Spinner? = null
     private var albumAdapter: ArrayAdapter<Album>? = null
@@ -39,7 +36,7 @@ class AssociateAlbumToMusicianFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         if (_binding == null)
-            _binding = AssociateAlbumToMusicianFragmentBinding.inflate(inflater, container, false)
+            _binding = AddAlbumToMusicianFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,8 +46,8 @@ class AssociateAlbumToMusicianFragment : Fragment() {
             val activity = requireNotNull(this.activity) {
                 "You can only access the viewModel after onActivityCreated()"
             }
-            viewModel = ViewModelProvider(this, AssociateAlbumToMusicianViewModel.Factory(activity.application)).get(
-                AssociateAlbumToMusicianViewModel::class.java
+            viewModel = ViewModelProvider(this, AddAlbumToMusicianViewModel.Factory(activity.application)).get(
+                AddAlbumToMusicianViewModel::class.java
             )
             viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
                 it.apply {
@@ -59,7 +56,7 @@ class AssociateAlbumToMusicianFragment : Fragment() {
             })
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.stackTraceToString())
-            val action = MusicianDetailsFragmentDirections.actionMusicianDetailsFragmentToErrorMessageFragment()
+            val action = AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
         }
     }
@@ -69,7 +66,15 @@ class AssociateAlbumToMusicianFragment : Fragment() {
         try {
             spinner = view.findViewById(R.id.album_list_spinner) as Spinner
 
-            albumAdapter = ArrayAdapter<Album>(this, android.R.layout.simple_spinner_item, albums)
+            albumAdapter = activity?.let { ArrayAdapter<Album>(it, android.R.layout.simple_spinner_item, albums) }
+
+            spinner!!.adapter = this.activity?.let {
+                ArrayAdapter(
+                    it,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    albums
+                )
+            } as SpinnerAdapter
 
             val txtName: TextView = view.findViewById(R.id.nameMusicianDetailsAssociateAlbum)
             txtName.text = args.musician.name.toString()
@@ -80,24 +85,14 @@ class AssociateAlbumToMusicianFragment : Fragment() {
             txtBirthDate.text =
                 getString(R.string.musician_birth_date, DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate))
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            this.context?.let {
-                ArrayAdapter.createFromResource(
-                    it,
-                    R.array.genre_list,
-                    android.R.layout.simple_spinner_item
-                ).also { adapter ->
-                    // Specify the layout to use when the list of choices appears
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    // Apply the adapter to the spinner
-                    binding.albumListSpinner.adapter = adapter
-                }
+            binding.addAlbumToMusicianButton.setOnClickListener {
+                //TODO Read the select value
+                viewModel.addAlbumToMusician(100, args.musician.id)
             }
-
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
             val action =
-                AssociateAlbumToMusicianFragmentDirections.actionAssociateAlbumToMusicianFragmentToErrorMessageFragment()
+                AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToErrorMessageFragment()
             view.findNavController().navigate(action)
         }
     }
@@ -110,7 +105,7 @@ class AssociateAlbumToMusicianFragment : Fragment() {
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
             val action =
-                AssociateAlbumToMusicianFragmentDirections.actionAssociateAlbumToMusicianFragmentToErrorMessageFragment()
+                AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
