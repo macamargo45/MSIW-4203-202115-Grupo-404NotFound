@@ -4,7 +4,6 @@
     android:background="@null">
 
     <data>
-
         <variable
             name="collector"
             type="com.example.vinilos.models.Collector" />

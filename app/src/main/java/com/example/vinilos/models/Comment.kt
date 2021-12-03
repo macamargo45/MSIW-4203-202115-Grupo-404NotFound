@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CollectorAlbum (
+data class Comment (
     val id: Int,
-    val price: Int,
-    val status: String?
+    val rating: Int,
+    val description: String
 ): Parcelable

@@ -50,7 +50,7 @@ class AlbumDetailsFragment : Fragment() {
             })
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
         }
     }
@@ -87,7 +87,7 @@ class AlbumDetailsFragment : Fragment() {
                 .into(imgCover)
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToErrorMessageFragment()
             view.findNavController().navigate(action)
         }
     }
@@ -99,7 +99,7 @@ class AlbumDetailsFragment : Fragment() {
 
     private fun onNetworkError() {
         if (!viewModel.isNetworkErrorShown.value!!) {
-            val action = AlbumFragmentDirections.actionAlbumFragment2ToErrorMessageFragment()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToErrorMessageFragment()
             view?.findNavController()?.navigate(action)
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()

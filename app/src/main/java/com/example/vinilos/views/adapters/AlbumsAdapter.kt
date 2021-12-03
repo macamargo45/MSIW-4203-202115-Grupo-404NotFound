@@ -43,17 +43,14 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             .load(album.cover)
             .resize(100, 100)
             .into(holder.viewDataBinding.imageView)
-
-
         
         holder.viewDataBinding.also {
             it.album = album
         }
         holder.viewDataBinding.root.setOnClickListener {
             try {
-                val action = AlbumFragmentDirections.actionAlbumFragment2ToAlbumDetailsFragment2(album)
+                val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailsFragment(album)
                 holder.viewDataBinding.root.findNavController().navigate(action)
-
             }
             catch(e: Exception) {
                Log.println(Log.ERROR,"Error",e.message.toString())

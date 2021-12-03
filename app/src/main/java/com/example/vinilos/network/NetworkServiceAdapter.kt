@@ -156,49 +156,20 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val list = mutableListOf<Collector>()
 
                     for (i in 0 until resp.length()) {
-                        val item = resp.getJSONObject(i)
+                        val json = resp.getJSONObject(i)
 
-                        val favoritePerformers = mutableListOf<Performer?>()
-                        val jsonPerformers = item.getJSONArray("favoritePerformers")
-
-                        val collectorsAlbums = mutableListOf<CollectorAlbum?>()
-                        val jsonCollectorsAlbums = item.getJSONArray("collectorAlbums")
-
-                        for (performerIndex in 0 until jsonPerformers.length()) {
-                            val jsonPerformer = jsonPerformers.getJSONObject(performerIndex)
-
-                            favoritePerformers.add(
-                                performerIndex, Performer(
-                                    id = jsonPerformer.getInt("id"),
-                                    name = jsonPerformer.getString("name"),
-                                    image = jsonPerformer.getString("image"),
-                                    description = jsonPerformer.getString("description")
-                                )
-                            )
-                        }
-
-                        for (albumIndex in 0 until jsonCollectorsAlbums.length()) {
-                            val jsonCollectorAlbum = jsonCollectorsAlbums.getJSONObject(albumIndex)
-
-                            collectorsAlbums.add(
-                                albumIndex, CollectorAlbum(
-                                    id = jsonCollectorAlbum.getInt("id"),
-                                    status = jsonCollectorAlbum.getString("status"),
-                                    price = jsonCollectorAlbum.getInt("price")
-                                )
-                            )
-                        }
-
-                        list.add(
-                            i, Collector(
-                                id = item.getInt("id"),
-                                name = item.getString("name"),
-                                telephone = item.getString("telephone"),
-                                email = item.getString("email"),
-                                favoritePerformers = favoritePerformers,
-                                collectorAlbums = collectorsAlbums
-                            )
+                        val collector = Collector(
+                            id = json.getInt("id"),
+                            name = json.getString("name"),
+                            telephone = json.getString("telephone"),
+                            email = json.getString("email"),
                         )
+
+                        collector.setPerformersFromJSON(json.getJSONArray("favoritePerformers"))
+                        collector.setAlbumsFromJSON(json.getJSONArray("collectorAlbums"))
+                        collector.setCommentsFromJSON(json.getJSONArray("comments"))
+
+                        list.add(i, collector)
                     }
                     cont.resume(list)
                     EspressoIdlingResource.decrement()
@@ -255,5 +226,4 @@ class NetworkServiceAdapter constructor(context: Context) {
             cont.resumeWithException(it) //se relanza la excepción
         }))
     }
-
 }
