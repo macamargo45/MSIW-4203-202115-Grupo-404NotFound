@@ -3,9 +3,7 @@ package com.example.vinilos.views
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -23,7 +21,6 @@ import com.example.vinilos.views.adapters.MusicianAlbumsAdapter
 import com.squareup.picasso.Picasso
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import androidx.appcompat.widget.Toolbar
 
 class MusicianDetailsFragment : Fragment() {
     private var _binding: MusicianDetailsFragmentBinding? = null
