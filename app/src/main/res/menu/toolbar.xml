@@ -3,5 +3,5 @@
     <item
         android:id="@+id/accion_asociar_album"
         android:icon="@drawable/ic_album"
-        android:title="@string/associate_album_to_musician" />
+        android:title="@string/add_album_to_musician" />
 </menu>

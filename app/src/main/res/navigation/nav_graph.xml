@@ -66,21 +66,21 @@
             android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment2"
             app:destination="@id/albumDetailsFragment2" />
         <action
-            android:id="@+id/action_musicianDetailFragment_to_associateAlbumToMusicianFragment"
-            app:destination="@id/associateAlbumToMusicianFragment" />
+            android:id="@+id/action_musicianDetailFragment_to_addAlbumToMusicianFragment"
+            app:destination="@id/addAlbumToMusicianFragment" />
         <action
             android:id="@+id/action_musicianDetailsFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/associateAlbumToMusicianFragment"
-        android:name="com.example.vinilos.views.AssociateAlbumToMusicianFragment"
-        android:label="@string/associate_album_to_musician">
+        android:id="@+id/addAlbumToMusicianFragment"
+        android:name="com.example.vinilos.views.AddAlbumToMusicianFragment"
+        android:label="@string/add_album_to_musician">
         <argument
             android:name="musician"
             app:argType="com.example.vinilos.models.Musician" />
         <action
-            android:id="@+id/action_associateAlbumToMusicianFragment_to_errorMessageFragment"
+            android:id="@+id/action_addAlbumToMusicianFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
     </fragment>
     <fragment

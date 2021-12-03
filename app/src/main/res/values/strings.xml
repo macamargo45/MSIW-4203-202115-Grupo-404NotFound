@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Vinilos</string>
     <string name="album_list_title">Albumes</string>
-    <string name="associate_album_to_musician">Asociar Album</string>
+    <string name="add_album_to_musician">Asociar Album</string>
     <string name="album_details_title">Detalle Album</string>
     <string name="record_label_title">Compañia discográfica</string>
     <string name="genre_title">Género</string>

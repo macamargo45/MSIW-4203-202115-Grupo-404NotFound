@@ -113,6 +113,22 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    suspend fun addAlbumToMusician(idAlbum: Int, idMusician: Int) = suspendCoroutine<Int> { cont ->
+        EspressoIdlingResource.increment()
+
+        requestQueue.add(
+            postRequestWithoutBody(
+                "musicians/$idMusician/albums/$idAlbum",
+                { response ->
+                    val albumId = response.getInt("id")
+                    EspressoIdlingResource.decrement()
+                    cont.resume(albumId)
+                },
+                {
+                    cont.resumeWithException(it) //se relanza la excepción
+                })
+        )
+    }
 
     private fun getRequest(
         path: String,
@@ -124,18 +140,17 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     private fun postRequest(
         path: String,
-        parameters: JSONObject,
+        body: JSONObject,
         responseListener: Response.Listener<JSONObject>,
         errorListener: Response.ErrorListener
     ): JsonObjectRequest {
-
         val request = object : JsonObjectRequest(
-                Method.POST,
-                BASE_URL + path,
-                parameters,
-                responseListener,
-                errorListener
-            ){
+            Method.POST,
+            BASE_URL + path,
+            body,
+            responseListener,
+            errorListener
+        ) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val headers: MutableMap<String, String> = HashMap()
@@ -143,7 +158,28 @@ class NetworkServiceAdapter constructor(context: Context) {
                 return headers
             }
         }
+        return request
+    }
 
+    private fun postRequestWithoutBody(
+        path: String,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener
+    ): JsonObjectRequest {
+        val request = object : JsonObjectRequest(
+            Method.POST,
+            BASE_URL + path,
+            null,
+            responseListener,
+            errorListener
+        ) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers: MutableMap<String, String> = HashMap()
+                headers["Authorization"] = "TOKEN" //put your token here
+                return headers
+            }
+        }
         return request
     }
 
