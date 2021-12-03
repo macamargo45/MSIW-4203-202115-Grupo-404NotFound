@@ -53,6 +53,14 @@ class AddAlbumToMusicianFragment : Fragment() {
                 it.apply {
                     albums = this
                 }
+                albumAdapter = activity?.let { ArrayAdapter<Album>(it, android.R.layout.simple_spinner_item, albums) }
+                spinner!!.adapter = this.activity?.let {
+                    ArrayAdapter(
+                        it,
+                        R.layout.support_simple_spinner_dropdown_item,
+                        albums
+                    )
+                } as SpinnerAdapter
             })
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.stackTraceToString())
@@ -65,16 +73,6 @@ class AddAlbumToMusicianFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
             spinner = view.findViewById(R.id.album_list_spinner) as Spinner
-
-            albumAdapter = activity?.let { ArrayAdapter<Album>(it, android.R.layout.simple_spinner_item, albums) }
-
-            spinner!!.adapter = this.activity?.let {
-                ArrayAdapter(
-                    it,
-                    R.layout.support_simple_spinner_dropdown_item,
-                    albums
-                )
-            } as SpinnerAdapter
 
             val txtName: TextView = view.findViewById(R.id.nameMusicianDetailsAssociateAlbum)
             txtName.text = args.musician.name.toString()
