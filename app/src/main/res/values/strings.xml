@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Vinilos</string>
-    <string name="album_list_title">Albumes</string>
+    <string name="album_list_title">lista de álbumes</string>
+    <string name="album_list_menu">Albumes</string>
     <string name="album_details_title">Detalle Album</string>
     <string name="record_label_title">Compañia discográfica</string>
     <string name="genre_title">Género</string>
@@ -10,11 +11,13 @@
     <string name="error_message_title">Ocurrió un error</string>
     <string name="musician_details_title">Detalle Músico</string>
     <string name="musician_birth_date">Fecha de Nacimiento %1$s</string>
-    <string name="musician_album_title">Albumes</string>
+    <string name="musician_album_title">Lista de álbumes</string>
     <string name="collector_default_thumbnail">Imagen de coleccionista por defecto</string>
-    <string name="collectors_list_title">Coleccionistas</string>
+    <string name="collectors_list_title">Lista de coleccionistas</string>
+    <string name="collectors_list_menu">Coleccionistas</string>
     <string name="collector_details_title">Detalle Coleccionista</string>
-    <string name="musicians_list_title">Músicos</string>
+    <string name="musicians_list_title">Lista de músicos</string>
+    <string name="musicians_list_menu">Músicos</string>
     <string name="premios_list_title">Premios</string>
     <string name="error_message">Ha ocurrido un error. Vuelva a intentar usar la aplicación más tarde.</string>
     <string name="add_album_title">Agregar Album</string>
@@ -30,6 +33,12 @@
     <string name="ErrorMessageAlbumGenre">Seleccione el género del album</string>
     <string name="ErrorMessageAlbumLabel">Seleccione el sello discográfico del album</string>
     <string name="ErrorMessageAlbumDescription">Ingrese una descripción de al menos 5 caracteres</string>
+    <string name="nombre_coleccionista">nombre del coleccionista: %1$s</string>
+    <string name="email_coleccionista">email del coleccionista: %1$s</string>
+    <string name="album_nombre">nombre del album: %1$s</string>
+    <string name="artista_nombre">nombre del artista: %1$s</string>
+    <string name="artista_img">imagen del artista: %1$s</string>
+    <string name="album_img">imagen del album: %1$s</string>
     <string name="collections">Colecciones</string>
     <string name="favorite_musicians">Músicos Favoritos</string>
     <string name="latest_comments">Comentarios Recientes</string>

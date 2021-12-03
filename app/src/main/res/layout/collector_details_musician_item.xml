@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/cover_title_musician"
+            android:contentDescription="@{@string/artista_img(musician.name)}"
             android:tag="@{musician.id}"/>
 
         <LinearLayout
@@ -43,10 +43,11 @@
                 android:id="@+id/musicianName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@{Integer.toString(musician.id)}"
+                android:contentDescription="@{@string/artista_nombre(musician.name)}"
                 android:text="@{musician.name}"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:tag="@{musician.id}"/>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
