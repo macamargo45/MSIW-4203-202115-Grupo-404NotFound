@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/accion_asociar_album"
+        android:icon="@drawable/ic_album"
+        android:title="@string/associate_album_to_musician" />
+</menu>

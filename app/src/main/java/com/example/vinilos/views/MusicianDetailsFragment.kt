@@ -23,6 +23,7 @@ import com.example.vinilos.views.adapters.MusicianAlbumsAdapter
 import com.squareup.picasso.Picasso
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import androidx.appcompat.widget.Toolbar
 
 class MusicianDetailsFragment : Fragment() {
     private var _binding: MusicianDetailsFragmentBinding? = null
@@ -35,10 +36,10 @@ class MusicianDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        if(_binding == null)
+        if (_binding == null)
             _binding = MusicianDetailsFragmentBinding.inflate(inflater, container, false)
 
-        if(viewModelAdapter == null)
+        if (viewModelAdapter == null)
             viewModelAdapter = MusicianAlbumsAdapter()
         return binding.root
     }
@@ -55,10 +56,14 @@ class MusicianDetailsFragment : Fragment() {
             binding.albumsMusicianRv.isVisible = true
 
             viewModel =
-                ViewModelProvider(this, MusicianDetailsViewModel.Factory(activity.application))[MusicianDetailsViewModel::class.java]
+                ViewModelProvider(
+                    this,
+                    MusicianDetailsViewModel.Factory(activity.application)
+                )[MusicianDetailsViewModel::class.java]
             viewModel.eventNetworkError.observe(viewLifecycleOwner, { isNetworkError ->
                 if (isNetworkError) onNetworkError()
             })
+            setHasOptionsMenu(true)
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.stackTraceToString())
             val action = MusicianDetailsFragmentDirections.actionMusicianDetailsFragmentToErrorMessageFragment()
@@ -79,7 +84,8 @@ class MusicianDetailsFragment : Fragment() {
             val birthDate = LocalDate.parse(args.musician.birthDate, DateTimeFormatter.ISO_DATE_TIME)
 
             val txtBirthDate: TextView = view.findViewById(R.id.BirthDate)
-            txtBirthDate.text = getString(R.string.musician_birth_date, DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate))
+            txtBirthDate.text =
+                getString(R.string.musician_birth_date, DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate))
 
             val imgCover: ImageView = view.findViewById(R.id.imageViewMusicianDetails)
             Picasso
@@ -97,6 +103,27 @@ class MusicianDetailsFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.toolbar, menu)
+
+        val expandListener = MenuItem.OnMenuItemClickListener {
+            if (it.itemId == R.id.accion_asociar_album) {
+                val action =
+                    MusicianDetailsFragmentDirections.actionMusicianDetailFragmentToAssociateAlbumToMusicianFragment(
+                        args.musician
+                    )
+                view?.findNavController()?.navigate(action)
+            }
+            true
+        }
+
+        // Get the MenuItem for the action item
+        val actionMenuItem = menu.findItem(R.id.accion_asociar_album)
+
+        // Assign the listener to that action item
+        actionMenuItem?.setOnMenuItemClickListener(expandListener)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -111,4 +138,5 @@ class MusicianDetailsFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
+
 }
