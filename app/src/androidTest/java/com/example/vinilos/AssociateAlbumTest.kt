@@ -38,6 +38,7 @@ import org.hamcrest.Matchers.anything
 import org.hamcrest.Matchers.`is`
 import org.junit.After
 import org.junit.Before
+import java.util.*
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -107,9 +108,17 @@ class AssociateAlbumTest {
         )
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
+        var menuName = "Más opciones"
+        val localeInPhone = Locale.getDefault()
+        if(localeInPhone == Locale.US)
+            menuName = "More options"
+        else if(localeInPhone.toString() == "pt_BR")
+            menuName = "Mais opções"
+
+
         val imageView = onView(
             allOf(
-                withContentDescription("Más opciones"),
+                withContentDescription(menuName),
                 withParent(withParent(withId(R.id.action_bar))),
                 isDisplayed()
             )
@@ -118,7 +127,7 @@ class AssociateAlbumTest {
 
         val overflowMenuButton = onView(
             allOf(
-                withContentDescription("Más opciones"),
+                withContentDescription(menuName),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.action_bar),
