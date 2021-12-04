@@ -139,7 +139,7 @@ class AssociateAlbumTest {
 
         val textView = onView(
             allOf(
-                withText("Lista de álbumes"), withContentDescription("Lista de Albumes"),
+                withText("Lista de álbumes"), withContentDescription("Lista de álbumes"),
                 withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
                 isDisplayed()
             )
@@ -166,7 +166,7 @@ class AssociateAlbumTest {
         val materialButton = onView(
             allOf(
                 withId(R.id.add_album_to_musician_button),
-                withContentDescription("Asociar album"),
+                withContentDescription("Boton de Asociar"),
                 isDisplayed()
             )
         )
