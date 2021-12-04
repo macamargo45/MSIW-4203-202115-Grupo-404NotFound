@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Vinilos</string>
+    <string name="associate_album_to_musician">Asociar Album</string>
     <string name="album_list_title">lista de álbumes</string>
     <string name="album_list_menu">Albumes</string>
+    <string name="add_album_to_musician">Asociar Album</string>
     <string name="album_details_title">Detalle Album</string>
     <string name="record_label_title">Compañia discográfica</string>
     <string name="genre_title">Género</string>
@@ -19,6 +21,7 @@
     <string name="musicians_list_title">Lista de músicos</string>
     <string name="musicians_list_menu">Músicos</string>
     <string name="premios_list_title">Premios</string>
+    <string name="associate">Asociar</string>
     <string name="error_message">Ha ocurrido un error. Vuelva a intentar usar la aplicación más tarde.</string>
     <string name="add_album_title">Agregar Album</string>
     <string name="album_name_title">Nombre</string>
@@ -42,6 +45,7 @@
     <string name="collections">Colecciones</string>
     <string name="favorite_musicians">Músicos Favoritos</string>
     <string name="latest_comments">Comentarios Recientes</string>
+    <string name="AdditionSucessMessage">Agregado con éxito</string>
     <string-array name="record_labels">
         <item>Seleccionar</item>
         <item>Sony Music</item>

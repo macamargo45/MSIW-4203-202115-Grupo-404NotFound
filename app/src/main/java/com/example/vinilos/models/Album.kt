@@ -19,6 +19,8 @@ data class Album(
     constructor(
     ) : this(null, null, null, null, null, null, null, null)
 
+    override fun toString(): String = this.name ?: ""
+
     val performerNames get() = this.performers?.map { it?.name }?.joinToString()
 
     fun isNameValueProvided(): Boolean {

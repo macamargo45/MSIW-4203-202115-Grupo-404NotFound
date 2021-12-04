@@ -145,6 +145,7 @@ class CreateAlbumFragment : Fragment() {
         viewModel.albumId.observe(
             viewLifecycleOwner,
             {
+                Toast.makeText(activity, getString(R.string.AdditionSucessMessage), Toast.LENGTH_LONG).show()
                 val action = CreateAlbumFragmentDirections.actionCreateAlbumFragmentToAlbumFragment()
                 view?.findNavController()?.navigate(action)
             })
