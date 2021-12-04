@@ -141,16 +141,11 @@ class AssociateAlbumTest {
         overflowMenuButton.perform(click())
 
 
+        Thread.sleep(250)
+
         val materialTextView = onView(
             allOf(
                 withId(R.id.title), withText("Asociar Album"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.content),
-                        0
-                    ),
-                    0
-                ),
                 isDisplayed()
             )
         )
