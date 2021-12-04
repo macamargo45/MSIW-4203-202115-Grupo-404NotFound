@@ -47,6 +47,9 @@ class AlbumDetailTest {
 
     @Test
     fun albumDetailsTest() {
+
+        Thread.sleep(3000)
+
         val recyclerView = onView(
             allOf(
                 withId(R.id.albumsRv),

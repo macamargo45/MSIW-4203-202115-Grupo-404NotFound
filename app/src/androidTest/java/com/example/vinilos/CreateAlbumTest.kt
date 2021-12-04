@@ -1,20 +1,12 @@
 package com.example.vinilos
 
 
-import androidx.test.espresso.DataInteraction
-import androidx.test.espresso.ViewInteraction
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
-
-import androidx.test.InstrumentationRegistry.getInstrumentation
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -29,6 +21,16 @@ import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.random.Random
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.*
+
+import androidx.test.espresso.Espresso.onView
+
+
+
+
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -49,6 +51,7 @@ class CreateAlbumTest {
         )
         frameLayout.check(matches(isDisplayed()))
 
+        val albumName = "album de prueba " + Random.nextInt(0,7000000).toString()
         val textView = onView(
             allOf(
                 withId(R.id.add_album), withContentDescription("Agregar Album"),
@@ -108,11 +111,11 @@ class CreateAlbumTest {
                 )
             )
         )
-        appCompatEditText.perform(scrollTo(), replaceText("album de prueba"), closeSoftKeyboard())
+        appCompatEditText.perform(scrollTo(), replaceText(albumName), closeSoftKeyboard())
 
         val appCompatEditText2 = onView(
             allOf(
-                withId(R.id.nameTextbox), withText("album de prueba"),
+                withId(R.id.nameTextbox), withText(albumName),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.nav_host_fragment),
@@ -258,6 +261,8 @@ class CreateAlbumTest {
         checkedTextView2.check(matches(isDisplayed()))
         seleccionargenero.perform(click())
 
+        onView(withId(R.id.navigationView))
+            .perform(swipeUp());
 
         val textView8 = onView(
             allOf(
@@ -281,6 +286,7 @@ class CreateAlbumTest {
                 )
             )
         )
+
         appCompatEditText7.perform(scrollTo(), replaceText("hola mundo"), closeSoftKeyboard())
 
         val button = onView(
@@ -306,14 +312,30 @@ class CreateAlbumTest {
         )
         button.perform(scrollTo(),click())
 
+        Thread.sleep(3000)
+
+        val recyclerView =
+            mActivityTestRule.activity.findViewById<RecyclerView>(R.id.albumsRv)
+        val itemCount = recyclerView.adapter!!.itemCount
+
+        onView(withId(R.id.albumsRv))
+            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(itemCount - 1))
+
+        onView(withId(R.id.navigationView))
+            .perform(swipeUp());
+
         val textView9 = onView(
             allOf(
-                withId(R.id.albumName), withText("album de prueba"), withContentDescription("15"),
+                withId(R.id.albumName),
+                withText(albumName),
+                withContentDescription("nombre del album: $albumName"),
                 withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
             )
         )
-        textView9.check(matches(withText("album de prueba")))
+        textView9.perform(scrollTo())
+        textView9.check(matches(withText(albumName)))
+
+
     }
 
     private fun childAtPosition(
