@@ -200,17 +200,30 @@ class CreateAlbumTest {
         )
         textView6.check(matches(withText("Sello Discográfico")))
 
-
-
-
-        val textView7 = onView(
+        val appCompatSpinner = onView(
             allOf(
-                withId(R.id.labelGenero),
-                withParent(withParent(withId(R.id.nav_host_fragment))),
+                withId(R.id.record_label_spinner),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.nav_host_fragment),
+                        0
+                    ),
+                    7
+                )
+            )
+        )
+        appCompatSpinner.perform(scrollTo(), click())
+
+        val seleccionarsello = onView(
+            allOf(
+                withId(android.R.id.text1), withText("Sony Music"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java))),
                 isDisplayed()
             )
         )
-        textView7.check(matches(not(withText(""))))
+        seleccionarsello.perform(click())
+
+
 
         val appCompatSpinner2 = onView(
             allOf(
@@ -225,6 +238,25 @@ class CreateAlbumTest {
             )
         )
         appCompatSpinner2.perform(scrollTo(), click())
+
+        val checkedTextView2 = onView(
+            allOf(
+                withId(android.R.id.text1), withText("Salsa"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java))),
+                isDisplayed()
+            )
+        )
+        checkedTextView2.check(matches(isDisplayed()))
+
+        val seleccionargenero = onView(
+            allOf(
+                withId(android.R.id.text1), withText("Salsa"),
+                withParent(withParent(IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java))),
+                isDisplayed()
+            )
+        )
+        checkedTextView2.check(matches(isDisplayed()))
+        seleccionargenero.perform(click())
 
 
         val textView8 = onView(
@@ -272,7 +304,7 @@ class CreateAlbumTest {
                 )
             )
         )
-        materialButton.perform(click())
+        button.perform(scrollTo(),click())
 
         val textView9 = onView(
             allOf(

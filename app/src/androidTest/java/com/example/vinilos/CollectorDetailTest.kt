@@ -27,6 +27,7 @@ import com.example.vinilos.util.EspressoIdlingResource
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
@@ -85,7 +86,7 @@ class CollectorDetailTest {
 
         val textView = onView(
             allOf(
-                withText("Coleccionistas"),
+                withText("Lista de coleccionistas"),
                 withParent(
                     allOf(
                         withId(R.id.action_bar),
@@ -95,7 +96,22 @@ class CollectorDetailTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Coleccionistas")))
+        textView.check(matches(withText("Lista de coleccionistas")))
+
+        val cardView = onView(
+            allOf(
+                withId(R.id.collectorName),
+                withText("Manolo Bellon"),
+                withTagValue(allOf(
+                    Matchers.instanceOf(Int::class.java),
+                    Matchers.equalTo(100 as Int?)
+                )),
+                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                isDisplayed()
+            )
+        )
+        cardView.check(matches(withText("Manolo Bellon")))
+
 
         val recyclerView = onView(
             allOf(

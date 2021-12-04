@@ -175,7 +175,7 @@ class AlbumDetailTest {
 
         val textView12 = onView(
             allOf(
-                withText("Albumes"),
+                withText("Lista de álbumes"),
                 withParent(
                     allOf(
                         withId(R.id.action_bar),
@@ -185,7 +185,7 @@ class AlbumDetailTest {
                 isDisplayed()
             )
         )
-        textView12.check(matches(withText("Albumes")))
+        textView12.check(matches(withText("Lista de álbumes")))
     }
 
     private fun childAtPosition(

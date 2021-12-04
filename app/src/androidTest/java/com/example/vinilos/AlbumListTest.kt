@@ -46,7 +46,7 @@ class AlbumListTest {
 
         val textView = onView(
             allOf(
-                withText("Albumes"),
+                withText("Lista de álbumes"),
                 withParent(
                     allOf(
                         withId(R.id.action_bar),
@@ -56,7 +56,7 @@ class AlbumListTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Albumes")))
+        textView.check(matches(withText("Lista de álbumes")))
 
         val viewGroup = onView(
             allOf(
@@ -122,13 +122,13 @@ class AlbumListTest {
 
         val textView7 = onView(
             allOf(
-                withId(R.id.albumPerformerNames), withText("Queen"),
+                withId(R.id.albumPerformerNames),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 withTagValue(allOf(instanceOf(Int::class.java), equalTo(102 as Int?))),
                 isDisplayed()
             )
         )
-        textView7.check(matches(withText("Queen")))
+        textView7.check(matches(isDisplayed()))
 
         val textView8 = onView(
             allOf(
@@ -141,13 +141,13 @@ class AlbumListTest {
 
         val textView9 = onView(
             allOf(
-                withId(R.id.albumPerformerNames), withText("Queen"),
+                withId(R.id.albumPerformerNames),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 withTagValue(allOf(instanceOf(Int::class.java), equalTo(103 as Int?))),
                 isDisplayed()
             )
         )
-        textView9.check(matches(withText("Queen")))
+        textView9.check(matches(isDisplayed()))
 
         val imageView = onView(
             allOf(

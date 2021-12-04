@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="7sp"
-                android:contentDescription="Boton de Asociar"
+                android:contentDescription="Asociar album"
                 android:text="@string/associate">
 
             </Button>
