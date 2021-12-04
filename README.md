@@ -2,12 +2,12 @@
 
 ## Instalación del APK
 - Todas las versiones de los APKs para instalación se encuentran el el folder / APKs.
-- Descargue la versión 2.0.0 que es la última desde su teléfono o use [este link](https://github.com/macamargo45/MSIW-4203-202115-Grupo-404NotFound/blob/main/APKs/vinilos%202.0.0.apk).
+- Descargue la versión 3.0.0 que es la última desde su teléfono o use [este link](https://github.com/macamargo45/MSIW-4203-202115-Grupo-404NotFound/blob/main/APKs/vinilos%203.0.0.apk).
 - Asegurese de autorizar que se instale la aplicación desde un apk si su telefono le pide esas confirmaciones.
 
 ## Correr el código localmente
 - Primero asegurese de tener Android studio instalado. Si no sabe como siga las instrucciones en [este tutorial](https://misovirtual.virtual.uniandes.edu.co/codelabs/android-setup-tutorial/index.html#0)
-- Descargue el código de la rama [release/2.0.0](https://github.com/macamargo45/MSIW-4203-202115-Grupo-404NotFound/tree/release/2.0.0) que corresponde a la entrega 2 en su máquina local.
+- Descargue el código de la rama [release/3.0.0](https://github.com/macamargo45/MSIW-4203-202115-Grupo-404NotFound/tree/release/3.0.0) que corresponde a la entrega 3 en su máquina local.
 - Para abrir y correr el proyecto con Android studio siga [este tutorial](http://androidcodelabs.com/BlogDetails.aspx?BlogId=8&name=How-To-Open-Project-in-Android-Studio). Asegurese de tener configurado al menos uno de los emuladores descritos en los anexos de [la estrategia de pruebas](https://uniandes-my.sharepoint.com/:w:/g/personal/j_monterov_uniandes_edu_co/EXM_dCCmPmtJvjlnZ8Q5qQkBW5o6NKCHZkepwi1gSEkD0Q?e=qb3bsb)
 
 ## Historias incluidas en esta versión
@@ -17,6 +17,9 @@ Las historias incluidas en esta versión son las siguientes:
 * HU003 - Consultar el listado de artistas
 * HU004 - Consultar la información detallada de un artista
 * HU005 - Consultar listado de coleccionistas
+* HU006 - Consultar la información detallada de coleccionista
+* HU007 - Crear un album
+* HU015 - Asociar album con un artista
 
 Además se incluyenron optimizaciones para el uso de recursos de red, memoria y CPU.
 
@@ -50,6 +53,18 @@ La historia HU005 se cubre con las pruebas:
 * Verificar que la lista se despliegue
 * Verificar que todos los coleccionistas esperados se desplieguen
 * Verificar que los datos de los coleccionistas desplegados son los correctos
+
+La historia HU006 se cubre con las pruebas: 
+* Navagar a un coleccionista desde la lista de coleccionistas
+* Verificar que los datos del coleccionista seleccionado se despliega correctamente
+
+La historia HU007 se cubre con las pruebas: 
+* Crear un nuevo album
+* Verificar que el nuevo album se despliega en la lista de álbumes
+
+La historia HU015 se cubre con las pruebas: 
+* Asignar un album a un músico
+* Verificar que el album ligado se despliega en la lista de albumes del músico
 
 Addicionalmente se tiene un test de navegacion (NevigationTest) que verificar:
 * Que la primer ventana que se ve sea la de la lista de albumes
