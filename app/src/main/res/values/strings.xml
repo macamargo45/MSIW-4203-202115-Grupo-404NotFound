@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Vinilos</string>
-    <string name="associate_album_to_musician">Asociar Album</string>
-    <string name="album_list_title">Lista de álbumes</string>
+    <string name="album_list_title">lista de álbumes</string>
     <string name="album_list_menu">Albumes</string>
     <string name="add_album_to_musician">Asociar Album</string>
     <string name="album_details_title">Detalle Album</string>
@@ -46,6 +45,8 @@
     <string name="favorite_musicians">Músicos Favoritos</string>
     <string name="latest_comments">Comentarios Recientes</string>
     <string name="AdditionSucessMessage">Agregado con éxito</string>
+    <string name="select_albums">Seleccion de albumes</string>
+    <string name="button_add_album_musician">Boton de Asociar</string>
     <string-array name="record_labels">
         <item>Seleccionar</item>
         <item>Sony Music</item>

@@ -1,35 +1,26 @@
 package com.example.vinilos
 
 
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import android.view.View
-import android.view.ViewGroup
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.matcher.ViewMatchers.*
-
-import com.example.vinilos.R
-
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.*
+import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.random.Random
-import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.*
-
-import androidx.test.espresso.Espresso.onView
-
-
-
 
 
 @LargeTest
@@ -262,7 +253,7 @@ class CreateAlbumTest {
         seleccionargenero.perform(click())
 
         onView(withId(R.id.navigationView))
-            .perform(swipeUp());
+            .perform(swipeUp())
 
         val textView8 = onView(
             allOf(
@@ -311,7 +302,7 @@ class CreateAlbumTest {
             )
         )
         onView(withId(R.id.navigationView))
-            .perform(swipeUp());
+            .perform(swipeUp())
         button.perform(scrollTo(),click())
 
         Thread.sleep(3000)
@@ -324,7 +315,7 @@ class CreateAlbumTest {
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(itemCount - 1))
 
         onView(withId(R.id.navigationView))
-            .perform(swipeUp());
+            .perform(swipeUp())
 
         val textView9 = onView(
             allOf(
