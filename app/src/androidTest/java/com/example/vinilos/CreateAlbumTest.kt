@@ -310,6 +310,8 @@ class CreateAlbumTest {
                 )
             )
         )
+        onView(withId(R.id.navigationView))
+            .perform(swipeUp());
         button.perform(scrollTo(),click())
 
         Thread.sleep(3000)
