@@ -45,6 +45,7 @@
     <string name="collections">Colecciones</string>
     <string name="favorite_musicians">Músicos Favoritos</string>
     <string name="latest_comments">Comentarios Recientes</string>
+    <string name="AdditionSucessMessage">Agregado con éxito</string>
     <string-array name="record_labels">
         <item>Seleccionar</item>
         <item>Sony Music</item>

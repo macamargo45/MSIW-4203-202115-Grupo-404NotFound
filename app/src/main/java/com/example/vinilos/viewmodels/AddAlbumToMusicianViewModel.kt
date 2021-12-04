@@ -44,7 +44,7 @@ class AddAlbumToMusicianViewModel(application: Application) : AndroidViewModel(a
                 try {
                     withContext(Dispatchers.IO) {
                         val data = albumRepository.refreshData()
-                        _albums.postValue(data)
+                        _albums.postValue(data.filter { it.performerNames == "" })
                     }
                     _eventNetworkError.postValue(false)
                     _isNetworkErrorShown.postValue(false)

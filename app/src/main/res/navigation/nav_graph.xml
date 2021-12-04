@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_addAlbumToMusicianFragment_to_musicianDetailsFragment"
             app:destination="@id/musicianDetailsFragment" />
+        <action
+            android:id="@+id/action_addAlbumToMusicianFragment_to_musiciansListFragment"
+            app:destination="@id/musiciansListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAlbumFragment"

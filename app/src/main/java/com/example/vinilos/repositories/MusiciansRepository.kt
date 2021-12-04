@@ -28,6 +28,8 @@ class MusiciansRepository(val application: Application) {
     suspend fun addAlbumToMusician(idAlbum: Int, idMusician: Int): Int{
         val albumId = NetworkServiceAdapter.getInstance(application).addAlbumToMusician(idAlbum, idMusician)
         // Remove cache so that next query updates the albums list from the network
+
+        CacheManager.getInstance(application.applicationContext).removeMusician("allAlbums")
         CacheManager.getInstance(application.applicationContext).removeMusician("allMusicians")
         return albumId
     }

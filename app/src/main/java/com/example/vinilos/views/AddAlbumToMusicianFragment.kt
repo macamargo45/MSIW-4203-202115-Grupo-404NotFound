@@ -72,7 +72,8 @@ class AddAlbumToMusicianFragment : Fragment() {
             viewModel.albumId.observe(
                 viewLifecycleOwner,
                 {
-                    val action = AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToMusicianDetailsFragment(args.musician)
+                    Toast.makeText(activity, getString(R.string.AdditionSucessMessage), Toast.LENGTH_LONG).show()
+                    val action = AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToMusiciansListFragment()
                     view?.findNavController()?.navigate(action)
                 })
         } catch (e: Exception) {
