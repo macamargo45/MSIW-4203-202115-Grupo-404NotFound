@@ -7,10 +7,8 @@ import androidx.test.runner.AndroidJUnit4
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.vinilos.util.EspressoIdlingResource
-import java.util.regex.Matcher
 
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
