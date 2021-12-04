@@ -1,23 +1,33 @@
 package com.example.vinilos
 
 
+import androidx.test.espresso.DataInteraction
+import androidx.test.espresso.ViewInteraction
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 
+import androidx.test.InstrumentationRegistry.getInstrumentation
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
+
+import com.example.vinilos.R
 import com.example.vinilos.util.EspressoIdlingResource
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
@@ -25,13 +35,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.anything
 import org.hamcrest.Matchers.`is`
 import org.junit.After
 import org.junit.Before
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class MusicianDetailTest {
+class CollectorDetailTest {
 
     @Rule
     @JvmField
@@ -48,25 +59,63 @@ class MusicianDetailTest {
     }
 
     @Test
-    fun musicianDetailsTest() {
+    fun collectorDetailTest() {
+        val frameLayout = onView(
+            allOf(
+                withId(R.id.navigation_coleccionistas), withContentDescription("Coleccionistas"),
+                withParent(withParent(withId(R.id.navigationView))),
+                isDisplayed()
+            )
+        )
+        frameLayout.check(matches(isDisplayed()))
+
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_musicos), withContentDescription("Músicos"),
+                withId(R.id.navigation_coleccionistas), withContentDescription("Coleccionistas"),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.navigationView),
                         0
                     ),
-                    1
+                    2
                 ),
                 isDisplayed()
             )
         )
         bottomNavigationItemView.perform(click())
 
+        val textView = onView(
+            allOf(
+                withText("Lista de coleccionistas"),
+                withParent(
+                    allOf(
+                        withId(R.id.action_bar),
+                        withParent(withId(R.id.action_bar_container))
+                    )
+                ),
+                isDisplayed()
+            )
+        )
+        textView.check(matches(withText("Lista de coleccionistas")))
+
+        val cardView = onView(
+            allOf(
+                withId(R.id.collectorName),
+                withText("Manolo Bellon"),
+                withTagValue(allOf(
+                    Matchers.instanceOf(Int::class.java),
+                    Matchers.equalTo(100 as Int?)
+                )),
+                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                isDisplayed()
+            )
+        )
+        cardView.check(matches(withText("Manolo Bellon")))
+
+
         val recyclerView = onView(
             allOf(
-                withId(R.id.musicianRv),
+                withId(R.id.collectorsRv),
                 childAtPosition(
                     withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
                     1
@@ -75,55 +124,23 @@ class MusicianDetailTest {
         )
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
-        // Debe contener la imagen del musico
-        val imageView = onView(
-            allOf(
-                withId(R.id.imageViewMusicianDetails), withContentDescription("Imagen del musico"),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-        imageView.check(matches(isDisplayed()))
-
-        // Debe contener nombre del musico
-        val textView = onView(
-            allOf(
-                withId(R.id.NameMusicianDetails), withText("Rubén Blades Bellido de Luna"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Rubén Blades Bellido de Luna")))
-
-        // Debe contener fecha de nacimiento del musico
         val textView2 = onView(
             allOf(
-                withId(R.id.BirthDate), withText("Fecha de Nacimiento 16-07-1948"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withText("Colecciones"),
+                withParent(withParent(withId(R.id.collectorDetailsFragment))),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("Fecha de Nacimiento 16-07-1948")))
+        textView2.check(matches(withText("Colecciones")))
 
-        // Debe contener descripción del musico
         val textView3 = onView(
             allOf(
-                withId(R.id.MusicianDescriptionDetails),
-                withText("Es un cantante, compositor, músico, actor, abogado, político y activista panameño. Ha desarrollado gran parte de su carrera artística en la ciudad de Nueva York."),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withText("Músicos Favoritos"),
+                withParent(withParent(withId(R.id.collectorDetailsFragment))),
                 isDisplayed()
             )
         )
-        textView3.check(matches(withText("Es un cantante, compositor, músico, actor, abogado, político y activista panameño. Ha desarrollado gran parte de su carrera artística en la ciudad de Nueva York.")))
-
-        // Debe contener una lista de albumes del musico
-        val musicianRv = onView(
-            allOf(
-                withId(R.id.albumsMusicianRv),
-                isDisplayed()
-            )
-        )
-        musicianRv.check(matches(isDisplayed()))
+        textView3.check(matches(withText("Músicos Favoritos")))
     }
 
     private fun childAtPosition(

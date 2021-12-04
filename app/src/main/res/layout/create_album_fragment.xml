@@ -75,6 +75,7 @@
             android:padding="7sp"/>
 
         <TextView
+            android:id="@+id/labelGenero"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="7sp"
@@ -87,6 +88,7 @@
             android:padding="7sp" />
 
         <TextView
+            android:id="@+id/labelDescripcion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="7sp"
