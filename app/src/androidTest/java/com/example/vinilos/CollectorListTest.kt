@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
+import com.example.vinilos.util.EspressoIdlingResource
 
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
@@ -21,6 +24,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.hamcrest.Matchers.allOf
+import org.junit.After
+import org.junit.Before
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -29,6 +34,16 @@ class CollectorListTest {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @Before
+    fun registerIdlingResource() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @After
+    fun unregisterIdlingResource() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
 
     @Test
     fun collectorListTest() {
@@ -61,7 +76,10 @@ class CollectorListTest {
             allOf(
                 withId(R.id.collectorName),
                 withText("Manolo Bellon"),
-                withContentDescription("100"),
+                withTagValue(allOf(
+                    Matchers.instanceOf(Int::class.java),
+                    Matchers.equalTo(100 as Int?)
+                )),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
@@ -73,7 +91,10 @@ class CollectorListTest {
             allOf(
                 withId(R.id.collectorEmail),
                 withText("manollo@caracol.com.co"),
-                withContentDescription("100"),
+                withTagValue(allOf(
+                    Matchers.instanceOf(Int::class.java),
+                    Matchers.equalTo(100 as Int?)
+                )),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
@@ -85,7 +106,10 @@ class CollectorListTest {
             allOf(
                 withId(R.id.collectorName),
                 withText("Jaime Monsalve"),
-                withContentDescription("101"),
+                withTagValue(allOf(
+                    Matchers.instanceOf(Int::class.java),
+                    Matchers.equalTo(101 as Int?)
+                )),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )
@@ -97,7 +121,10 @@ class CollectorListTest {
             allOf(
                 withId(R.id.collectorEmail),
                 withText("jmonsalve@rtvc.com.co"),
-                withContentDescription("101"),
+                withTagValue(allOf(
+                    Matchers.instanceOf(Int::class.java),
+                    Matchers.equalTo(101 as Int?)
+                )),
                 withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
                 isDisplayed()
             )

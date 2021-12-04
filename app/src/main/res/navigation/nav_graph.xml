@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_addAlbumToMusicianFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
+        <action
+            android:id="@+id/action_addAlbumToMusicianFragment_to_musicianDetailsFragment"
+            app:destination="@id/musicianDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAlbumFragment"

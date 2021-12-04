@@ -62,6 +62,19 @@ class AddAlbumToMusicianFragment : Fragment() {
                     )
                 } as SpinnerAdapter
             })
+
+            viewModel.eventNetworkError.observe(
+                viewLifecycleOwner,
+                { isNetworkError ->
+                    if (isNetworkError) onNetworkError()
+                })
+
+            viewModel.albumId.observe(
+                viewLifecycleOwner,
+                {
+                    val action = AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToMusicianDetailsFragment(args.musician)
+                    view?.findNavController()?.navigate(action)
+                })
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.stackTraceToString())
             val action = AddAlbumToMusicianFragmentDirections.actionAddAlbumToMusicianFragmentToErrorMessageFragment()
@@ -84,8 +97,10 @@ class AddAlbumToMusicianFragment : Fragment() {
                 getString(R.string.musician_birth_date, DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate))
 
             binding.addAlbumToMusicianButton.setOnClickListener {
-                //TODO Read the select value
-                viewModel.addAlbumToMusician(100, args.musician.id)
+                viewModel.addAlbumToMusician(
+                    albums.get(binding.albumListSpinner.selectedItemId.toInt()).albumId!!,
+                    args.musician.id
+                )
             }
         } catch (e: Exception) {
             Log.println(Log.ERROR, "Error", e.message.toString())

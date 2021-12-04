@@ -3,15 +3,15 @@
     <item
         android:id="@+id/navigation_albums"
         android:icon="@drawable/ic_album"
-        android:title="@string/album_list_title"/>
+        android:title="@string/album_list_menu"/>
     <item
         android:id="@+id/navigation_musicos"
         android:icon="@drawable/ic_zap"
-        android:title="@string/musicians_list_title"/>
+        android:title="@string/musicians_list_menu"/>
     <item
         android:id="@+id/navigation_coleccionistas"
         android:icon="@drawable/ic_colecc"
-        android:title="@string/collectors_list_title"/>
+        android:title="@string/collectors_list_menu"/>
     <item
         android:id="@+id/navigation_premios"
         android:icon="@drawable/ic_premios"
