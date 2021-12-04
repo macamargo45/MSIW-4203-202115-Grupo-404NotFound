@@ -56,6 +56,11 @@ class CacheManager(context: Context) {
         return if (musicians.containsKey(key)) musicians[key]!! else listOf()
     }
 
+    fun removeMusician(key:String) {
+        if (musicians.containsKey(key))
+            musicians.remove(key)
+    }
+
     //CAHCE PARA LOS coleccionistas
     private var collectors: HashMap<String, List<Collector>> = HashMap()
     fun addCollectors(key:String, collector: List<Collector>,dateNow:Calendar){

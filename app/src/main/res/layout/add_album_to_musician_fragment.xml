@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:orientation="vertical"
+    android:padding="14sp"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:orientation="vertical"
+            android:padding="14sp">
+
+            <TextView
+                android:id="@+id/nameMusicianDetailsAssociateAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:contentDescription="Nombre del Musico"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/birthDateAssociateAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Fecha de Nacimiento"
+                android:text="@string/musician_birth_date"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:orientation="vertical"
+            android:padding="14sp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="7sp"
+                android:contentDescription="Lista de Albumes"
+                android:text="@string/album_list_title" />
+
+            <Spinner
+                android:id="@+id/album_list_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Seleccion de albumes"
+                android:padding="7sp"/>
+
+            <Button
+                android:id="@+id/add_album_to_musician_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="7sp"
+                android:contentDescription="Boton de Asociar"
+                android:text="@string/associate">
+
+            </Button>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

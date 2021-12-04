@@ -63,14 +63,34 @@
             android:id="@+id/action_musicianDetailFragment_to_albumDetailsFragment"
             app:destination="@id/albumDetailsFragment" />
         <action
+            android:id="@+id/action_musicianDetailFragment_to_addAlbumToMusicianFragment"
+            app:destination="@id/addAlbumToMusicianFragment" />
+        <action
             android:id="@+id/action_musicianDetailsFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAlbumToMusicianFragment"
+        android:name="com.example.vinilos.views.AddAlbumToMusicianFragment"
+        android:label="@string/add_album_to_musician">
+        <argument
+            android:name="musician"
+            app:argType="com.example.vinilos.models.Musician" />
+        <action
+            android:id="@+id/action_addAlbumToMusicianFragment_to_errorMessageFragment"
+            app:destination="@id/errorMessageFragment" />
+        <action
+            android:id="@+id/action_addAlbumToMusicianFragment_to_musicianDetailsFragment"
+            app:destination="@id/musicianDetailsFragment" />
+        <action
+            android:id="@+id/action_addAlbumToMusicianFragment_to_musiciansListFragment"
+            app:destination="@id/musiciansListFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAlbumFragment"
         android:name="com.example.vinilos.views.CreateAlbumFragment"
         android:label="@string/add_album_title"
-        tools:layout="@layout/create_album_fragment" >
+        tools:layout="@layout/create_album_fragment">
         <action
             android:id="@+id/action_createAlbumFragment_to_errorMessageFragment"
             app:destination="@id/errorMessageFragment" />
@@ -107,5 +127,5 @@
         android:id="@+id/errorMessageFragment"
         android:name="com.example.vinilos.views.ErrorMessageFragment"
         android:label="@string/error_message_title"
-        tools:layout="@layout/error_message_fragment"/>
+        tools:layout="@layout/error_message_fragment" />
 </navigation>
