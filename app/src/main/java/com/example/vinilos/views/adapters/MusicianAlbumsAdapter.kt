@@ -52,7 +52,7 @@ class MusicianAlbumsAdapter : RecyclerView.Adapter<MusicianAlbumsAdapter.Musicia
         holder.viewDataBinding.root.setOnClickListener {
             try {
                 val action =
-                    MusicianDetailsFragmentDirections.actionMusicianDetailFragmentToAlbumDetailsFragment2(album)
+                    MusicianDetailsFragmentDirections.actionMusicianDetailFragmentToAlbumDetailsFragment(album)
                 holder.viewDataBinding.root.findNavController().navigate(action)
 
             } catch (e: Exception) {

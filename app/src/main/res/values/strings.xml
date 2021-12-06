@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Vinilos</string>
-    <string name="album_list_title">Albumes</string>
+    <string name="album_list_title">Lista de álbumes</string>
+    <string name="album_list_menu">Albumes</string>
+    <string name="add_album_to_musician">Asociar Album</string>
     <string name="album_details_title">Detalle Album</string>
     <string name="record_label_title">Compañia discográfica</string>
     <string name="genre_title">Género</string>
@@ -8,13 +10,56 @@
     <string name="cover_title">Portada del album</string>
     <string name="cover_title_musician">Imagen del musico</string>
     <string name="error_message_title">Ocurrió un error</string>
-    <string name="musicos_list_title">Músicos</string>
     <string name="musician_details_title">Detalle Músico</string>
     <string name="musician_birth_date">Fecha de Nacimiento %1$s</string>
-    <string name="musician_album_title">Albumes</string>
+    <string name="musician_album_title">Lista de álbumes</string>
     <string name="collector_default_thumbnail">Imagen de coleccionista por defecto</string>
-    <string name="collecionistas_list_title">Coleccionistas</string>
-    <string name="musicians_list_title">Musicos</string>
+    <string name="collectors_list_title">Lista de coleccionistas</string>
+    <string name="collectors_list_menu">Coleccionistas</string>
+    <string name="collector_details_title">Detalle Coleccionista</string>
+    <string name="musicians_list_title">Lista de músicos</string>
+    <string name="musicians_list_menu">Músicos</string>
     <string name="premios_list_title">Premios</string>
+    <string name="associate">Asociar</string>
     <string name="error_message">Ha ocurrido un error. Vuelva a intentar usar la aplicación más tarde.</string>
+    <string name="add_album_title">Agregar Album</string>
+    <string name="album_name_title">Nombre</string>
+    <string name="album_cover_title">Carátula</string>
+    <string name="album_release_date_title">Fecha Lanzamiento</string>
+    <string name="album_record_label_title">Sello Discográfico</string>
+    <string name="album_description_title">Descripción</string>
+    <string name="agregar">Agregar</string>
+    <string name="album_genre_title">Género</string>
+    <string name="MensajeErrorNombreAlbum">Ingrese el nombre del album</string>
+    <string name="ErrorMessageAlbumCover">Ingrese un URL válido para el cover del album</string>
+    <string name="ErrorMessageAlbumGenre">Seleccione el género del album</string>
+    <string name="ErrorMessageAlbumLabel">Seleccione el sello discográfico del album</string>
+    <string name="ErrorMessageAlbumDescription">Ingrese una descripción de al menos 5 caracteres</string>
+    <string name="nombre_coleccionista">nombre del coleccionista: %1$s</string>
+    <string name="email_coleccionista">email del coleccionista: %1$s</string>
+    <string name="album_nombre">nombre del album: %1$s</string>
+    <string name="artista_nombre">nombre del artista: %1$s</string>
+    <string name="artista_img">imagen del artista: %1$s</string>
+    <string name="album_img">imagen del album: %1$s</string>
+    <string name="collections">Colecciones</string>
+    <string name="favorite_musicians">Músicos Favoritos</string>
+    <string name="latest_comments">Comentarios Recientes</string>
+    <string name="AdditionSucessMessage">Agregado con éxito</string>
+    <string name="select_albums">Seleccion de albumes</string>
+    <string name="button_add_album_musician">Boton de Asociar</string>
+    <string-array name="record_labels">
+        <item>Seleccionar</item>
+        <item>Sony Music</item>
+        <item>EMI</item>
+        <item>Discos Fuentes</item>
+        <item>Elektra</item>
+        <item>Fania Records</item>
+    </string-array>
+    <string-array name="genre_list">
+        <item>Seleccionar</item>
+        <item>Classical</item>
+        <item>Salsa</item>
+        <item>Rock</item>
+        <item>Folk</item>
+    </string-array>
 </resources>

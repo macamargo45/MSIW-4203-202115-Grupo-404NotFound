@@ -1,35 +1,35 @@
 package com.example.vinilos
 
 
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import android.view.View
-import android.view.ViewGroup
-
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.vinilos.util.EspressoIdlingResource
-
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
+import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.hamcrest.Matchers.allOf
-import org.junit.After
-import org.junit.Before
-
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class CollectorListTest {
+class CollectorDetailTest {
 
     @Rule
     @JvmField
@@ -46,7 +46,16 @@ class CollectorListTest {
     }
 
     @Test
-    fun collectorListTest() {
+    fun collectorDetailTest() {
+        val frameLayout = onView(
+            allOf(
+                withId(R.id.navigation_coleccionistas), withContentDescription("Coleccionistas"),
+                withParent(withParent(withId(R.id.navigationView))),
+                isDisplayed()
+            )
+        )
+        frameLayout.check(matches(isDisplayed()))
+
         val bottomNavigationItemView = onView(
             allOf(
                 withId(R.id.navigation_coleccionistas), withContentDescription("Coleccionistas"),
@@ -62,17 +71,21 @@ class CollectorListTest {
         )
         bottomNavigationItemView.perform(click())
 
-        // Debe contener una lista de coleccionistas con dos elementos
-        val collectorRv = onView(
+        val textView = onView(
             allOf(
-                withId(R.id.collectorsRv),
+                withText("Lista de coleccionistas"),
+                withParent(
+                    allOf(
+                        withId(R.id.action_bar),
+                        withParent(withId(R.id.action_bar_container))
+                    )
+                ),
                 isDisplayed()
             )
         )
-        collectorRv.check(matches(hasChildCount(2)))
+        textView.check(matches(withText("Lista de coleccionistas")))
 
-        // Debe mostrar nombre de coleccionista Manolo Bellon
-        val textView = onView(
+        val cardView = onView(
             allOf(
                 withId(R.id.collectorName),
                 withText("Manolo Bellon"),
@@ -84,52 +97,37 @@ class CollectorListTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Manolo Bellon")))
+        cardView.check(matches(withText("Manolo Bellon")))
 
-        // Debe mostrar correo del coleccionista Manolo Bellon
+
+        val recyclerView = onView(
+            allOf(
+                withId(R.id.collectorsRv),
+                childAtPosition(
+                    withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
+                    1
+                )
+            )
+        )
+        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
+
         val textView2 = onView(
             allOf(
-                withId(R.id.collectorEmail),
-                withText("manollo@caracol.com.co"),
-                withTagValue(allOf(
-                    Matchers.instanceOf(Int::class.java),
-                    Matchers.equalTo(100 as Int?)
-                )),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withText("Colecciones"),
+                withParent(withParent(withId(R.id.collectorDetailsFragment))),
                 isDisplayed()
             )
         )
-        textView2.check(matches(withText("manollo@caracol.com.co")))
+        textView2.check(matches(withText("Colecciones")))
 
-        // Debe mostrar el nombre del coleccionista Jaime Monsalve
         val textView3 = onView(
             allOf(
-                withId(R.id.collectorName),
-                withText("Jaime Monsalve"),
-                withTagValue(allOf(
-                    Matchers.instanceOf(Int::class.java),
-                    Matchers.equalTo(101 as Int?)
-                )),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
+                withText("Músicos Favoritos"),
+                withParent(withParent(withId(R.id.collectorDetailsFragment))),
                 isDisplayed()
             )
         )
-        textView3.check(matches(withText("Jaime Monsalve")))
-
-        // Debe mostrar el correo del coleccionista Jaime Monsalve
-        val textView4 = onView(
-            allOf(
-                withId(R.id.collectorEmail),
-                withText("jmonsalve@rtvc.com.co"),
-                withTagValue(allOf(
-                    Matchers.instanceOf(Int::class.java),
-                    Matchers.equalTo(101 as Int?)
-                )),
-                withParent(withParent(IsInstanceOf.instanceOf(android.view.ViewGroup::class.java))),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(withText("jmonsalve@rtvc.com.co")))
+        textView3.check(matches(withText("Músicos Favoritos")))
     }
 
     private fun childAtPosition(

@@ -1,17 +1,22 @@
 package com.example.vinilos.network
 
 import android.content.Context
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.vinilos.models.*
 import com.example.vinilos.util.EspressoIdlingResource
 import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+
 
 class NetworkServiceAdapter constructor(context: Context) {
 
@@ -29,9 +34,10 @@ class NetworkServiceAdapter constructor(context: Context) {
     private val requestQueue: RequestQueue by lazy {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
+
     }
 
-    suspend fun getAlbums() = suspendCoroutine<List<Album>>{ cont->
+    suspend fun getAlbums() = suspendCoroutine<List<Album>> { cont ->
         EspressoIdlingResource.increment()
         requestQueue.add(
             getRequest("albums",
@@ -80,8 +86,49 @@ class NetworkServiceAdapter constructor(context: Context) {
         )
     }
 
+    suspend fun createAlbum(newAlbum: Album) = suspendCoroutine<Int> { cont ->
+        EspressoIdlingResource.increment()
 
+        val postData = JSONObject()
+        try {
+            postData.put("name", newAlbum.name)
+            postData.put("cover", newAlbum.cover)
+            postData.put("releaseDate", newAlbum.releaseDate)
+            postData.put("description", newAlbum.description)
+            postData.put("genre", newAlbum.genre)
+            postData.put("recordLabel", newAlbum.recordLabel)
+        } catch (e: JSONException) {
+            cont.resumeWithException(e)
+        }
+        requestQueue.add(
+            postRequest("albums", postData,
+                { response ->
+                    val albumId = response.getInt("id")
+                    EspressoIdlingResource.decrement()
+                    cont.resume(albumId)
+                },
+                {
+                    cont.resumeWithException(it) //se relanza la excepción
+                })
+        )
+    }
 
+    suspend fun addAlbumToMusician(idAlbum: Int, idMusician: Int) = suspendCoroutine<Int> { cont ->
+        EspressoIdlingResource.increment()
+
+        requestQueue.add(
+            postRequestWithoutBody(
+                "musicians/$idMusician/albums/$idAlbum",
+                { response ->
+                    val albumId = response.getInt("id")
+                    EspressoIdlingResource.decrement()
+                    cont.resume(albumId)
+                },
+                {
+                    cont.resumeWithException(it) //se relanza la excepción
+                })
+        )
+    }
 
     private fun getRequest(
         path: String,
@@ -89,6 +136,51 @@ class NetworkServiceAdapter constructor(context: Context) {
         errorListener: Response.ErrorListener
     ): StringRequest {
         return StringRequest(Request.Method.GET, BASE_URL + path, responseListener, errorListener)
+    }
+
+    private fun postRequest(
+        path: String,
+        body: JSONObject,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener
+    ): JsonObjectRequest {
+        val request = object : JsonObjectRequest(
+            Method.POST,
+            BASE_URL + path,
+            body,
+            responseListener,
+            errorListener
+        ) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers: MutableMap<String, String> = HashMap()
+                headers["Authorization"] = "TOKEN" //put your token here
+                return headers
+            }
+        }
+        return request
+    }
+
+    private fun postRequestWithoutBody(
+        path: String,
+        responseListener: Response.Listener<JSONObject>,
+        errorListener: Response.ErrorListener
+    ): JsonObjectRequest {
+        val request = object : JsonObjectRequest(
+            Method.POST,
+            BASE_URL + path,
+            null,
+            responseListener,
+            errorListener
+        ) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers: MutableMap<String, String> = HashMap()
+                headers["Authorization"] = "TOKEN" //put your token here
+                return headers
+            }
+        }
+        return request
     }
 
     suspend fun getCollectors() = suspendCoroutine<List<Collector>> { cont ->
@@ -100,60 +192,30 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val list = mutableListOf<Collector>()
 
                     for (i in 0 until resp.length()) {
-                        val item = resp.getJSONObject(i)
+                        val json = resp.getJSONObject(i)
 
-                        val favoritePerformers = mutableListOf<Performer?>()
-                        val jsonPerformers = item.getJSONArray("favoritePerformers")
-
-                        val collectorsAlbums = mutableListOf<CollectorAlbum?>()
-                        val jsonCollectorsAlbums = item.getJSONArray("collectorAlbums")
-
-                        for (performerIndex in 0 until jsonPerformers.length()) {
-                            val jsonPerformer = jsonPerformers.getJSONObject(performerIndex)
-
-                            favoritePerformers.add(
-                                performerIndex, Performer(
-                                    id = jsonPerformer.getInt("id"),
-                                    name = jsonPerformer.getString("name"),
-                                    image = jsonPerformer.getString("image"),
-                                    description = jsonPerformer.getString("description")
-                                )
-                            )
-                        }
-
-                        for (albumIndex in 0 until jsonCollectorsAlbums.length()) {
-                            val jsonCollectorAlbum = jsonCollectorsAlbums.getJSONObject(albumIndex)
-
-                            collectorsAlbums.add(
-                                albumIndex, CollectorAlbum(
-                                    id = jsonCollectorAlbum.getInt("id"),
-                                    status = jsonCollectorAlbum.getString("status"),
-                                    price = jsonCollectorAlbum.getInt("price")
-                                )
-                            )
-                        }
-
-                        list.add(
-                            i, Collector(
-                                id = item.getInt("id"),
-                                name = item.getString("name"),
-                                telephone = item.getString("telephone"),
-                                email = item.getString("email"),
-                                favoritePerformers = favoritePerformers,
-                                collectorAlbums = collectorsAlbums
-                            )
+                        val collector = Collector(
+                            id = json.getInt("id"),
+                            name = json.getString("name"),
+                            telephone = json.getString("telephone"),
+                            email = json.getString("email"),
                         )
+
+                        collector.setPerformersFromJSON(json.getJSONArray("favoritePerformers"))
+                        collector.setAlbumsFromJSON(json.getJSONArray("collectorAlbums"))
+                        collector.setCommentsFromJSON(json.getJSONArray("comments"))
+
+                        list.add(i, collector)
                     }
                     cont.resume(list)
                     EspressoIdlingResource.decrement()
                 },
                 {
                     cont.resumeWithException(it) //se relanza la excepción
-                }))
+                })
+        )
     }
 
-
-    //FUCNION PARA TRAER LOS MUSICOS DEL ENDPOINT
     suspend fun getMusicians() = suspendCoroutine<List<Musician>> { cont ->
         EspressoIdlingResource.increment()
         requestQueue.add(getRequest("musicians", { response ->
@@ -200,5 +262,4 @@ class NetworkServiceAdapter constructor(context: Context) {
             cont.resumeWithException(it) //se relanza la excepción
         }))
     }
-
 }

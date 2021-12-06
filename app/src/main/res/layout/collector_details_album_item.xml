@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@null">
+    <data>
+        <variable name="album" type="com.example.vinilos.models.Album"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="72sp"
+            android:layout_height="72sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@{@string/album_img(album.name)}"
+            android:tag="@{album.albumId}"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="86sp"
+            android:paddingTop="14sp"
+            android:paddingBottom="14sp"
+            android:paddingEnd="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@null">
+
+            <TextView
+                android:id="@+id/albumName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{album.name}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:contentDescription="@{@string/album_nombre(album.name)}"
+                />
+
+            <TextView
+                android:id="@+id/albumPerformerNames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{album.performerNames}"
+                android:tag="@{album.albumId}"
+                android:contentDescription="@{@string/artista_nombre(album.performerNames)}" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -49,7 +49,7 @@ class NavigationTest {
 
         val textView = onView(
             allOf(
-                withText("Albumes"),
+                withText("Lista de álbumes"),
                 withParent(
                     allOf(
                         withId(R.id.action_bar),
@@ -59,7 +59,7 @@ class NavigationTest {
                 isDisplayed()
             )
         )
-        textView.check(matches(withText("Albumes")))
+        textView.check(matches(withText("Lista de álbumes")))
 
         val imageView = onView(
             allOf(
@@ -153,7 +153,7 @@ class NavigationTest {
 
         val textView6 = onView(
             allOf(
-                withText("Albumes"),
+                withText("Lista de álbumes"),
                 withParent(
                     allOf(
                         withId(R.id.action_bar),
@@ -163,7 +163,7 @@ class NavigationTest {
                 isDisplayed()
             )
         )
-        textView6.check(matches(withText("Albumes")))
+        textView6.check(matches(withText("Lista de álbumes")))
 
         val recyclerView = onView(
             allOf(

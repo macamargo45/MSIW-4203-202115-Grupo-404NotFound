@@ -47,6 +47,9 @@ class AlbumDetailTest {
 
     @Test
     fun albumDetailsTest() {
+
+        Thread.sleep(3000)
+
         val recyclerView = onView(
             allOf(
                 withId(R.id.albumsRv),
@@ -175,7 +178,7 @@ class AlbumDetailTest {
 
         val textView12 = onView(
             allOf(
-                withText("Albumes"),
+                withText("Lista de álbumes"),
                 withParent(
                     allOf(
                         withId(R.id.action_bar),
@@ -185,7 +188,7 @@ class AlbumDetailTest {
                 isDisplayed()
             )
         )
-        textView12.check(matches(withText("Albumes")))
+        textView12.check(matches(withText("Lista de álbumes")))
     }
 
     private fun childAtPosition(
